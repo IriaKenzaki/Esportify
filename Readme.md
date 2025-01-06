@@ -1,4 +1,5 @@
 # Esportify
-ce site est mon projet ecf Esportify pour mon examen de Graduate developper.
+
+Ce site est mon projet Ecf Esportify pour mon examen Graduate devellopper.
 
 # Installation
