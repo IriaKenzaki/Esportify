@@ -1,15 +1,180 @@
 @import url("/node_modules/bootstrap-icons/font/bootstrap-icons.css");
 @import 'custom';
 
-html{
-    background-color: #262628;
-    position:relative;
+html, body {
+    position: relative;
     min-height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
-footer.footer{
-    position: absolute;
-    bottom : 0;
-    width:100%;
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #262628;
+    font-family: "Afacad", sans-serif;
+    color: white;
+    width: 100%;
+}
 
+.nav-link {
+    font-size: 20px;
+}
+
+footer.footer {
+    bottom: 0;
+    width: 100%;
+    margin-top: 10px;
+}
+
+h1 {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #E5C687;
+}
+
+.container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .left, .right {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .text-block, .right {
+        padding: 0;
+        border-radius: 0;
+        width: 100%;
+    }
+
+    .carousel-block {
+        padding: 0;
+        width: 100%;
+    }
+
+    .carousel img {
+        width: 100%;
+        border-radius: 0;
+    }
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.text-block, .right {
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.text-block {
+    background-image: url(../Images/pexels-lanophotography-194511.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.text-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    mix-blend-mode: darken;
+    z-index: 1;
+}
+
+.text-block p {
+    text-align: center;
+    font-size: 24px;
+    position: relative;
+    z-index: 2;
+}
+
+.carousel-block {
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.carousel img {
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+}
+
+.right {
+    background-image: url(../Images/green-1757807_1280.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    mix-blend-mode: multiply;
+    z-index: 1;
+}
+
+.right * {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event {
+    background-color: #BCB382;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
