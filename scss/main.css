@@ -11971,18 +11971,44 @@ html, body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-toggler {
+    display: block;
+  }
+}
+button {
+  font-family: "Afacad";
+  font-size: 1.5rem;
+  display: block;
+  font-weight: 500;
+  text-align: center;
+  background-color: #BCB382;
+  color: black;
+  border-radius: 20px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.content {
+  flex: 1;
+}
+
+button:hover {
+  background-color: #E5C687;
 }
 
 body {
   display: flex;
   flex-direction: column;
   background-color: #262628;
-  font-family: "Afacad", sans-serif;
+  font-family: "Afacad", serif;
   color: white;
   width: 100%;
+  min-height: 100vh;
 }
 
 .nav-link {
@@ -11990,12 +12016,14 @@ body {
 }
 
 footer.footer {
+  position: relative;
   bottom: 0;
   width: 100%;
   margin-top: 10px;
 }
 
 h1, .h1 {
+  font-family: "Chakra Petch";
   margin-top: 10px;
   text-align: center;
   font-weight: bold;
@@ -12137,4 +12165,61 @@ h1, .h1 {
   text-align: center;
   font-size: 18px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  font-size: 1.5rem;
+  color: #E5C687;
+  padding: 0.1rem;
+  margin-bottom: 0;
+}
+
+input {
+  padding: 10px;
+  height: 3rem;
+  margin-bottom: 20px;
+  width: 90%;
+  max-width: 20rem;
+  min-width: 5rem;
+  background-color: #121619;
+  color: whitesmoke;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  border: solid white 1px;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator,
+input[type=time]::-webkit-calendar-picker-indicator {
+  background-color: #E5C687;
+  border: none;
+  padding: 0.3rem;
+  border-radius: 5px;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  margin: 20px;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    width: 100%;
+    margin: auto;
+  }
+  label {
+    margin-bottom: 0;
+    margin-left: 1rem;
+    text-align: left;
+  }
+  input {
+    margin-left: 0;
+    margin-right: 0;
+    width: 20rem;
+  }
 }/*# sourceMappingURL=main.css.map */

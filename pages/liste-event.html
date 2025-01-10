@@ -3,10 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/scss/main.css">
     <title>Liste event</title>
 </head>
+<header>
+    <h1>Liste évènements global</h1>
+</header>
 <body>
-    
+    <div class="form-container">
+        <div>
+            <label for="date">Sélectionner date:</label>
+            <input type="date" id="date" name="date" min="2025-01-01" max="">
+        </div>
+        <div>
+            <label for="time">Sélectionner heur:</label>
+            <input type="time" id="time" name="time">
+        </div>
+        <div>
+            <label for="number">Nombre de Joueurs:</label>
+            <input type="number" id="number" name="number" min="0">
+        </div>
+        <div>
+            <label for="pseudo">Pseudo créateur:</label>
+            <input type="text" id="pseudo" name="pseudo" maxlengh="60">        
+        </div>
+    </div>
+        <button>Recherche</button>
+
 </body>
 </html>
