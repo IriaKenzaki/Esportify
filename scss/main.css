@@ -12450,6 +12450,7 @@ input[type=text]::placeholder {
   .container-right-account {
     overflow: hidden;
     height: 100vh;
+    box-shadow: none;
   }
   input[type=password], input[type=text] {
     padding: 10px;
@@ -12505,7 +12506,6 @@ input[type=search], select {
   display: block;
   margin-bottom: 10px;
   font-size: 1.2rem;
-  font-weight: bold;
 }
 
 .response {
@@ -12525,7 +12525,7 @@ input[type=search], select {
 }
 
 .response-details span {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .divider {
@@ -12533,4 +12533,64 @@ input[type=search], select {
   height: 4px;
   background-color: #E5C687;
   margin: 10px 0;
+}
+
+.acces {
+  text-decoration: none;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .container-accounts {
+    padding: 10px;
+  }
+  .container-accounts-top {
+    flex-direction: column;
+    align-items: center;
+  }
+  .field {
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  input[type=search], select {
+    width: 300px;
+  }
+  .response {
+    flex-direction: column;
+    justify-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .response-details {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+  .response-details span {
+    font-size: 1.2rem;
+  }
+  .access-button {
+    width: 100%;
+  }
+  .divider {
+    height: 2px;
+    margin: 5px 0;
+  }
+}
+/* Gestion d'un compte */
+.container-useraccount {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  height: 80vh;
+}
+
+.container-useraccount form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }/*# sourceMappingURL=main.css.map */
