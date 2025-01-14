@@ -23,6 +23,9 @@ button{
     padding: 10px;
 }
 
+p {
+    margin-bottom: 0px;
+}
 .content{flex: 1;}
 
 button:hover{
@@ -142,6 +145,7 @@ h1 {
 
 .text-block p {
     text-align: center;
+    margin-bottom: 10px;
     font-size: 24px;
     position: relative;
     z-index: 2;
@@ -211,10 +215,10 @@ label {
     margin-bottom: 0;
 }
 
-input {
-    padding: 10px;
-    height: 3rem;
-    margin-bottom: 20px;
+input, select {
+    padding: 0px;
+    height: 2.5rem;
+    margin-bottom: 10px;
     width: 300px;
     max-width: 20rem;
     min-width: 5rem;
@@ -250,7 +254,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     }
 
     label {
-        margin-bottom: 0;
+        margin-bottom: 0 !important;
         margin-left: 1rem;
         text-align: left;
     }
@@ -372,8 +376,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 input[type="password"],input[type="email"] {   
     padding: 10px;
-    height: 3rem;
-    margin-bottom: 20px;
+    height: 2.5rem;
+    margin-bottom: 10px;
     width: 300px;
     max-width: 20rem;
     min-width: 5rem;
@@ -444,7 +448,7 @@ input[type="email"]::placeholder{
 
 input[type="password"],input[type="text"] {   
     padding: 10px;
-    height: 3rem;
+    height: 2.5rem;
     margin-bottom: 10px;
     width: 300px;
     max-width: 20rem;
@@ -489,4 +493,74 @@ input[type="text"]::placeholder{
     .container-left-account{
         display: none; 
     }
+}
+
+/* Gestions des comptes */
+
+.container-accounts {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 20px;
+}
+
+.container-accounts-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="search"], select {
+    width: 300px;
+    height: 2.5rem;
+    margin-top: 0.5rem;
+}
+
+.container-accounts-bottom {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.container-responses label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.response {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.response-details {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 20px;
+}
+
+.response-details span {
+    font-size: 1rem;
+}
+
+.divider {
+    border: none;
+    height: 4px;
+    background-color: #E5C687;
+    margin: 10px 0;
 }

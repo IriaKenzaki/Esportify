@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/scss/main.css">
+    <title>Gestion des comptes</title>
+</head>
+<header>
+    <h1>Gestion des comptes</h1>
+</header>
+<body>
+    <div class="container-accounts">
+        <div class="container-accounts-top">
+            <div class="field">
+                <label for="role-select">Sélection des droits:</label>
+                <select name="role" id="role-select">
+                    <option value="">--Choix des options--</option>
+                    <option value="Joueur">Joueurs</option>
+                    <option value="organisateur">Organisateur</option>
+                    <option value="admin">Administrateur</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="pseudo-search">Pseudo du compte:</label>
+                <input type="search" id="pseudo-search" name="pseudo-search" />
+            </div>
+            <div class="field">
+                <label for="email-search">Mail du compte:</label>
+                <input type="search" id="email-search" name="email-search" />
+            </div>
+        </div>
+        <div>
+            <button type="submit">Recherche</button>
+        </div>
+        <div class="container-accounts-bottom">
+            <label for="responses">Résultats trouvés :</label>
+            <div class="response">
+                <div class="response-details">
+                    <span class="role">Utilisateur: <strong>Admin</strong></span>
+                    <span class="pseudo">Pseudo: <strong>AdminUser</strong></span>
+                    <span class="email">Email: <strong>admin@example.com</strong></span>
+                </div>
+                <button class="button">Accès au compte</button>
+            </div>
+            <hr class="divider" />
+            <div class="response">
+                <div class="response-details">
+                    <span class="role">Utilisateur: <strong>Joueur</strong></span>
+                    <span class="pseudo">Pseudo: <strong>Player123</strong></span>
+                    <span class="email">Email: <strong>player@example.com</strong></span>
+                </div>
+                <button class="button">Accès au compte</button>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
