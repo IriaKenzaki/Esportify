@@ -12178,10 +12178,10 @@ label {
 }
 
 input, select {
-  padding: 0px;
+  padding: 5px;
   height: 2.5rem;
   margin-bottom: 10px;
-  width: 300px;
+  width: 20rem;
   max-width: 20rem;
   min-width: 5rem;
   background-color: #121619;
@@ -12340,7 +12340,7 @@ input[type=password], input[type=email] {
   padding: 10px;
   height: 2.5rem;
   margin-bottom: 10px;
-  width: 300px;
+  width: 20rem;
   max-width: 20rem;
   min-width: 5rem;
   background-color: #121619;
@@ -12366,6 +12366,9 @@ input[type=email]::placeholder {
     height: 100%;
     padding: 0;
     margin: 0;
+  }
+  .container-left {
+    box-shadow: none;
   }
   .container-right {
     display: none;
@@ -12420,7 +12423,7 @@ input[type=password], input[type=text] {
   padding: 10px;
   height: 2.5rem;
   margin-bottom: 10px;
-  width: 300px;
+  width: 20rem;
   max-width: 20rem;
   min-width: 5rem;
   background-color: #121619;
@@ -12455,7 +12458,7 @@ input[type=text]::placeholder {
   input[type=password], input[type=text] {
     padding: 10px;
     height: 2.5rem;
-    width: 300px;
+    width: 20rem;
     margin-bottom: 0;
     background-color: #121619;
     color: whitesmoke;
@@ -12532,7 +12535,7 @@ input[type=search], select {
   border: none;
   height: 4px;
   background-color: #E5C687;
-  margin: 10px 0;
+  margin: 0;
 }
 
 .acces {
@@ -12574,7 +12577,7 @@ input[type=search], select {
   }
   .divider {
     height: 2px;
-    margin: 5px 0;
+    margin: 0;
   }
 }
 /* Gestion d'un compte */
@@ -12593,4 +12596,67 @@ input[type=search], select {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Scores */
+.container-scores {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  padding: 20px;
+}
+
+.container-scores-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.response-global {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 10px;
+}
+
+.score-global {
+  font-size: 2rem;
+}
+
+.divider-global {
+  border: none;
+  height: 6px;
+  background-color: #E5C687;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .container-scores {
+    padding: 10px;
+  }
+  .container-scores-top {
+    flex-direction: column;
+    align-items: center;
+  }
+  .response-global {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+  .divider-global {
+    height: 2px;
+    margin: 0;
+  }
 }/*# sourceMappingURL=main.css.map */
