@@ -12712,7 +12712,7 @@ textarea {
   color: #ffffff;
   text-align: left;
   border: 1px solid #ffffff;
-  border-radius: 4px;
+  border-radius: 5px;
   box-sizing: border-box;
   outline: none;
 }
@@ -12733,4 +12733,62 @@ textarea::placeholder {
 
 .span-contact {
   color: #E5C687;
+}
+
+/* Avis */
+.rate {
+  background-color: #121619;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  height: 40px;
+  align-items: center;
+  text-align: left;
+  padding: 0 5px;
+}
+
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 35px;
+  color: #ccc;
+  line-height: 35px;
+  transition: color 0.3s ease;
+}
+
+.rate:not(:checked) > label:before {
+  content: "★ ";
+}
+
+.rate > input:checked ~ label {
+  color: #ffc700;
+}
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+.container-avis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }/*# sourceMappingURL=main.css.map */
