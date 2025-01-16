@@ -20,7 +20,7 @@ button{
     color:black;
     border-radius: 20px;
     margin: 10px auto;
-    padding: 10px;
+    padding: 5px 15px;
 }
 
 p {
@@ -227,6 +227,10 @@ input, select {
     font-size: 1.5rem;
     border-radius: 5px;
     border: solid white 1px;
+}
+
+select{
+    padding: 0;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator,
@@ -700,4 +704,30 @@ input[type="search"], select {
         height: 2px;
         margin:  0;
     }
+}
+
+/* Liste participant */
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #df9800;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0;
+}
+
+input[type="checkbox"]:checked + .checkbox-custom {
+    background-color: #df9800;
 }
