@@ -12,33 +12,38 @@
     <div class="container-useraccount">
         <form>
             <div>
-              <label for="UsernameInput" class="form-label">Votre Pseudo:</label>
-              <input type="text" class="form-control" id="UsernameInput" placeholder="Xx-Dark-Sasuke-xX" name="Username"> 
+              <label for="UsernameInput" class="form-label">Pseudo du compte:</label>
+              <input type="text" class="form-control" id="UsernameInput" placeholder="Pseudo" name="Username"> 
             </div>
             <div>
-              <label for="PasswordInput" class="form-label">Votre mot de passe</label>
-              <input type="password" class="form-control" id="PasswordInput" name="Password">
+                <label for="EmailInput" class="form-label">Email du compte :</label>
+                <input type="email" class="form-control" id="EmailInput" placeholder="test@mail.fr" name="Email"> 
             </div>
             <div>
-                <label for="ValidatePasswordInput" class="form-label">Validez votre mot de passe</label>
-                <input type="password" class="form-control" id="ValidatePasswordInput" name="PasswordConfirm">
+                <label for="role-select">Sélection des droits:</label>
+                <select name="role" id="role-select">
+                    <option value="">--Choix des options--</option>
+                    <option value="Joueur">Joueurs</option>
+                    <option value="organisateur">Organisateur</option>
+                    <option value="admin">Administrateur</option>
+                </select>
               </div>
             <div>
-                <button type="submit">Modifier le compte</button>
+                <button type="submit">Modification du compte</button>
             </div>
             <div>
                 <p style="text-align: center">Pour la suppression du compte, entez le mot de passe du compte. Attention cette action est irréversible.</p>
             </div>
             <div>
-                <label for="PasswordInput" class="form-label">Votre mot de passe</label>
-                <input type="password" class="form-control" id="PasswordInput" name="Password">
+                <label for="EmailInput" class="form-label">Email du compte :</label>
+                <input type="email" class="form-control" id="EmailInput" placeholder="test@mail.fr" name="Email"> 
               </div>
               <div class="text-center">
                 <button type="submit">Supprimer le compte</button>
             </div>
         </form>
         <div class="text-center pt-2">
-            <a href="/contact">Pour faire un changement d'adresse mail, veuilliez prendre contact avec nous.</a>
+            <p>Envoie d’un mail de confirmation à l’adresse mail suite à une modification ou une suppression d’un compte.</p>
         </div>
     </div>
 </body>

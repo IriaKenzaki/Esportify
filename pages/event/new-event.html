@@ -1,0 +1,65 @@
+!<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/scss/main.css">
+    <title>Création d'évènement</title>
+</head>
+<header>
+    <h1>Création d'évènement</h1>
+</header>
+<body>
+    <div class="container-new-event">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <div class="form-container">
+                <div>
+                    <label for="TitleInput" class="form-label">Titre :</label>
+                    <input type="text" class="form-control" id="TitleInput" placeholder="Titre" name="Title" maxlenght="64"> 
+                </div>
+                <div>
+                    <label for="date">Date de début:</label>
+                    <input type="date" id="date" name="date" min="2025-01-01" max="">
+                </div>
+                <div>
+                    <label for="date">Date de fin:</label>
+                    <input type="date" id="date" name="date" min="2025-01-01" max="">
+                </div>
+                <div>
+                    <label for="time">Heure de début:</label>
+                    <input type="time" id="time" name="timeStart">
+                </div>
+                <div>
+                    <label for="time">Heure de fin:</label>
+                    <input type="time" id="time" name="timeEnd">
+                </div>
+                <div>
+                    <label for="number">Nombre de Joueurs:</label>
+                    <input type="number" id="number" name="number" min="0">
+                </div>
+                <div>
+                    <label for="game">Jeux:</label>
+                    <input type="text" id="game" name="game" maxlenght="64">        
+                </div>
+                <div>
+                    <label for="imageUpload" class="form-label">Télécharger une image :</label>
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                </div>                
+            </div>
+            <div class="container-new-event-bottom">
+                <div>
+                    <label for="textarea" class="form-label">Description de l'évènement :</label>
+                    <textarea placeholder="Entrez la description ici..."></textarea>
+                </div>
+                <div>
+                    <p class="p-contact"><span class="span-contact">Information : </span></p>
+                    <p class="p-contact">Les image ne sont pas obligatoire pour la création de l’évènement, 
+                        si vous voulez en mettre une image vous 
+                        devez d’utiliser une image libre de droits ou vous appartenant. Merci de votre coopération.</p>
+                </div>
+            </div>
+            <button type="submit">Recherche</button>
+        </form>
+    </div>
+</body>
+</html>

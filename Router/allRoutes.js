@@ -11,6 +11,7 @@ export const allRoutes = [
     new Route("/useraccount", "Gestion d'un compte", "/pages/account/useraccount.html"),
     new Route("/scores", "Scores", "/pages/scores.html"),
     new Route("/liste-participant", "Liste participant", "/pages/event/liste-participant.html"),
+    new Route("/new-event", "Création d'évènement", "/pages/event/new-event.html"),
     new Route("/contact", "Contact", "/pages/contact.html"),
     new Route("/avis", "Avis", "/pages/avis/avis.html"),
 ];

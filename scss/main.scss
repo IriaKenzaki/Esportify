@@ -221,7 +221,7 @@ input, select {
     margin-bottom: 10px;
     width: 20rem;
     background-color: #121619;
-    color: whitesmoke;
+    color: gray;
     font-size: 1.5rem;
     border-radius: 5px;
     border: solid white 1px;
@@ -243,7 +243,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-items: center;
-    width: 100%;
+    width: 100vw;
     padding: 30px;
 }
 
@@ -344,7 +344,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .container-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 100%;
+    width: 100vh;
     padding: 20px;
     margin-top: 10px;
     height: 100%;
@@ -354,7 +354,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .container-left {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-items: center;
     align-items: center;
     padding: 20px;
     border-radius: 5px;
@@ -389,7 +389,7 @@ input[type="password"],input[type="email"] {
 }
 
 input[type="email"]::placeholder{
-    color: rgb(128, 128, 128);
+    color: gray;
 }
 @media screen and (max-width: 768px) {
     .container-form {
@@ -484,7 +484,7 @@ input[type="text"]::placeholder{
         padding: 10px;
         height: 2.5rem;
         width: 20rem;
-        margin-bottom: 0;
+        margin-bottom: 10px;
         background-color: #121619;
         color: whitesmoke;
         font-size: 1.5rem;
@@ -820,4 +820,37 @@ textarea::placeholder {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+}
+/* Création d'évènement */
+
+.form-label{
+    margin-bottom: 0;
+}
+#imageUpload{
+    padding: 0;
+}
+input[type="file"]::-webkit-file-upload-button{
+    margin: 0;
+    padding-top: 0px;
+    border: 1px solid #ffffff;
+    background-color: #121619;
+    color: #E5C687;
+}
+.container-new-event-bottom{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 30px;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .container-new-event-bottom {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        justify-items: center;
+        align-items: center;
+        gap: 20px;
+    }
 }
