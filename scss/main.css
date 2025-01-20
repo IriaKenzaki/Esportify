@@ -12235,7 +12235,7 @@ input[type=time]::-webkit-calendar-picker-indicator {
   }
 }
 .container-event {
-  padding: 30px;
+  padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
@@ -12252,7 +12252,7 @@ input[type=time]::-webkit-calendar-picker-indicator {
   padding-bottom: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
-  font-size: 17.5px;
+  font-size: 19px;
 }
 
 .card img {
@@ -12950,4 +12950,33 @@ input[type=file]::-webkit-file-upload-button {
   background-color: rgba(204, 204, 204, 0);
   border-radius: 0;
   border: none;
+}
+
+/* Page évènement */
+.container-page-event {
+  justify-items: center;
+  align-items: center;
+}
+
+.game-event {
+  width: 1000px;
+  height: 600px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  margin: 30px;
+  border: #ffffff solid 2px;
+}
+
+.a-button {
+  font-family: "Afacad";
+  font-size: 1.5rem;
+  display: block;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  background-color: #BCB382;
+  color: black;
+  border-radius: 20px;
+  margin: 10px auto;
+  padding: 5px 15px;
 }/*# sourceMappingURL=main.css.map */
