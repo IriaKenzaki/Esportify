@@ -298,6 +298,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 .card-content {
     padding: 10px;
+    justify-items: center;
 }
 
 h3 {
@@ -882,7 +883,7 @@ textarea::placeholder {
     white-space: nowrap;
     cursor: pointer;
     font-size: 35px;
-    color: #ccc;
+    color: #ffffff;
     line-height: 35px;
     transition: color 0.3s ease;
 }
@@ -890,18 +891,18 @@ textarea::placeholder {
     content: '★ ';
 }
 .rate > input:checked ~ label {
-    color: #ffc700;    
+    color: #fffb00;    
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
+    color: #fffb00;  
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
+    color: #fffb00;
 }
 .container-avis{
     display: flex;
@@ -951,4 +952,21 @@ input[type="file"]::-webkit-file-upload-button{
     justify-content: space-between;
     gap: 30px;
     padding: 20px
+}
+
+/* Liste avis */
+
+.form-container-avis {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    justify-items: center;
+    width: 100vw;
+    align-items: center;
+    padding: 30px;
+}
+
+#rate-review{
+    background-color: #cccccc00;
+    border-radius: 0;
+    border: none;
 }
