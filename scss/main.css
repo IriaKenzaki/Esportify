@@ -12028,7 +12028,7 @@ footer.footer {
 
 h1, .h1 {
   font-family: "Chakra Petch";
-  margin-top: 10px;
+  margin: 10px;
   text-align: center;
   font-weight: bold;
   color: #E5C687;
@@ -12242,7 +12242,7 @@ input[type=time]::-webkit-calendar-picker-indicator {
 
 .card {
   text-align: center;
-  width: 300px;
+  width: 330px;
   border: 1px solid #000000;
   background-color: #BCB382;
   color: black;
@@ -12250,6 +12250,7 @@ input[type=time]::-webkit-calendar-picker-indicator {
   padding-bottom: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+  font-size: 17.5px;
 }
 
 .card img {
