@@ -6,6 +6,7 @@ html, body {
     min-height: 100%;
     margin: 0;
     padding: 0;
+    min-width: 100vw;
     box-sizing: border-box;
     overflow-x: hidden;
 }
@@ -243,6 +244,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-items: center;
     width: 100vw;
+    align-items: center;
     padding: 30px;
 }
 
@@ -334,7 +336,7 @@ h3 {
     justify-content: center;
     align-items: center;
 }
-
+#eventModalLabel{ font-size: 24px !important;}
 .modal.show {display: flex !important;}
 
 body.modal-open {
@@ -357,6 +359,7 @@ body.modal-open {
     color: #000000;
     border-radius: 10px;
     max-width: 630px;
+    font-size: 1.2rem;
     width: 630px;
     position: relative;
 }
@@ -387,7 +390,7 @@ body.modal-open {
     color: white;
     border-radius: 20px;
     overflow: visible;
-    margin: 10px ;
+    margin: 0px ;
     padding: 5px 15px;
     cursor: pointer;
 }
