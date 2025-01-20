@@ -386,7 +386,7 @@ body.modal-open {
     color: white;
     border-radius: 20px;
     overflow: visible;
-    margin: 10px auto;
+    margin: 10px ;
     padding: 5px 15px;
     cursor: pointer;
 }
@@ -937,4 +937,14 @@ input[type="file"]::-webkit-file-upload-button{
         align-items: center;
         gap: 20px;
     }
+}
+
+/* Mes inscriptions */
+
+.button-modal{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 20px
 }
