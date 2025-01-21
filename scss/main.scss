@@ -228,6 +228,7 @@ input, select {
 }
 
 select{
+    color:rgb(204, 204, 204);
     padding: 0;
 }
 
@@ -243,12 +244,12 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-items: center;
-    width: 100vw;
+    width: 100%;
     align-items: center;
     padding: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1120px) {
     .form-container {
         grid-template-columns: 1fr;
         justify-items: center;
@@ -1066,4 +1067,29 @@ h2{
     grid-template-rows: 1fr 1fr 1fr;
     padding: 5px;
 
+}
+
+@media (max-width: 768px) {
+    .container-validation {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        justify-items: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .container-validation-left{
+        margin: 0;
+    }
+}
+
+/* Dashboard */
+
+.container-resultat{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    margin: 20px;
 }

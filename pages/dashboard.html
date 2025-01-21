@@ -1,0 +1,44 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/scss/main.css">
+    <title>Validation</title>
+</head>
+<header>
+    <h1>Validation d'évènement</h1>
+</header>
+<body>
+    <form action="/search" method="GET">
+        <div class="form-container">
+            <div>
+                <label for="date">Date de début:</label>
+                <input type="date" id="date" name="date" min="2025-01-01" max="">
+            </div>
+            <div>
+                <label for="date">Date de fin:</label>
+                <input type="date" id="date" name="date" min="2025-01-01" max="">
+            </div>
+            <div>
+                <label for="role-select">Sélection des filtres:</label>
+                <select name="role" id="role-select">
+                    <option value="">--Choix des options--</option>
+                    <option value="connexion">Connexion</option>
+                    <option value="event">Evènement crées</option>
+                    <option value="compte">Compte crées</option>
+                    <option value="all">Tout</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" style="margin: 20px 0 0 0">Recherche</button>
+            </div>
+        </div>
+    </form>
+    <div class="container-resultat">
+        <div>
+            résultat
+        </div>
+        <div>
+            <canvas id="histogram" width="800" height="400"></canvas>
+        </div>
+    </div>
+</body>
