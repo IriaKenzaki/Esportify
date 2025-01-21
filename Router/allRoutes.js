@@ -14,6 +14,7 @@ export const allRoutes = [
     new Route("/new-event", "Création d'évènement", "/pages/event/new-event.html"),
     new Route("/inscription", "Mes inscriptions", "/pages/event/inscription.html"),
     new Route("/my-event", "Mes évènements", "/pages/event/my-event.html"),
+    new Route("/validation", "Validation d'évènement", "/pages/event/validation.html"),
     new Route("/contact", "Contact", "/pages/contact.html"),
     new Route("/avis", "Avis", "/pages/avis/avis.html"),
     new Route("/liste-avis", "Liste des Avis", "/pages/avis/liste-avis.html"),

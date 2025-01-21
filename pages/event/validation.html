@@ -1,0 +1,107 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/scss/main.css">
+    <title>Validation</title>
+</head>
+<header>
+    <h1>Validation d'évènement</h1>
+</header>
+<body>
+    <form action="/search" method="GET">
+        <div class="form-container">
+            <div>
+                <label for="date">Sélectionner date:</label>
+                <input type="date" id="date" name="date" min="2025-01-01" max="">
+            </div>
+            <div>
+                <label for="time">Sélectionner heur:</label>
+                <input type="time" id="time" name="time">
+            </div>
+            <div>
+                <label for="number">Créateur de l'évènement:</label>
+                <input type="number" id="number" name="number" min="0">
+            </div>
+            <div>
+                <button type="submit" style="margin: 20px 0 0 0">Recherche</button>
+            </div>
+        </div>
+    </form>
+        <div class="container-validation">
+        <div class="container-validation-left">
+            <h2>Evènement en attente</h2>
+            <div class="card-validation">
+                <div>
+                    <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">   
+                </div>
+                <div class="card-content-validation">
+                    <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
+                    <p><strong>Nombre de joueurs :</strong> 10</p>
+                    <hr class="card-divider" />
+                    <h3>Titre de l'événement</h3>
+                    <div style="text-align: right;">
+                        <a href="#" id="viewDetails" data-bs-toggle="modal" data-bs-target="#eventModal">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="container-validation-right">
+                <h2>Evènement validés</h2>
+                <div class="card-validation">
+                    <div>
+                        <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">   
+                    </div>
+                    <div class="card-content-validation">
+                        <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
+                        <p><strong>Nombre de joueurs :</strong> 10</p>
+                        <hr class="card-divider" />
+                        <h3>Titre de l'événement</h3>
+                        <div style="text-align: right;">
+                            <a href="#" id="viewDetails" data-bs-toggle="modal" data-bs-target="#eventModal">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-validation">
+                    <div>
+                        <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">   
+                    </div>
+                    <div class="card-content-validation">
+                        <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
+                        <p><strong>Nombre de joueurs :</strong> 10</p>
+                        <hr class="card-divider" />
+                        <h3>Titre de l'événement</h3>
+                        <div style="text-align: right;">
+                            <a href="#" id="viewDetails" data-bs-toggle="modal" data-bs-target="#eventModal">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">
+                </div>
+                <div class="modal-body">
+                    <h3 class="modal-title fs-5" id="eventModalLabel">Titre de l'évènement</h3>
+                    <hr class="modal-divider"/>
+                    <div class="modal-info">
+                        <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
+                        <p><strong>Nombre de joueurs :</strong> 10</p>
+                        <p><strong>Date et heure de fin :</strong> 2025-12-01 20:00</p>
+                        <p><strong>Organisateur :</strong> Organa</p>
+                    </div>
+                    <p><strong>Visibilité :</strong> non/oui</p>
+                    <p>Description évènement</p>   
+                    <div class="button-modal">
+                        <button type="submit" id= "button-modal" class="btn btn-primary">Valider</button>
+                        <button type="submit" id= "button-modal" class="btn btn-primary">Supprimer</button>
+                    </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+        <script src="/js/event.js"></script>
+</body>
