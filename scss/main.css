@@ -12035,6 +12035,11 @@ h1, .h1 {
   color: #E5C687;
 }
 
+.acces-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 /* Accueil */
 .container {
   flex: 1;
@@ -12341,7 +12346,7 @@ body.modal-open {
 }
 
 .modal-body {
-  padding: 0;
+  padding-bottom: 10px;
   justify-items: center;
   align-items: center;
 }
@@ -12366,7 +12371,7 @@ body.modal-open {
   color: white;
   border-radius: 20px;
   overflow: visible;
-  margin: 0px;
+  margin: 10px;
   padding: 5px 15px;
   cursor: pointer;
 }
@@ -12671,7 +12676,7 @@ input[type=search], select {
   .response-details span {
     font-size: 1.2rem;
   }
-  .access-button {
+  .acces-button {
     width: 100%;
   }
   .divider {

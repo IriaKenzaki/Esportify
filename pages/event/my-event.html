@@ -10,7 +10,8 @@
 </header>
 <body>
     <div style="margin: 30px auto;">
-        <button type="submit" href="/new-event">Crée un évènement</button>
+        <button type="submit"><a href="/new-event" class="acces">Crée un évènement</a></button>
+
     </div>
     <form action="/search" method="GET">
         <div class="form-container">
@@ -94,10 +95,10 @@
                     </div>
                     <p>Description évènement</p>   
                     <div class="button-modal">
-                        <button type="submit" href="/new-event" id= "button-modal" class="btn btn-primary">Modifier l'évent</button>
-                        <button type="submit" href="/event" id= "button-modal" class="btn btn-primary">Démarrer l'évent</button>
-                        <button type="submit" href="/my-event" id= "button-modal" class="btn btn-primary">Supprimer l'évent</button>    
-                        <button type="submit" href="/liste-participant" id= "button-modal" class="btn btn-primary">Liste participants</button>    
+                        <button type="submit" id="button-modal"><a href="/new-event" class="acces-link">Modifier l'évènement</a></button>
+                        <button type="submit" id="button-modal"><a href="/event" class="acces-link">Démarrer l'évènement</a></button>
+                        <button type="submit" id="button-modal"><a href="/my-event" class="acces-link">Supprimer l'évènement</a></button>
+                        <button type="submit" id="button-modal"><a href="/liste-participant" class="acces-link">Liste participants</a></button>
                     </div>  
                 </div>
               </div>
