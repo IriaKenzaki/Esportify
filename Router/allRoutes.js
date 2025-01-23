@@ -4,8 +4,8 @@ import Route from "./Route.js";
 export const allRoutes = [
     new Route("/", "Accueil", "/pages/home.html"),
     new Route("/liste-event", "Liste event", "/pages/event/liste-event.html"),
-    new Route("/signin", "Connexion", "/pages/auth/signin.html"),
-    new Route("/signup", "Inscription", "/pages/auth/signup.html"),
+    new Route("/signin", "Connexion", "/pages/auth/signin.html", "/js/auth/signin.js"),
+    new Route("/signup", "Inscription", "/pages/auth/signup.html", "/js/auth/signup.js"),
     new Route("/myaccount", "Gestion du compte", "/pages/account/myaccount.html"),
     new Route("/accounts", "Gestion des comptes", "/pages/account/accounts.html"),
     new Route("/useraccount", "Gestion d'un compte", "/pages/account/useraccount.html"),

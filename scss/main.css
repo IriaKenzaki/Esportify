@@ -12475,6 +12475,12 @@ input[type=email]::placeholder {
     display: none;
   }
 }
+.invalid-feedback,
+.valid-feedback {
+  max-width: 20rem;
+  text-align: center;
+}
+
 /* Gestion du compte */
 .container-account {
   display: grid;
