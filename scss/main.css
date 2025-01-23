@@ -11989,6 +11989,13 @@ button {
   padding: 5px 15px;
 }
 
+#signout-btn {
+  border-radius: 0;
+  margin: 0;
+  padding: 8px;
+  background-color: #121619;
+}
+
 a {
   font-family: "Afacad", serif;
   font-weight: bold;

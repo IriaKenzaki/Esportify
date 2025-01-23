@@ -1,4 +1,18 @@
 const tokenCookieName = "accesstoken";
+const signoutBtn = document.getElementById("signout-btn");
+const roleCookieName = "role";
+
+signoutBtn.addEventListener("click", signout);
+
+function signout(){
+    eraseCookie(tokenCookieName);
+    eraseCookie(roleCookieName);
+    window.location.reload();
+}
+
+function getRole(){
+    return getCookie(roleCookieName);
+}
 
 function setToken(token){
     setCookie(tokenCookieName, token, 7);
@@ -41,8 +55,48 @@ function isConnected(){
     }
 }
 
-if(isConnected()){
-    alert("Vous êtes connecté.");
-}else{
-    alert("Vous n'êtes pas connecté.");
+/* 
+disconnected
+connected (admin ou organisateur ou user)
+    - admin
+    - user
+    - organisateur
+*/
+
+function showAndHideElementsForRoles(){
+    const userConnected = isConnected();
+    const role = getRole();
+
+    let allElementsToEdit = document.querySelectorAll('[data-show]');
+
+    allElementsToEdit.forEach(element =>{
+        switch(element.dataset.show){
+            case 'disconnected': 
+                if(userConnected){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'connected':
+                if(!userConnected){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'admin': 
+                if(!userConnected || role != "admin"){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'user': 
+                if(!userConnected || role != "user"){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'organisateur': 
+                if(!userConnected || role != "organisateur"){
+                    element.classList.add("d-none");
+                }
+                break;
+        }
+
+    })
 }
