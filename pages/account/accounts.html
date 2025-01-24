@@ -12,27 +12,29 @@
 <body>
     <div class="container-accounts">
         <div class="container-accounts-top">
-            <div class="field">
-                <label for="role-select">Sélection des droits:</label>
-                <select name="role" id="role-select">
-                    <option value="">--Choix des options--</option>
-                    <option value="Joueur">Joueurs</option>
-                    <option value="organisateur">Organisateur</option>
-                    <option value="admin">Administrateur</option>
-                </select>
-            </div>
-            <div class="field">
-                <label for="pseudo-search">Pseudo du compte:</label>
-                <input type="search" id="pseudo-search" name="pseudo-search" />
-            </div>
-            <div class="field">
-                <label for="email-search">Mail du compte:</label>
-                <input type="search" id="email-search" name="email-search" />
-            </div>
-        </div>
-        <div>
-            <button type="submit">Recherche</button>
-        </div>
+            <form>
+                <div class="field">
+                    <label for="role-select">Sélection des droits:</label>
+                    <select name="role" id="role-select">
+                        <option value="">--Choix des options--</option>
+                        <option value="Joueur">Joueurs</option>
+                        <option value="organisateur">Organisateur</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="pseudo-search">Pseudo du compte:</label>
+                    <input type="search" id="pseudo-search" name="pseudo-search" />
+                </div>
+                <div class="field">
+                    <label for="email-search">Mail du compte:</label>
+                    <input type="search" id="email-search" name="email-search" />
+                </div>
+                </div>
+                <div>
+                    <button type="submit">Recherche</button>
+                </div>
+            </form>
         <div class="container-accounts-bottom">
             <label for="responses">Résultats trouvés :</label>
             <div class="response">

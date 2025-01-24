@@ -1,18 +1,18 @@
 const tokenCookieName = "accesstoken";
 const signoutBtn = document.getElementById("signout-btn");
-const roleCookieName = "role";
-const apiUrl = "http://127.0.0.1:8000/api/"
+const RoleCookieName = "role";
+const apiUrl = "https://127.0.0.1:8000/api/";
 
 signoutBtn.addEventListener("click", signout);
 
 function signout(){
     eraseCookie(tokenCookieName);
-    eraseCookie(roleCookieName);
+    eraseCookie(RoleCookieName);
     window.location.reload();
 }
 
 function getRole(){
-    return getCookie(roleCookieName);
+    return getCookie(RoleCookieName);
 }
 
 function setToken(token){
@@ -82,18 +82,18 @@ function showAndHideElementsForRoles(){
                     element.classList.add("d-none");
                 }
                 break;
-            case 'admin': 
-                if(!userConnected || role != "admin"){
+            case 'ROLE_ADMIN': 
+                if(!userConnected || role != "ROLE_ADMIN"){
                     element.classList.add("d-none");
                 }
                 break;
-            case 'user': 
-                if(!userConnected || role != "user"){
+            case 'ROLE_USER': 
+                if(!userConnected || role != "ROLE_USER"){
                     element.classList.add("d-none");
                 }
                 break;
-            case 'organisateur': 
-                if(!userConnected || role != "organisateur"){
+            case 'ROLE_ORGANISATEUR': 
+                if(!userConnected || role != "ROLE_ORGANISATEUR"){
                     element.classList.add("d-none");
                 }
                 break;
@@ -107,7 +107,35 @@ function sanitizeHtml(text){
     tempHtml.textContent = text;
     return tempHtml.innerHTML;
 }
+document.querySelector('form').addEventListener('submit', function(event) {
+    const searchQuery = this.querySelector('input[name="query"]').value;
+    this.querySelector('input[name="query"]').value = sanitizeHtml(searchQuery);
+});
 
 function getInfosUser(){
-    console.log("infouser");
-}
+    let myHeaders = new Headers();
+    myHeaders.append("X-AUTH-TOKEN", getToken());
+
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(apiUrl+"account/me", requestOptions)
+    .then(response =>{
+        if(response.ok){
+            return response.json();
+        }
+        else{
+            console.log("Impossible de récupérer les informations utilisateur");
+        }
+    })
+    .then(result => {
+        console.log(result);
+        return result;
+    })
+    .catch(error =>{
+        console.error("erreur lors de la récupération des données utilisateur", error);
+    });
+}    
