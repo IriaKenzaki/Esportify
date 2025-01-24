@@ -11,7 +11,7 @@ export const allRoutes = [
     new Route("/useraccount", "Gestion d'un compte", "/pages/account/useraccount.html", ["admin"]),
     new Route("/scores", "Scores", "/pages/scores.html", ["user", "organisateur", "admin"]),
     new Route("/liste-participant", "Liste participant", "/pages/event/liste-participant.html", ["organisateur", "admin"]),
-    new Route("/new-event", "Création d'évènement", "/pages/event/new-event.html", ["organisateur", "admin"]),
+    new Route("/new-event", "Création d'évènement", "/pages/event/new-event.html", ["organisateur", "admin"], "/js/event/new-event.js"),
     new Route("/inscription", "Mes inscriptions", "/pages/event/inscription.html", ["user", "organisateur", "admin"]),
     new Route("/my-event", "Mes évènements", "/pages/event/my-event.html",["organisateur", "admin"]),
     new Route("/validation", "Validation d'évènement", "/pages/event/validation.html", ["admin"]),

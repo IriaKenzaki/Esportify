@@ -1,6 +1,7 @@
 const tokenCookieName = "accesstoken";
 const signoutBtn = document.getElementById("signout-btn");
 const roleCookieName = "role";
+const apiUrl = "http://127.0.0.1:8000/api/"
 
 signoutBtn.addEventListener("click", signout);
 
@@ -99,4 +100,14 @@ function showAndHideElementsForRoles(){
         }
 
     })
+}
+
+function sanitizeHtml(text){
+    const tempHtml = document.createElement('div');
+    tempHtml.textContent = text;
+    return tempHtml.innerHTML;
+}
+
+function getInfosUser(){
+    console.log("infouser");
 }

@@ -11,7 +11,7 @@ function checkCredentials(){
         const token = "lkjsdngfljsqdnglkjsdbglkjqskjgkfjgbqslkfdgbskldfgdfgsdgf";
         setToken(token);
 
-        setCookie(roleCookieName, "user", 7)
+        setCookie(roleCookieName, "organisateur", 7)
         window.location.replace("/");
     }
     else{
