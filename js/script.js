@@ -102,15 +102,39 @@ function showAndHideElementsForRoles(){
     })
 }
 
-function sanitizeHtml(text){
+
+function sanitizeHtml(text) {
     const tempHtml = document.createElement('div');
     tempHtml.textContent = text;
-    return tempHtml.innerHTML;
+    return tempHtml.innerHTML; 
 }
-document.querySelector('form').addEventListener('submit', function(event) {
-    const searchQuery = this.querySelector('input[name="query"]').value;
-    this.querySelector('input[name="query"]').value = sanitizeHtml(searchQuery);
+
+const forms = document.querySelectorAll('form');
+
+forms.forEach(form => {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const inputs = form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.value = sanitizeHtml(input.value);
+        });
+        form.submit();
+    });
+
+    const buttons = form.querySelectorAll('button[type="button"]');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const inputs = form.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.value = sanitizeHtml(input.value);
+            });
+
+            form.submit();
+        });
+    });
 });
+
+
 
 function getInfosUser(){
     let myHeaders = new Headers();
@@ -139,3 +163,16 @@ function getInfosUser(){
         console.error("erreur lors de la récupération des données utilisateur", error);
     });
 }    
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    // Formate la date dans le format souhaité : 'YYYY-MM-DD HH:mm'
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0'); 
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+}

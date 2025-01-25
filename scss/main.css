@@ -12296,7 +12296,7 @@ h3, .h3 {
   margin: 5px;
 }
 
-#viewDetails {
+.view-details {
   color: #2D4739;
   font-weight: bold;
 }
@@ -12983,6 +12983,12 @@ input[type=file]::-webkit-file-upload-button {
   border: #ffffff solid 2px;
 }
 
+iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
 .a-button {
   font-family: "Afacad";
   font-size: 1.5rem;
@@ -13077,4 +13083,71 @@ h2, .h2 {
   align-items: center;
   justify-items: center;
   margin: 20px;
+}
+
+/* Jeu du yams */
+#yamsContainer {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dice-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.die {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.die.selected {
+  background-color: #d1e7dd;
+  border-color: #0f5132;
+}
+
+#rollButton {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#rollButton:hover {
+  background-color: #0056b3;
+}
+
+#rollsLeft {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+#score {
+  font-size: 18px;
+  margin-top: 10px;
+  font-weight: bold;
 }/*# sourceMappingURL=main.css.map */
