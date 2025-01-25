@@ -1,76 +1,159 @@
-// Sélection des éléments HTML
-const diceContainer = document.getElementById('diceContainer');
+// Variables globales
+const diceElements = document.querySelectorAll('.dice');
 const rollButton = document.getElementById('rollButton');
-const rollsLeftText = document.getElementById('rollsLeft');
-const scoreText = document.getElementById('score');
+const scoreElement = document.getElementById('score');
+const turnsLeftElement = document.getElementById('turnsLeft');
 
-// Variables du jeu
-const NUM_DICE = 5;
-const MAX_ROLLS = 3;
-let rollsLeft = MAX_ROLLS;
-let dice = Array(NUM_DICE).fill(0);
-let selectedDice = Array(NUM_DICE).fill(false);
+// Limites et initialisation
+let turnsLeft = 3;
+let selectedDice = [];
+let eventId = null;
+let userId = null;
 
-// Fonction pour générer les dés dans le conteneur
-function createDice() {
-    diceContainer.innerHTML = '';
-    for (let i = 0; i < NUM_DICE; i++) {
-        const die = document.createElement('div');
-        die.classList.add('die');
-        die.textContent = dice[i] || '-';
-        die.addEventListener('click', () => toggleDieSelection(i));
-        if (selectedDice[i]) die.classList.add('selected');
-        diceContainer.appendChild(die);
-    }
+// Fonction pour générer un résultat de dé aléatoire (1 à 6)
+function rollDie() {
+    return Math.floor(Math.random() * 6) + 1;
 }
 
-// Fonction pour basculer la sélection d'un dé
-function toggleDieSelection(index) {
-    if (rollsLeft < MAX_ROLLS && rollsLeft > 0) { 
-        selectedDice[index] = !selectedDice[index];
-        createDice();
-    }
+// Fonction pour afficher l'animation du lancer de dés
+function animateDice() {
+    diceElements.forEach(dice => {
+        dice.classList.add('shake');
+    });
+
+    // Retirer l'animation après qu'elle se termine
+    setTimeout(() => {
+        diceElements.forEach(dice => {
+            dice.classList.remove('shake');
+        });
+    }, 500);
 }
 
-// Fonction pour lancer les dés
-function rollDice() {
-    if (rollsLeft > 0) {
-        for (let i = 0; i < NUM_DICE; i++) {
-            if (!selectedDice[i]) {
-                dice[i] = Math.floor(Math.random() * 6) + 1;
-            }
-        }
-        rollsLeft--;
-        rollsLeftText.textContent = `Lancers restants : ${rollsLeft}`;
-        createDice();
+// Fonction pour mettre à jour les résultats des dés
+function updateDiceResults() {
+    diceElements.forEach((dice, index) => {
 
-        // Désactiver le bouton si plus de lancers
-        if (rollsLeft === 0) {
-            rollButton.disabled = true;
-            calculateScore();
+        if (selectedDice.includes(index)) {
+            return;
         }
-    }
+        const rollResult = rollDie();
+        dice.textContent = rollResult;
+    });
 }
 
 // Fonction pour calculer le score
 function calculateScore() {
-    const score = dice.reduce((total, die) => total + die, 0);
-    scoreText.textContent = `Score : ${score}`;
+    let totalScore = 0;
+    diceElements.forEach(dice => {
+        totalScore += parseInt(dice.textContent);
+    });
+    scoreElement.textContent = totalScore;
 }
 
-// Initialisation du jeu
+// Fonction pour récupérer le token d'authentification (si vous utilisez des cookies ou sessionStorage)
+function getToken() {
+
+    const tokenCookieName = "authToken";
+    const token = document.cookie.split('; ').find(row => row.startsWith(tokenCookieName)).split('=')[1];
+    return token;
+}
+
+// Fonction pour récupérer les détails de l'utilisateur actuel (par exemple via un cookie ou sessionStorage)
+function getUserId() {
+    return localStorage.getItem("userId");
+}
+
+// Récupérer l'eventId dynamique 
+function getEventId() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('eventId');
+}
+
+// Fonction pour envoyer le score en base de données
+function sendScoreToDatabase(eventId, userId) {
+    const token = getToken();
+    const headers = new Headers({
+        "X-AUTH-TOKEN": token,
+        "Content-Type": "application/json",
+    });
+
+    const data = {
+        score: parseInt(scoreElement.textContent),
+        eventId: eventId,
+        userId: userId
+    };
+
+    fetch(apiUrl+"add-scores", {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Score envoyé avec succès : ", data);
+    })
+    .catch(error => {
+        console.error("Erreur lors de l'envoi du score : ", error);
+    });
+}
+
+// Fonction pour garder un dé (et gérer les sélections)
+function toggleDice(index) {
+    if (selectedDice.includes(index)) {
+        selectedDice = selectedDice.filter(i => i !== index);
+        diceElements[index].classList.remove('selected');
+    } else {
+        if (selectedDice.length < 2) { 
+            selectedDice.push(index);
+            diceElements[index].classList.add('selected');
+        }
+    }
+}
+
+// Fonction principale au clic sur le bouton "Lancer les dés"
+rollButton.addEventListener('click', () => {
+    if (turnsLeft > 0) {
+        animateDice();
+        updateDiceResults();
+        calculateScore();
+        turnsLeft--;
+        turnsLeftElement.textContent = turnsLeft;
+    }
+
+    if (turnsLeft === 0) {
+        rollButton.disabled = true;
+    }
+});
+
+// Fonction pour réinitialiser le jeu
 function resetGame() {
-    rollsLeft = MAX_ROLLS;
-    dice.fill(0);
-    selectedDice.fill(false);
+    turnsLeft = 3;
+    selectedDice = [];
+    scoreElement.textContent = '0';
+    turnsLeftElement.textContent = turnsLeft;
+    diceElements.forEach(dice => {
+        dice.textContent = '0';
+        dice.classList.remove('selected');
+    });
     rollButton.disabled = false;
-    rollsLeftText.textContent = `Lancers restants : ${rollsLeft}`;
-    scoreText.textContent = `Score : 0`;
-    createDice();
 }
 
-// Lancer les dés lorsque le bouton est cliqué
-rollButton.addEventListener('click', rollDice);
+// Fonction pour démarrer le jeu
+function loadGame() {
+    eventId = getEventId();
+    userId = getUserId();
 
-// Démarrer le jeu au chargement
-resetGame();
+    if (eventId && userId) {
+        console.log("Jeu chargé pour l'événement ID:", eventId, "Utilisateur ID:", userId);
+    } else {
+        console.error("L'eventId ou userId est manquant.");
+    }
+}
+
+// Réinitialisation lors de la fermeture ou du changement de page
+window.onbeforeunload = function() {
+    resetGame();
+};
+
+// Charger le jeu au début
+window.onload = loadGame;

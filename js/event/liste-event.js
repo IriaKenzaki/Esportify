@@ -95,8 +95,6 @@ function fetchEventDetails(eventId) {
     });
 
     const url = `${apiUrl}${eventId}/details`;
-    console.log("URL appelée :", url);
-    console.log("Token envoyé :", token);
 
     fetch(url, {
         method: 'GET',

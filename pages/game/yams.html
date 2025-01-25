@@ -1,11 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu Yams</title>
+    <link rel="stylesheet" href="/scss/main.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Yams - Jeu de Dés</h1>
 
-<div id="yamsContainer">
-    <div class="dice-container" id="diceContainer">
-        <!-- Les dés seront ici -->
+        <div class="dice-container">
+            <div class="dice" id="dice1" onclick="toggleDice(0)">1</div>
+            <div class="dice" id="dice2" onclick="toggleDice(1)">2</div>
+            <div class="dice" id="dice3" onclick="toggleDice(2)">3</div>
+            <div class="dice" id="dice4" onclick="toggleDice(3)">4</div>
+            <div class="dice" id="dice5" onclick="toggleDice(4)">5</div>
+        </div>
+
+        <button id="rollButton">Lancer les dés</button>
+
+        <div class="score-board">
+            <p>Score: <span id="score">0</span></p>
+            <p>Nombre de lancés restants : <span id="turnsLeft">3</span></p>
+        </div>
     </div>
-    <button id="rollButton">Lancer les dés</button>
-    <p id="rollsLeft">Lancers restants : 3</p>
-    <div class="score" id="score">Score : 0</div>
-</div>
 
-
+    <script src="/js/game/yams.js"></script>
+</body>
+</html>

@@ -1,8 +1,22 @@
-<div id="penduContainer">
-    <h1>Jeu du Pendu</h1>
-    <p id="wordToGuess">_ _ _ _ _</p>
-    <div id="lettersContainer">
-        <!-- Lettres disponibles -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu du Pendu</title>
+    <link rel="stylesheet" href="/scss/main.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Jeu du Pendu</h1>
+        <p id="wordDisplay">_ _ _ _ _</p>
+        <p id="attemptsLeft">Tentatives restantes : <span id="attempts">6</span></p>
+        <div id="hangmanDrawing"></div>
+        <div id="letters">
+            <!-- Lettres à cliquer -->
+        </div>
     </div>
-    <p id="triesLeft">Essais restants : 6</p>
-</div>
+    
+    <script src="/js/game/pendu.js"></script>
+</body>
+</html>
