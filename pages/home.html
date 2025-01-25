@@ -17,57 +17,19 @@
             </div>
             <div class="carousel-block">
                 <div class="carousel">
-                    <img src="../Images/control-2679227_1280.jpg" alt="Image 1">
+                    <img src="/Images/pokemon.webp" id="slide">
+                    <div id="precedent" onclick="ChangeSlide(-1)"></div>
+                    <div id="suivant" onclick="ChangeSlide(1)"></div>
                 </div>
             </div>
         </div>
         <div class="right">
             <h3 style="margin-bottom: 10px;">Liste des événements</h3>
             <div class="event-list">
-                <div class="card-validation">
-                    <div>
-                        <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">   
-                    </div>
-                    <div class="card-content-validation">
-                        <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
-                        <p><strong>Nombre de joueurs :</strong> 10</p>
-                        <hr class="card-divider" />
-                        <h3>Titre de l'événement</h3>
-                        <div style="text-align: right;">
-                            <a href="/liste-event" id="viewDetails" data-bs-toggle="modal" data-bs-target="#eventModal">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-validation">
-                    <div>
-                        <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">   
-                    </div>
-                    <div class="card-content-validation">
-                        <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
-                        <p><strong>Nombre de joueurs :</strong> 10</p>
-                        <hr class="card-divider" />
-                        <h3>Titre de l'événement</h3>
-                        <div style="text-align: right;">
-                            <a href="/liste-event" id="viewDetails" data-bs-toggle="modal" data-bs-target="#eventModal">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-validation">
-                    <div>
-                        <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">   
-                    </div>
-                    <div class="card-content-validation">
-                        <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
-                        <p><strong>Nombre de joueurs :</strong> 10</p>
-                        <hr class="card-divider" />
-                        <h3>Titre de l'événement</h3>
-                        <div style="text-align: right;">
-                            <a href="/liste-event" id="viewDetails" data-bs-toggle="modal" data-bs-target="#eventModal">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
-                        </div>
-                    </div>
-                </div>
+                <!-- ici seras injecter les events-->
             </div>
         </div>
     </div>
+    <script src="/js/home.js" ></script>
 </body>
 </html>

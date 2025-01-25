@@ -2,7 +2,7 @@ import Route from "./Route.js";
 
 //Définir ici vos routes
 export const allRoutes = [
-    new Route("/", "Accueil", "/pages/home.html", []),
+    new Route("/", "Accueil", "/pages/home.html", [], "/js/home.js"),
     new Route("/liste-event", "Liste event", "/pages/event/liste-event.html", [], "/js/event/liste-event.js"),
     new Route("/signin", "Connexion", "/pages/auth/signin.html", ["disconnected"], "/js/auth/signin.js"),
     new Route("/signup", "Inscription", "/pages/auth/signup.html", ["disconnected"], "/js/auth/signup.js"),
@@ -18,7 +18,7 @@ export const allRoutes = [
     new Route("/contact", "Contact", "/pages/contact.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
     new Route("/avis", "Avis", "/pages/avis/avis.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
     new Route("/liste-avis", "Liste des Avis", "/pages/avis/liste-avis.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
-    new Route("/event", "Evènement", "/pages/event/event.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
+    new Route("/event", "Evènement", "/pages/event/event.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/game/loadgame.js"),
     new Route("/dashboard", "Tableau de bord", "/pages/dashboard.html", ["ROLE_ADMIN"]),
     new Route("/yams", "Yams", "/pages/game/yams.html", [], "/js/game/yams.js"),
 
