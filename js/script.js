@@ -116,7 +116,10 @@ forms.forEach(form => {
         event.preventDefault();
         const inputs = form.querySelectorAll('input, textarea');
         inputs.forEach(input => {
-            input.value = sanitizeHtml(input.value);
+            // Ne pas appliquer sanitizeHtml sur les inputs de type "number"
+            if (input.type !== "number") {
+                input.value = sanitizeHtml(input.value);
+            }
         });
         form.submit();
     });
@@ -126,15 +129,16 @@ forms.forEach(form => {
         button.addEventListener('click', function() {
             const inputs = form.querySelectorAll('input, textarea');
             inputs.forEach(input => {
-                input.value = sanitizeHtml(input.value);
+                // Ne pas appliquer sanitizeHtml sur les inputs de type "number"
+                if (input.type !== "number") {
+                    input.value = sanitizeHtml(input.value);
+                }
             });
 
             form.submit();
         });
     });
 });
-
-
 
 function getInfosUser(){
     let myHeaders = new Headers();

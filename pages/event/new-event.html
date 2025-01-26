@@ -11,35 +11,39 @@
 </header>
 <body>
     <div class="container-new-event">
-        <form action="/" method="POST" enctype="multipart/form-data">
+        <form action="/" method="POST" id= "formEvent" enctype="multipart/form-data">
             <div class="form-container">
                 <div>
                     <label for="TitleInput" class="form-label">Titre :</label>
                     <input type="text" class="form-control" id="TitleInput" placeholder="Titre" name="Title" maxlenght="64"> 
                 </div>
                 <div>
-                    <label for="date">Date de début:</label>
-                    <input type="date" id="date" name="date" min="2025-01-01" max="">
+                    <label for="DateStartInput">Date de début:</label>
+                    <input type="date" id="DateStartInput" name="DateStartInput" min="2025-01-01" max="">
                 </div>
                 <div>
-                    <label for="date">Date de fin:</label>
-                    <input type="date" id="date" name="date" min="2025-01-01" max="">
+                    <label for="DateEndInput">Date de fin:</label>
+                    <input type="date" id="DateEndInput" name="DateEndInput" min="2025-01-01" max="">
                 </div>
                 <div>
-                    <label for="time">Heure de début:</label>
-                    <input type="time" id="time" name="timeStart">
+                    <label for="TimeStartInput">Heure de début:</label>
+                    <input type="time" id="TimeStartInput" name="TimeStartInput">
                 </div>
                 <div>
-                    <label for="time">Heure de fin:</label>
-                    <input type="time" id="time" name="timeEnd">
+                    <label for="TimeEndInput">Heure de fin:</label>
+                    <input type="time" id="TimeEndInput" name="TimeEndInput">
                 </div>
                 <div>
-                    <label for="number">Nombre de Joueurs:</label>
-                    <input type="number" id="number" name="number" min="0">
+                    <label for="PlayersInput">Nombre de Joueurs:</label>
+                    <input type="number" id="PlayersInput" name="PlayersInput" min="0">
                 </div>
                 <div>
-                    <label for="game">Jeux:</label>
-                    <input type="text" id="game" name="game" maxlenght="64">        
+                    <label for="GameSelectInput">Sélection des jeux:</label>
+                    <select name="GameSelectInput" id="GameSelectInput">
+                        <option value="">--Choix des options--</option>
+                        <option value="yams">Yams</option>
+                        <option value="pendu">Pendu</option>
+                    </select>        
                 </div>
                 <div>
                     <label for="imageUpload" class="form-label">Télécharger une image :</label>
@@ -48,8 +52,8 @@
             </div>
             <div class="container-new-event-bottom">
                 <div>
-                    <label for="textarea" class="form-label">Description de l'évènement :</label>
-                    <textarea placeholder="Entrez la description ici..."></textarea>
+                    <label for="DescriptionInput" class="form-label">Description de l'évènement :</label>
+                    <textarea id= "DescriptionInput" name="Description" placeholder="Entrez la description ici..."></textarea>
                 </div>
                 <div>
                     <p class="p-contact"><span class="span-contact">Information : </span></p>
@@ -58,8 +62,9 @@
                         devez d’utiliser une image libre de droits ou vous appartenant. Merci de votre coopération.</p>
                 </div>
             </div>
-            <button type="submit" ><a href="/my-event" class="acces">Crée l'évènement</a></button>
+            <button type="button" id="btn-creation">Créer l'évènement</button>
         </form>
     </div>
+    <script src="/js/event/new-event.js"></script>
 </body>
 </html>

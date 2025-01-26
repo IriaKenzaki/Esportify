@@ -9,7 +9,6 @@ const modalButton = document.getElementById("button-modal");
 
 function getToken() {
     const token = getCookie(tokenCookieName);
-    console.log("Token récupéré dans getToken :", token);
     return token;
 }
 
@@ -23,29 +22,42 @@ document.getElementById("searchButton").addEventListener("click", function(event
         if (value) params.append(key, value);
     });
 
-    let url = apiUrl+"all";
+    let url = apiUrl + "all";
     if (params.toString()) {
-        url = apiUrl+`event?${params.toString()}`;
+        url = apiUrl + `event?${params.toString()}`;
     }
 
     fetch(url)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Erreur lors de la récupération des événements");
-            }
-            return response.json();
-        })
-        .then((data) => {
-            displayEvent(data);
-        })
-        .catch((error) => {
-            console.error("Erreur : ", error);
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Erreur lors de la récupération des événements");
+        }
+        return response.json();
+    })
+    .then((data) => {
+        const events = Object.values(data);
+
+        if (events.length > 0) {
+            displayEvent(events);
+        } else {
             containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
-        });
+        }
+    })
+    .catch((error) => {
+        console.error("Erreur : ", error);
+        containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+    });
 });
 
 function displayEvent(events) {
     containerEvent.innerHTML = "";
+
+    // Vérification si 'events' est un tableau
+    if (!Array.isArray(events)) {
+        console.error("La réponse de l'API n'est pas un tableau :", events);
+        containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+        return;
+    }
 
     if (events.length === 0) {
         containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
@@ -55,7 +67,11 @@ function displayEvent(events) {
     events.forEach((event) => {
         const card = document.createElement("div");
         card.classList.add("card");
-        const eventImage = event.imageUrl && event.imageUrl !== "" ? event.imageUrl : '/Images/def-event.webp';
+
+        const eventImage = event.image && event.image !== "" 
+        ? 'https://localhost:8000/uploads/images/' + event.image
+        : '/Images/def-event.webp';
+
         card.innerHTML = `
             <img src="${eventImage}" alt="Image de l'événement">
             <div class="card-content">
@@ -100,26 +116,25 @@ function fetchEventDetails(eventId) {
         method: 'GET',
         headers: headers,
     })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else if (response.status === 401) {
-                console.error("Token invalide ou expiré.");
-                alert("Votre session a expiré. Veuillez vous reconnecter.");
-                window.location.href = "/signin";
-                throw new Error("Non autorisé.");
-            } else {
-                throw new Error(`Erreur ${response.status}: Impossible de récupérer les détails de l'événement.`);
-            }
-        })
-        .then((data) => {
-            console.log("Détails de l'événement récupérés :", data);
-            displayEventModal(data);
-        })
-        .catch((error) => {
-            console.error("Erreur lors de la récupération des détails de l'événement :", error);
-            alert("Une erreur est survenue lors du chargement des détails de l'événement.");
-        });
+    .then((response) => {
+        if (response.ok) {
+            return response.json();
+        } else if (response.status === 401) {
+            console.error("Token invalide ou expiré.");
+            alert("Votre session a expiré. Veuillez vous reconnecter.");
+            window.location.href = "/signin";
+            throw new Error("Non autorisé.");
+        } else {
+            throw new Error(`Erreur ${response.status}: Impossible de récupérer les détails de l'événement.`);
+        }
+    })
+    .then((data) => {
+        displayEventModal(data);
+    })
+    .catch((error) => {
+        console.error("Erreur lors de la récupération des détails de l'événement :", error);
+        alert("Une erreur est survenue lors du chargement des détails de l'événement.");
+    });
 }
 
 function displayEventModal(event) {
@@ -129,7 +144,7 @@ function displayEventModal(event) {
         return;
     }
 
-    const imageUrl = event.imageUrl || "/Images/def-event.webp";
+    const imageUrl = event.image ? `https://localhost:8000/uploads/images/${event.image}` : "/Images/def-event.webp";
     const title = event.title || "Titre non disponible";
     const dateTimeStart = event.dateTimeStart ? formatDate(event.dateTimeStart) : "Non spécifié";
     const dateTimeEnd = event.dateTimeEnd ? formatDate(event.dateTimeEnd) : "Non spécifié";
@@ -150,6 +165,7 @@ function displayEventModal(event) {
 
     checkUserLoginStatus(event.id);
 }
+
 
 function checkUserLoginStatus(eventId) {
     const token = getToken();
@@ -236,4 +252,4 @@ function inscrireUtilisateur(eventId) {
         console.error("Erreur : ", error);
         alert("Une erreur est survenue lors de l'inscription à l'événement.");
     });
-}
+};
