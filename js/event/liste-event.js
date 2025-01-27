@@ -15,49 +15,59 @@ function getToken() {
 document.getElementById("searchButton").addEventListener("click", function(event) {
     event.preventDefault();
 
-    const formData = new FormData(form);
-    const params = new URLSearchParams();
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const number = document.getElementById("number").value;
+    const pseudo = document.getElementById("pseudo").value;
 
-    formData.forEach((value, key) => {
-        if (value) params.append(key, value);
-    });
+    const params = { date, time, number, pseudo };
 
-    let url = apiUrl + "all";
-    if (params.toString()) {
-        url = apiUrl + `event?${params.toString()}`;
-    }
-
-    fetch(url)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error("Erreur lors de la récupération des événements");
-        }
-        return response.json();
-    })
-    .then((data) => {
-        const events = Object.values(data);
-
-        if (events.length > 0) {
-            displayEvent(events);
-        } else {
+    fetch(apiUrl + "all")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération des événements");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data && typeof data === "object") {
+                const filteredEvents = filterEvents(data, params);
+                if (filteredEvents.length > 0) {
+                    displayEvent(filteredEvents);
+                } else {
+                    containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+                }
+            } else {
+                console.error("La réponse de l'API n'est pas un objet valide : ", data);
+                containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+            }
+        })
+        .catch((error) => {
+            console.error("Erreur : ", error);
             containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
-        }
-    })
-    .catch((error) => {
-        console.error("Erreur : ", error);
-        containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
-    });
+        });
 });
+
+function filterEvents(events, params) {
+    const filteredEvents = [];
+    
+    for (const eventId in events) {
+        const event = events[eventId];
+
+        const dateMatch = params.date ? event.dateTimeStart.includes(params.date) : true;
+        const timeMatch = params.time ? event.dateTimeStart.includes(params.time) : true;
+        const numberMatch = params.number ? event.players == params.number : true;
+        const pseudoMatch = params.pseudo ? event.createdBy.toLowerCase().includes(params.pseudo.toLowerCase()) : true;
+
+        if (dateMatch && timeMatch && numberMatch && pseudoMatch) {
+            filteredEvents.push(event);
+        }
+    }
+    return filteredEvents;
+}
 
 function displayEvent(events) {
     containerEvent.innerHTML = "";
-
-    // Vérification si 'events' est un tableau
-    if (!Array.isArray(events)) {
-        console.error("La réponse de l'API n'est pas un tableau :", events);
-        containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
-        return;
-    }
 
     if (events.length === 0) {
         containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
@@ -165,7 +175,6 @@ function displayEventModal(event) {
 
     checkUserLoginStatus(event.id);
 }
-
 
 function checkUserLoginStatus(eventId) {
     const token = getToken();

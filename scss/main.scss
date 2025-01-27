@@ -260,15 +260,15 @@ label {
 }
 
 input, select {
-    padding: 5px;
-    height: 2.5rem;
-    margin-bottom: 10px;
-    width: 20rem;
-    background-color: #121619;
-    color: gray;
-    font-size: 1.5rem;
-    border-radius: 5px;
-    border: solid white 1px;
+    padding: 5px !important;
+    height: 2.5rem !important;
+    margin-bottom: 10px !important;
+    width: 20rem !important;
+    background-color: #121619 !important;
+    color: lightgray !important;
+    font-size: 1.5rem !important;
+    border-radius: 5px !important;
+    border: solid white 1px !important;
 }
 
 select{
@@ -379,8 +379,10 @@ h3 {
     left: 0;
     width: 100%;
     height: 100%;
+    color: #000000;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
+    justify-items: center;
     align-items: center;
 }
 #eventModalLabel{ font-size: 24px !important;}
@@ -404,13 +406,15 @@ body.modal-open {
     background: #BCB382;
     color: #000000;
     border-radius: 10px;
-    max-width: 630px;
-    font-size: 1.2rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #000000;    font-size: 1.2rem;
     width: 630px;
     position: relative;
 }
 
 .modal-body {
+    color: #000000;
     padding-bottom: 10px;
     justify-items: center;
     align-items: center;
@@ -887,19 +891,19 @@ input[type="checkbox"]:checked + .checkbox-custom {
 }
 
 textarea {
-    width: 30rem;
-    height: 15rem;
-    background-color: #121619;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 1.5rem;
-    line-height: 1.2;
-    color: #ffffff;
-    text-align: left;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-sizing: border-box;
-    outline: none;
+    width: 30rem !important;
+    height: 15rem !important;
+    background-color: #121619 !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+    color: #ffffff !important;
+    text-align: left !important;
+    border: 1px solid #ffffff !important;
+    border-radius: 5px !important;
+    box-sizing: border-box !important;
+    outline: none !important;
 }
 
 textarea::placeholder {
@@ -972,11 +976,11 @@ textarea::placeholder {
     padding: 0;
 }
 input[type="file"]::-webkit-file-upload-button{
-    margin: 0;
-    padding-top: 0px;
-    border: 1px solid #ffffff;
-    background-color: #121619;
-    color: #E5C687;
+    margin: 0 !important;
+    padding-top: 0px !important;
+    border: 1px solid #ffffff !important;
+    background-color: #121619 !important;
+    color: #E5C687 !important;
 }
 .container-new-event-bottom{
     display: grid;
@@ -1288,4 +1292,75 @@ h1 {
 
 #resetButton:hover {
     background-color: #ff3b2b;
+}
+
+/* Mes évènements */
+
+#searchButton{
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+.button-card{
+    justify-items: center;
+}
+#card-button{
+    align-self: center ;
+    font-family: "Afacad";
+    font-size: 1.5rem;
+    display: block;
+    font-weight: 500;
+    text-align: center;
+    border: #000000 solid 1px;
+    background-color: #2D4739;
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    overflow: visible;
+    margin: 10px ;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+#card-button:hover{
+    background-color: #E5C687;
+    border: #000000 solid 2px;
+    color: #000000;
+}
+
+#saveChangesButton{
+    font-family: "Afacad";
+    font-size: 1.5rem;
+    display: block;
+    font-weight: 500;
+    text-align: center;
+    border: #000000 solid 1px;
+    background-color: #2D4739;
+    color: white;
+    border-radius: 20px;
+    overflow: visible;
+    margin: 10px ;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+#editDescription{
+    width: 20rem !important;
+}
+#saveChangesButton:hover{
+    background-color: #E5C687;
+    color: #000000;
+}
+#label-edit{
+    color: #000000;
+    font-weight: 500;
+}
+#editImage{
+    padding: 0 !important;
+    border: 0 !important;
+}
+.modal-header{
+    padding:5px;
+}
+.modal-footer{
+    justify-content: center;
 }

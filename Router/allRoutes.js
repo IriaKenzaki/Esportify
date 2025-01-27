@@ -13,7 +13,7 @@ export const allRoutes = [
     new Route("/liste-participant", "Liste participant", "/pages/event/liste-participant.html", ["ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
     new Route("/new-event", "Création d'évènement", "/pages/event/new-event.html", ["ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/event/new-event.js"),
     new Route("/inscription", "Mes inscriptions", "/pages/event/inscription.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
-    new Route("/my-event", "Mes évènements", "/pages/event/my-event.html",["ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
+    new Route("/my-event", "Mes évènements", "/pages/event/my-event.html",["ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/event/my-event.js"),
     new Route("/validation", "Validation d'évènement", "/pages/event/validation.html", ["ROLE_ADMIN"]),
     new Route("/contact", "Contact", "/pages/contact.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
     new Route("/avis", "Avis", "/pages/avis/avis.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
