@@ -205,15 +205,15 @@ function checkUserLoginStatus(eventId) {
                 return response.json(); 
             } else if (response.status === 403) {
                 console.warn("Utilisateur déjà inscrit à l'événement.");
-                modalButton.style.display = "none";
                 alert("Vous êtes déjà inscrit à cet événement.");
+                location.reload();           
             } else if (response.status === 404) {
                 console.error("Événement introuvable.");
                 throw new Error("Erreur 404 : Événement introuvable.");
             } else if (response.status === 401) {
                 console.error("Utilisateur non connecté.");
-                modalButton.style.display = "none";
                 alert("Veuillez vous connecter pour vous inscrire à cet événement.");
+                window.location.href = "/signin";
             } else {
                 throw new Error("Erreur inattendue lors de la vérification.");
             }
@@ -228,8 +228,8 @@ function checkUserLoginStatus(eventId) {
         })
         .catch((error) => {
             console.error("Erreur lors de la vérification de l'inscription :", error);
-            modalButton.style.display = "none";
         });
+
     });
 }
 

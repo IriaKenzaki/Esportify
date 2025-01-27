@@ -1,4 +1,3 @@
-// Fonction pour le caroussel
 const slide = ["/Images/pokemon.webp", "/Images/playstation.jpg", "/Images/video-game.jpg", "/Images/gamer.jpg"];
 let numero = 0;
 
@@ -9,10 +8,8 @@ function ChangeSlide(sens) {
     document.getElementById("slide").src = slide[numero];
 }
 
-fetchEventsOnLoad();
 const containerValidation = document.querySelector(".event-list");
 
-// Fonction pour récupérer les événements
 function fetchEventsOnLoad() {
     const url = `${apiUrl}all`;
 
@@ -24,7 +21,8 @@ function fetchEventsOnLoad() {
             return response.json();
         })
         .then((data) => {
-            const limitedData = data.slice(0, 2);
+            const eventsArray = Object.values(data);
+            const limitedData = eventsArray.slice(0, 2);
             displayValidationCards(limitedData);
         })
         .catch((error) => {
@@ -32,7 +30,6 @@ function fetchEventsOnLoad() {
         });
 }
 
-// Fonction pour afficher les événements au format `card-validation`
 function displayValidationCards(events) {
     containerValidation.innerHTML = "";
 
@@ -45,16 +42,23 @@ function displayValidationCards(events) {
         const card = document.createElement("div");
         card.classList.add("card-validation");
 
-        const eventImage = event.imageUrl && event.imageUrl !== "" ? event.imageUrl : "/Images/def-event.webp";
-        card.innerHTML = `
+        const eventImage = event.image && event.image !== "" 
+        ? 'https://localhost:8000/uploads/images/' + event.image
+        : '/Images/def-event.webp';
+
+        card.innerHTML = ` 
             <img src="${eventImage}" alt="Image de l'événement">
-            <div class="card-content-validation">
-                <h3>${event.title || "Titre non disponible"}</h3>
-                <p><strong>Date de début :</strong> ${formatDate(event.dateTimeStart || "Non spécifié")}</p>
-                <p><strong>Date de fin :</strong> ${formatDate(event.dateTimeEnd || "Non spécifié")}</p>
-                <a href="/liste-event" class="view-details">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
-            </div>
-        `;
+            <div class="card-content">
+                <h3>${event.title}</h3>
+                <hr class="card-divider" />
+                <p><strong>Nombre de joueurs :</strong> ${event.players}</p>
+                <p><strong>Date et heure de début :</strong> ${formatDate(event.dateTimeStart)}</p>
+                <p><strong>Date et heure de fin :</strong> ${formatDate(event.dateTimeEnd)}</p>
+                <a href="/liste-event" class="view-details" data-event-id="${event.id}">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
+            </div>`;
+        
         containerValidation.appendChild(card);
     });
 }
+
+fetchEventsOnLoad();

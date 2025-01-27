@@ -34,15 +34,15 @@
                                 Utilisateur
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="userMenu">
-                                <li data-show="ROLE_USER"><a class="dropdown-item text-primary">Joueurs</a></li>
-                                <li data-show="ROLE_USER"><a class="dropdown-item" href="/scores">Mes scores</a></li>
-                                <li data-show="ROLE_USER"><a class="dropdown-item" href="/inscription">Mes inscriptions</a></li>
-                                <li data-show="ROLE_USER"><a class="dropdown-item" href="/myaccount">Gestion du compte</a></li>
-                                <li data-show="ROLE_USER"><a class="dropdown-item" href="/avis">Avis</a></li>
-                                <li data-show="ROLE_USER"><a class="dropdown-item" href="/liste-avis">Liste des avis</a></li>
+                                <li data-show="ROLE_USER, ROLE_ORGANISATEUR, ROLE_ADMIN"><a class="dropdown-item text-primary">Joueurs</a></li>
+                                <li data-show="ROLE_USER, ROLE_ORGANISATEUR, ROLE_ADMIN"><a class="dropdown-item" href="/scores">Mes scores</a></li>
+                                <li data-show="ROLE_USER, ROLE_ORGANISATEUR, ROLE_ADMIN"><a class="dropdown-item" href="/inscription">Mes inscriptions</a></li>
+                                <li data-show="ROLE_USER, ROLE_ORGANISATEUR, ROLE_ADMIN"><a class="dropdown-item" href="/myaccount">Gestion du compte</a></li>
+                                <li data-show="ROLE_USER, ROLE_ORGANISATEUR, ROLE_ADMIN"><a class="dropdown-item" href="/avis">Avis</a></li>
+                                <li data-show="ROLE_USER, ROLE_ORGANISATEUR, ROLE_ADMIN"><a class="dropdown-item" href="/liste-avis">Liste des avis</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li data-show="ROLE_ORGANISATEUR"><a class="dropdown-item text-primary" >Organisateur</a></li>
-                                <li data-show="ROLE_ORGANISATEUR"><a class="dropdown-item" href="/my-event">Mes événements</a></li>
+                                <li data-show="ROLE_ORGANISATEUR, ROLE_ADMIN"><a class="dropdown-item text-primary" >Organisateur</a></li>
+                                <li data-show="ROLE_ORGANISATEUR, ROLE_ADMIN"><a class="dropdown-item" href="/my-event">Mes événements</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li data-show="ROLE_ADMIN"><a class="dropdown-item text-primary">Administrateur</a></li>
                                 <li data-show="ROLE_ADMIN"><a class="dropdown-item" href="/accounts">Gestion des comptes</a></li>
