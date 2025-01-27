@@ -15,7 +15,6 @@ function getToken() {
     return token;
 }
 
-// Charger les événements créés par l'utilisateur
 function loadUserEvents() {
     const token = getToken();
     if (!token) {
@@ -139,7 +138,7 @@ function displayEvents(events) {
                 <button type="button" class="btn btn-primary" id = "card-button" onclick="openEditEventModal(${event.id})">Modifier l'évènement</button>
                 <a href="/start-event/${event.id}" id = "card-button" class="acces-link">Démarrer l'événement</a>
                 <button type="button" class="delete-event" id = "card-button" data-event-id="${event.id}">Supprimer l'événement</button>
-                <a href="/liste-participant" id = "card-button" class="acces-link">Liste participants</a>
+                <button class="btn btn-primary" id = "card-button" onclick="goToParticipantsList(${event.id})">Liste des participants</button>
             </div>
         </div>`;
 
@@ -234,7 +233,6 @@ function deleteEvent(eventId) {
         "Content-Type": "application/json",
     });
 
-    // Envoi de la requête DELETE pour supprimer l'événement
     fetch(`${apiUrl}${eventId}`, {
         method: "DELETE",
         headers: headers,
@@ -244,7 +242,6 @@ function deleteEvent(eventId) {
             throw new Error("Erreur lors de la suppression de l'événement.");
         }
 
-        // Si l'événement est supprimé avec succès, mettre à jour l'affichage
         alert("L'événement a été supprimé avec succès.");
         const eventCard = document.querySelector(`.card[data-event-id='${eventId}']`);
         if (eventCard) {
@@ -350,7 +347,6 @@ function saveEventChanges(eventId) {
         visibility: formData.get("editVisibility") === "true" ? true : false
     };
 
-    // 1. Mettre à jour les informations de l'événement
     const headers = new Headers({
         "X-AUTH-TOKEN": token,
         "Content-Type": "application/json",
@@ -403,6 +399,19 @@ function saveEventChanges(eventId) {
         console.error("Erreur : ", error);
         alert("Une erreur est survenue lors de la modification de l'événement.");
     });
+}
+
+function goToParticipantsList(eventId) {
+    console.log("Redirection vers la liste des participants pour l'eventId :", eventId); 
+    const token = getToken();
+    if (!token) {
+        alert("Vous devez être connecté pour voir la liste des participants.");
+        return;
+    }
+
+    localStorage.setItem("eventId", eventId);
+
+    window.location.href = "/liste-participant";
 }
 
 // Charger les événements au démarrage

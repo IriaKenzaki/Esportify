@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1 class="nom-event">Nom de l'évènement</h1>
+        <h1 class="nom-event" id="eventName">Nom de l'évènement</h1>
     </header>
     <div class="container-accounts">
         <div class="container-accounts-top">
@@ -17,32 +17,17 @@
                 <input type="search" id="pseudo-search" name="pseudo-search" placeholder="Rechercher un pseudo..." />
             </div>
             <div class="field">
-                <button type="submit">Recherche</button>
+                <button type="button" id="searchButton">Recherche</button>
             </div>
         </div>
         <div class="container-accounts-bottom">
             <label for="responses">Liste des participants :</label>
-            <div class="response">
-                <div class="response-details">
-                    <span class="pseudo">Organa</span>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="checkbox1" />
-                    <label for="checkbox1" class="checkbox-custom"></label>
-                </div>
+            <div id="participantsList">
+                <!-- Les participants seront insérés ici dynamiquement -->
             </div>
-            <hr class="divider" />
-            <div class="response">
-                <div class="response-details">
-                    <span class="pseudo">Origan</span>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="checkbox2" />
-                    <label for="checkbox2" class="checkbox-custom"></label>
-                </div>
-            </div>
-            <button type="submit" class="reject-button">Rejeter participation</button>
+            <button type="button" class="reject-button" id="rejectButton">Rejeter participation</button>
         </div>
     </div>
+    <script src="/js/event/liste-participant.js"></script>
 </body>
 </html>
