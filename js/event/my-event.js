@@ -52,7 +52,6 @@ function loadUserEvents() {
         });
 }
 
-// Appliquer les filtres de recherche
 document.getElementById("searchButton").addEventListener("click", function (event) {
     event.preventDefault();
 

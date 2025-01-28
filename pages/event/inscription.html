@@ -10,64 +10,53 @@
     <h1>Mes inscriptions</h1>
 </header>
 <body>
-    <form action="/search" method="GET">
+    <form id="searchForm">
         <div class="form-container">
             <div>
-                <label for="date">Sélectionner date:</label>
+                <label for="date">Sélectionner date :</label>
                 <input type="date" id="date" name="date" min="2025-01-01" max="">
             </div>
             <div>
-                <label for="time">Sélectionner heur:</label>
+                <label for="time">Sélectionner heure :</label>
                 <input type="time" id="time" name="time">
             </div>
             <div>
-                <label for="number">Nombre de Joueurs:</label>
+                <label for="number">Nombre de joueurs :</label>
                 <input type="number" id="number" name="number" min="0">
             </div>
             <div>
-                <label for="pseudo">Pseudo créateur:</label>
-                <input type="text" id="pseudo" name="pseudo" maxlenght="60">        
+                <label for="pseudo">Pseudo créateur :</label>
+                <input type="text" id="pseudo" name="pseudo" maxlength="60">        
             </div>
         </div>
-        <button type="submit">Recherche</button>
+        <button type="button" id="searchButton">Recherche</button>
     </form>
-        <div class="container-event">
-            <div class="card">
-                <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">
-                <div class="card-content">
-                    <h3>Titre de l'événement</h3>
-                    <hr class="card-divider" />
-                    <p><strong>Nombre de joueurs :</strong> 10</p>
-                    <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
-                    <p><strong>Date et heure de fin :</strong> 2025-12-01 20:00</p>
-                    <a href="#" id="viewDetails" data-bs-toggle="modal" data-bs-target="#eventModal">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
+    <div class="container-event">
+        <!-- Les cartes des événements seront injectées ici -->
+    </div>
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <img src="/Images/ai-generated-8303646_1280.webp" alt="Image de l'événement">
+                    <img src="/Images/def-event.webp" alt="Image de l'événement" id="modalImage">
                 </div>
                 <div class="modal-body">
-                    <h3 class="modal-title fs-5" id="eventModalLabel">Nom Event</h3>
-                    <hr class="modal-divider"/>
-                    <div class="modal-info">
-                        <p><strong>Date et heure de début :</strong> 2025-12-01 18:00</p>
-                        <p><strong>Nombre de joueurs :</strong> 10</p>
-                        <p><strong>Date et heure de fin :</strong> 2025-12-01 20:00</p>
-                        <p><strong>Organisateur :</strong> Organa</p>
+                    <h3 class="modal-title fs-5" id="eventModalLabel">Nom de l'événement</h3>
+                    <hr class="modal-divider" />
+                    <div class="modal-info" id="modalInfo">
                     </div>
-                    <p>Description évènement</p>
-                    <div class="button-modal">
-                        <button type="submit" id="button-modal"><a href="/liste-event" class="acces-link">Désinscription</a></button>
-                        <button type="submit" id="button-modal"><a href="/event" class="acces-link">Rejoindre</a></button>
-                    </div>    
+                    <p id="modalDescription">Description de l'événement</p>    
+                    <button type="button" id="button-modal" data-show="connected">
+                        <a href="javascript:void(0);" class="acces-link" id="désinscriptionLink">Désinscription</a>
+                    </button>
+                    <button type="button" id="button-modal" data-show="connected">
+                        <a href="javascript:void(0);" class="acces-link" id="goToLink">Rejoindre l'évènement</a>
+                    </button>
                 </div>
-              </div>
             </div>
-          </div>
-        <script src="/js/event.js"></script>
+        </div>
+    </div>
+    <script src="/js/event/inscription.js"></script>
+    <script src="/js/event.js"></script>
 </body>
 </html>
