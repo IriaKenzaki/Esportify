@@ -6,7 +6,7 @@ export const allRoutes = [
     new Route("/liste-event", "Liste event", "/pages/event/liste-event.html", [], "/js/event/liste-event.js"),
     new Route("/signin", "Connexion", "/pages/auth/signin.html", ["disconnected"], "/js/auth/signin.js"),
     new Route("/signup", "Inscription", "/pages/auth/signup.html", ["disconnected"], "/js/auth/signup.js"),
-    new Route("/myaccount", "Gestion du compte", "/pages/account/myaccount.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
+    new Route("/myaccount", "Gestion du compte", "/pages/account/myaccount.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/account/myaccount.js"),
     new Route("/accounts", "Gestion des comptes", "/pages/account/accounts.html", ["ROLE_ADMIN"], "/js/account/accounts.js"),
     new Route("/useraccount", "Gestion d'un compte", "/pages/account/useraccount.html", ["ROLE_ADMIN"]),
     new Route("/scores", "Scores", "/pages/scores.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),

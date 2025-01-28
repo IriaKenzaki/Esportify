@@ -15,36 +15,26 @@
             <h1>Gestion du compte</h1>
             <form>
                 <div>
-                  <label for="UsernameInput" class="form-label">Votre Pseudo:</label>
-                  <input type="text" class="form-control" id="UsernameInput" placeholder="Pseudo" name="Username"> 
-                </div>
-                <div>
-                  <label for="PasswordInput" class="form-label">Votre mot de passe</label>
-                  <input type="password" class="form-control" id="PasswordInput" name="Password">
-                </div>
-                <div>
-                    <label for="ValidatePasswordInput" class="form-label">Validez votre mot de passe</label>
-                    <input type="password" class="form-control" id="ValidatePasswordInput" name="PasswordConfirm">
-                  </div>
-                <div>
-                    <button type="submit">Modifier le compte</button>
-                </div>
-                <div>
-                    <p style="text-align: center">Pour la suppression du compte, entez le mot de passe du compte. Attention cette action est irréversible.</p>
+                    <label for="UsernameInput" class="form-label">Votre Pseudo:</label>
+                    <input type="text" class="form-control" id="UsernameInput" placeholder="Pseudo" name="Username"> 
                 </div>
                 <div>
                     <label for="PasswordInput" class="form-label">Votre mot de passe</label>
                     <input type="password" class="form-control" id="PasswordInput" name="Password">
-                  </div>
-                  <div class="text-center">
-                    <button type="submit"><a href="/" class="acces">Supprimer le compte</a></button>
+                </div>
+                <div>
+                    <label for="ValidatePasswordInput" class="form-label">Validez votre mot de passe</label>
+                    <input type="password" class="form-control" id="ValidatePasswordInput" name="PasswordConfirm">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" id="submitButton">Modifier le compte</button>
                 </div>
             </form>
             <div class="text-center pt-2">
-                <a href="/contact">Pour faire un changement d'adresse mail, veuilliez prendre contact avec nous.</a>
+                <a href="/contact">Pour faire un changement d'adresse mail ou suppression de compte, veuilliez prendre contact avec nous.</a>
             </div>
         </div>
-        
     </div>
+    <script src="/js/account/myaccount.js"></script>
 </body>
 </html>
