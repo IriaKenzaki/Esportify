@@ -16,7 +16,7 @@ export const allRoutes = [
     new Route("/my-event", "Mes évènements", "/pages/event/my-event.html",["ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/event/my-event.js"),
     new Route("/validation", "Validation d'évènement", "/pages/event/validation.html", ["ROLE_ADMIN"]),
     new Route("/contact", "Contact", "/pages/contact.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
-    new Route("/avis", "Avis", "/pages/avis/avis.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
+    new Route("/avis", "Avis", "/pages/avis/avis.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/avis/avis.js"),
     new Route("/liste-avis", "Liste des Avis", "/pages/avis/liste-avis.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
     new Route("/event", "Evènement", "/pages/event/event.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/game/loadgame.js"),
     new Route("/dashboard", "Tableau de bord", "/pages/dashboard.html", ["ROLE_ADMIN"]),

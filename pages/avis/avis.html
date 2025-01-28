@@ -1,56 +1,55 @@
-!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/scss/main.css">
-    <title>Avis</title>
+    <title>Créer un Avis</title>
 </head>
 <header>
-    <h1>Formulaire d'avis</h1>
+    <h1>Formulaire d'Avis</h1>
 </header>
 <body>
     <div class="container-avis">
         <div>
-            <p class="p-contact"><span class="span-contact">Information : </span></p>
+            <p class="p-contact"><span class="span-contact">Information :</span></p>
             <p class="p-contact">Nous serions ravis d’avoir votre avis sur notre site.
                  Vos retours sont précieux et nous aideront à améliorer 
                 les futures mises à jour afin de vous offrir la meilleure expérience possible.</p>
         </div>
-        <div class="container-accounts-top">
-            <div class="field">
-                <label for="UsernameInput" class="form-label">Votre Pseudo :</label>
-                <input type="text" class="form-control" id="UsernameInput" placeholder="Pseudo" name="Username"> 
+        <form id="avisForm">
+            <div class="container-accounts-top" id="container-avis-top">
+                <div class="field">
+                    <label for="AvisInput" class="form-label">Titre de l'avis :</label>
+                    <input type="text" class="form-control" id="AvisInput" placeholder="Titre" name="title" required> 
+                </div>
+                <div class="field">
+                    <label for="rate" class="form-label">Evaluation :</label>
+                    <div class="rate">
+                        <input type="radio" id="star1" name="rate" value="5" />
+                        <label for="star1" title="1 star">1 étoile</label>
+                        <input type="radio" id="star2" name="rate" value="4" />
+                        <label for="star2" title="2 stars">2 étoiles</label>
+                        <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="3 stars">3 étoiles</label>
+                        <input type="radio" id="star4" name="rate" value="2" />
+                        <label for="star4" title="4 stars">4 étoiles</label>
+                        <input type="radio" id="star5" name="rate" value="1" />
+                        <label for="star5" title="5 stars">5 étoiles</label>
+                    </div>
+                </div>
             </div>
-            <div class="field">
-                <label for="AvisInput" class="form-label">Titre de l'avis :</label>
-                <input type="text" class="form-control" id="AvisInput" placeholder="Titre" name="AvisInput"> 
+            <div class="container-avis-textarea">
+                <label for="message" class="form-label">Votre méssage :</label>
+                <textarea id="message" name="message" placeholder="Entrez votre message ici..." required></textarea>
             </div>
-            <div class="field">
-                <label for="rate" class="form-label">Evaluation :</label>
-                <div class="rate">
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                  </div>
+            <div>
+                <button type="submit" class="submit-button">Envoyer</button>
             </div>
-        </div>
-        <div class="container-avis-textarea">
-            <label for="textarea" class="form-label">Votre méssage :</label>
-            <textarea placeholder="Entrez votre message ici..."></textarea>
-        </div>
-        <div>
-            <button type="submit"><a href="/liste-avis" class="acces">Envoyer</a></button>
-        </div>
+        </form>
         <div class="container-accounts-bottom">           
         </div>
     </div>
+    <script src="/js/avis/avis.js"></script>
 </body>
 </html>

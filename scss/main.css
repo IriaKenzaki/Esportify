@@ -12705,6 +12705,7 @@ input[type=search], select {
   .container-accounts-top {
     flex-direction: column;
     align-items: center;
+    gap: 10px !important;
   }
   .field {
     align-items: center;
@@ -12951,6 +12952,22 @@ textarea::placeholder {
   padding: 20px;
 }
 
+#container-avis-top {
+  gap: 120px !important;
+}
+
+.container-avis-textarea {
+  justify-items: center;
+}
+
+@media (max-width: 768px) {
+  #container-avis-top {
+    gap: 10px !important;
+  }
+  #message {
+    width: 20rem !important;
+  }
+}
 /* Création d'évènement */
 .form-label {
   margin-bottom: 0;
