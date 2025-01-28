@@ -21,8 +21,16 @@ document.getElementById("searchButton").addEventListener("click", function(event
     const pseudo = document.getElementById("pseudo").value;
 
     const params = { date, time, number, pseudo };
+    const token = getToken();
+    const headers = new Headers({
+        "X-AUTH-TOKEN": token,
+        "Content-Type": "application/json",
+    });
 
-    fetch(apiUrl + "all")
+    fetch(apiUrl + "my-events", {
+        method: "GET",
+        headers: headers,
+    })
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Erreur lors de la récupération des événements");
@@ -98,7 +106,7 @@ function displayEvent(events) {
     detailLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
             e.preventDefault();
-            const eventId = link.getAttribute("data-event-id");
+            const eventId = link.getAttribute("data-event-id", event.id);
             fetchEventDetails(eventId);
         });
     });
@@ -172,92 +180,44 @@ function displayEventModal(event) {
     `;
     modalDescription.textContent = description;
 
-    checkUserLoginStatus(event.id);
-}
-
-function checkUserLoginStatus(eventId) {
-    const token = getToken();
-    const inscriptionLink = modalButton.querySelector("#inscriptionLink");
-
-    if (!token) {
-        console.error("Aucun token trouvé. Redirection vers la page de connexion.");
-        modalButton.style.display = "none";
-        alert("Veuillez vous connecter pour vous inscrire à cet événement.");
-        inscriptionLink.href = "/signin";
-        return;
-    }
-
-    const url = `${apiUrl}events/${eventId}/add-participant`;
-
-    inscriptionLink.addEventListener("click", function(event) {
-        event.preventDefault();
-
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "X-AUTH-TOKEN": token, 
-                "Content-Type": "application/json",
-            },
-        })
-        .then((response) => {
-            if (response.ok) {
-                return response.json(); 
-            } else if (response.status === 403) {
-                console.warn("Utilisateur déjà inscrit à l'événement.");
-                alert("Vous êtes déjà inscrit à cet événement.");
-                location.reload();           
-            } else if (response.status === 404) {
-                console.error("Événement introuvable.");
-                throw new Error("Erreur 404 : Événement introuvable.");
-            } else if (response.status === 401) {
-                console.error("Utilisateur non connecté.");
-                alert("Veuillez vous connecter pour vous inscrire à cet événement.");
-                window.location.href = "/signin";
-            } else {
-                throw new Error("Erreur inattendue lors de la vérification.");
-            }
-        })
-        .then((data) => {
-            if (data && !data.isRegistered) {
-                modalButton.style.display = "block";
-                inscriptionLink.href = url; 
-                alert("Inscription réussie !");
-                window.location.href = "/inscription";
-            }
-        })
-        .catch((error) => {
-            console.error("Erreur lors de la vérification de l'inscription :", error);
-        });
-
+    const unsubscribeButton = document.getElementById("désinscriptionLink");
+    unsubscribeButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        removeParticipant(event.id);
     });
 }
 
-function inscrireUtilisateur(eventId) {
+function removeParticipant(eventId) {
     const token = getToken();
+
     if (!token) {
-        console.warn("Utilisateur non connecté. Redirection vers la page de connexion.");
+        console.error("Aucun token trouvé. L'utilisateur doit se connecter.");
+        alert("Veuillez vous connecter pour vous désinscrire.");
         window.location.href = "/signin";
         return;
     }
 
-    const url = `${apiUrl}events/${eventId}/add-participant`;
+    const headers = new Headers({
+        "X-AUTH-TOKEN": token,
+        "Content-Type": "application/json",
+    });
 
-    fetch(url, { 
-        method: "POST",
-        headers: {
-            "X-AUTH-TOKEN": token, 
-            "Content-Type": "application/json",
-        }
+    const url = `${apiUrl}events/${eventId}/remove-participant`;
+
+    fetch(url, {
+        method: 'DELETE',
+        headers: headers,
     })
     .then((response) => {
-        if (!response.ok) {
-            throw new Error("Erreur lors de l'inscription à l'événement");
+        if (response.ok) {
+            alert("Vous avez été désinscrit de l'événement.");
+            location.reload();  
+        } else {
+            throw new Error(`Erreur ${response.status}: Impossible de vous désinscrire.`);
         }
-        alert("Vous êtes inscrit à l'événement avec succès !");
-        window.location.href = "/inscription";
     })
     .catch((error) => {
-        console.error("Erreur : ", error);
-        alert("Une erreur est survenue lors de l'inscription à l'événement.");
+        console.error("Erreur lors de la désinscription :", error);
+        alert("Une erreur est survenue lors de la désinscription.");
     });
-};
+}
