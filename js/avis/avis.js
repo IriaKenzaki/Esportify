@@ -25,13 +25,11 @@ document.getElementById('avisForm').addEventListener('submit', async function(ev
         content: message
     };
     const token = getToken();
-    console.log("Token récupéré :", token);
     if (!token) {
         alert("Erreur d'authentification : le jeton est manquant.");
         return;
     }
     try {
-        console.log(data); 
         const response = await fetch(apiUrl+'avis', {
             method: 'POST',
             headers: {
@@ -50,7 +48,6 @@ document.getElementById('avisForm').addEventListener('submit', async function(ev
         } else if (contentType && contentType.includes("text/html")) {
             console.error("Le serveur a renvoyé une page HTML. Vérifiez l'erreur côté backend.");
             const errorText = await response.text();
-            console.log("HTML reçu :", errorText);
             alert("Une erreur serveur est survenue. Veuillez contacter l'administrateur.");
         } else {
             const errorData = await response.json();
