@@ -11,50 +11,37 @@
 </header>
 <body>
     <div class="container-accounts">
-        <div class="container-accounts-top">
-            <form>
-                <div class="field">
-                    <label for="role-select">Sélection des droits:</label>
-                    <select name="role" id="role-select">
-                        <option value="">--Choix des options--</option>
-                        <option value="Joueur">Joueurs</option>
-                        <option value="organisateur">Organisateur</option>
-                        <option value="admin">Administrateur</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label for="pseudo-search">Pseudo du compte:</label>
-                    <input type="search" id="pseudo-search" name="pseudo-search" />
-                </div>
-                <div class="field">
-                    <label for="email-search">Mail du compte:</label>
-                    <input type="search" id="email-search" name="email-search" />
-                </div>
-                </div>
-                <div>
-                    <button type="submit">Recherche</button>
+            <form id="searchForm">
+                <div class="form-container">
+                    <div>
+                        <label for="role-select">Sélection des droits:</label>
+                        <select name="role" id="role-select">
+                            <option value="">--Choix des options--</option>
+                            <option value="ROLE_USER">Joueurs</option>
+                            <option value="ROLE_ORGANISATEUR">Organisateur</option>
+                            <option value="ROLE_ADMIN">Administrateur</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="pseudo-search">Pseudo du compte:</label>
+                        <input type="search" id="pseudo-search" name="pseudo-search" />
+                    </div>
+                    <div>
+                        <label for="email-search">Mail du compte:</label>
+                        <input type="search" id="email-search" name="email-search" />
+                    </div>
+                    <div>
+                        <button type="button" id="searchButton">Recherche</button>
+                    </div>
                 </div>
             </form>
         <div class="container-accounts-bottom">
             <label for="responses">Résultats trouvés :</label>
-            <div class="response">
-                <div class="response-details">
-                    <span class="role">Admin</span>
-                    <span class="pseudo">AdminUser</span>
-                    <span class="email">admin@example.com</span>
-                </div>
-                <button><a href="useraccount" class="acces">Gérer ce compte</a></button>
-            </div>
-            <hr class="divider" />
-            <div class="response">
-                <div class="response-details">
-                    <span class="role">Joueur</span>
-                    <span class="pseudo">Player123</span>
-                    <span class="email">player@example.com</span>
-                </div>
-                <button><a href="useraccount" class="acces">Gérer ce compte</a></button>
+            <div id="response-list">
+                <!-- Zone dynamique pour afficher les résultats -->
             </div>
         </div>
     </div>
+    <script src="/js/account/accounts.js"></script>
 </body>
 </html>

@@ -260,7 +260,7 @@ label {
 }
 
 input, select {
-    padding: 5px !important;
+
     height: 2.5rem !important;
     margin-bottom: 10px !important;
     width: 20rem !important;
@@ -669,7 +669,6 @@ input[type="text"]::placeholder{
 input[type="search"], select {
     width: 300px;
     height: 2.5rem;
-    margin-top: 0.5rem;
 }
 
 .container-accounts-bottom {
@@ -702,6 +701,8 @@ input[type="search"], select {
 
 .response-details span {
     font-size: 1.5rem;
+    width: 20rem;
+    text-align: left;
 }
 
 .divider {
@@ -1382,3 +1383,6 @@ h1 {
 .modal-footer{
     justify-content: center;
 }
+
+
+

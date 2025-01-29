@@ -11,7 +11,7 @@
 </header>
 <body>
     <div class="container-useraccount">
-        <form>
+        <form id="userAccountForm">
             <div>
               <label for="UsernameInput" class="form-label">Pseudo du compte:</label>
               <input type="text" class="form-control" id="UsernameInput" placeholder="Pseudo" name="Username"> 
@@ -24,28 +24,26 @@
                 <label for="role-select">Sélection des droits:</label>
                 <select name="role" id="role-select">
                     <option value="">--Choix des options--</option>
-                    <option value="Joueur">Joueurs</option>
-                    <option value="organisateur">Organisateur</option>
-                    <option value="admin">Administrateur</option>
+                    <option value="ROLE_USER">Joueurs</option>
+                    <option value="ROLE_ORGANISATEUR">Organisateur</option>
+                    <option value="ROLE_ADMIN">Administrateur</option>
                 </select>
-              </div>
-            <div>
-                <button type="submit">Modification du compte</button>
             </div>
             <div>
-                <p style="text-align: center">Pour la suppression du compte, entez le mot de passe du compte. Attention cette action est irréversible.</p>
+                <button type="button" id="updateButton">Modification du compte</button>
+            </div>
+            <div>
+                <p style="text-align: center">Pour la suppression du compte, entrez le email du compte. Attention cette action est irréversible.</p>
             </div>
             <div>
                 <label for="EmailInput" class="form-label">Email du compte :</label>
                 <input type="email" class="form-control" id="EmailInput" placeholder="test@mail.fr" name="Email"> 
-              </div>
-              <div class="text-center">
-                <button type="submit"><a href="/accounts" class="acces">Supprimer le compte</a></button>
+            </div>
+            <div class="text-center">
+                <button type="button" id="deleteButton">Supprimer le compte</button>
             </div>
         </form>
-        <div class="text-center pt-2">
-            <p>Envoie d’un mail de confirmation à l’adresse mail suite à une modification ou une suppression d’un compte.</p>
-        </div>
     </div>
+    <script src="/js/account/useraccount.js"></script>
 </body>
 </html>
