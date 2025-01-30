@@ -1,9 +1,8 @@
 const userId = sessionStorage.getItem("userId");
 if (!userId) {
     alert("Utilisateur non spécifié.");
-    window.location.href = '/accounts'; // Rediriger vers la page des comptes
+    window.location.href = '/accounts';
 }
-console.log("User ID récupéré:", userId);
 loadUserDetails(userId);
 async function loadUserDetails(userId) {
     const token = getToken();
@@ -12,7 +11,6 @@ async function loadUserDetails(userId) {
         'Content-Type': 'application/json',
     });
     try {
-        // Appel à l'API pour récupérer tous les utilisateurs
         const response = await fetch(apiUrl + `admin/users`, {
             method: 'GET',
             headers: headers,
@@ -24,11 +22,9 @@ async function loadUserDetails(userId) {
             return;
         }
 
-        // Récupérer tous les utilisateurs
         const users = await response.json();
         console.log("Utilisateurs récupérés:", users);
 
-        // Filtrer l'utilisateur avec l'ID spécifique
         const user = users.find(u => u.id === parseInt(userId));
 
         if (!user) {
@@ -36,7 +32,6 @@ async function loadUserDetails(userId) {
             return;
         }
 
-        // Remplir les champs du formulaire avec les données de l'utilisateur
         document.getElementById('UsernameInput').value = user.username || '';
         document.getElementById('EmailInput').value = user.email || '';
         document.getElementById('role-select').value = user.roles[0] || '';
@@ -55,7 +50,6 @@ async function updateUserDetails() {
         role: document.getElementById('role-select').value,
         email: document.getElementById('EmailInput').value,
     };
-    console.log("Données de l'utilisateur mises à jour:", updatedUser);
     try {
         const response = await fetch(apiUrl + `admin/users/edit/${userId}`, {
             method: 'PUT',
@@ -88,7 +82,7 @@ async function deleteUser() {
         });
         if (response.ok) {
             alert("Utilisateur supprimé avec succès.");
-            window.location.href = '/accounts'; // Rediriger vers la page des comptes
+            window.location.href = '/accounts';
         } else {
             alert("Erreur lors de la suppression de l'utilisateur.");
             console.error("Erreur suppression utilisateur:", await response.json());
@@ -97,12 +91,10 @@ async function deleteUser() {
         console.error("Erreur réseau lors de la suppression de l'utilisateur:", error);
     }
 }
-// Gestion du bouton "Modifier le compte"
 document.getElementById('updateButton').addEventListener('click', function (event) {
-    event.preventDefault(); // Empêcher la soumission par défaut
+    event.preventDefault();
     updateUserDetails();
 });
-// Gestion du bouton "Supprimer le compte"
 document.getElementById('deleteButton').addEventListener('click', function (event) {
     event.preventDefault();
     if (confirm("Êtes-vous sûr de vouloir supprimer ce compte ?")) {

@@ -54,7 +54,11 @@ function displayValidationCards(events) {
                 <p><strong>Nombre de joueurs :</strong> ${event.players}</p>
                 <p><strong>Date et heure de début :</strong> ${formatDate(event.dateTimeStart)}</p>
                 <p><strong>Date et heure de fin :</strong> ${formatDate(event.dateTimeEnd)}</p>
-                <a href="/liste-event" class="view-details" data-event-id="${event.id}">Plus d'informations <i class="bi bi-arrow-right-circle"></i></a>
+                <div style="text-align: right;">
+                    <a href="#" class="viewDetails" data-id="${event.id}">
+                        Plus d'informations <i class="bi bi-arrow-right-circle"></i>
+                    </a>
+                </div>
             </div>`;
         
         containerValidation.appendChild(card);

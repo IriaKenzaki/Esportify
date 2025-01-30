@@ -360,7 +360,6 @@ function saveEventChanges(eventId) {
         if (!response.ok) {
             throw new Error("Erreur lors de la modification de l'événement.");
         }
-        console.log("Détails de l'événement mis à jour !");
         
         const imageFile = document.getElementById('editImage').files[0]; 
         if (imageFile) {
@@ -401,7 +400,6 @@ function saveEventChanges(eventId) {
 }
 
 function goToParticipantsList(eventId) {
-    console.log("Redirection vers la liste des participants pour l'eventId :", eventId); 
     const token = getToken();
     if (!token) {
         alert("Vous devez être connecté pour voir la liste des participants.");
