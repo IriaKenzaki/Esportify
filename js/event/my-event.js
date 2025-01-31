@@ -135,7 +135,7 @@ function displayEvents(events) {
         cardContent += `
             <div class="button-card">
                 <button type="button" class="btn btn-primary" id = "card-button" onclick="openEditEventModal(${event.id})">Modifier l'évènement</button>
-                <a href="/start-event/${event.id}" id = "card-button" class="acces-link">Démarrer l'événement</a>
+                <button type="button" class="btn btn-success start-event-btn" id = "card-button" data-event-id="${event.id}">Démarrer l'événement</button>
                 <button type="button" class="delete-event" id = "card-button" data-event-id="${event.id}">Supprimer l'événement</button>
                 <button class="btn btn-primary" id = "card-button" onclick="goToParticipantsList(${event.id})">Liste des participants</button>
             </div>
@@ -143,6 +143,14 @@ function displayEvents(events) {
 
         card.innerHTML = cardContent;
         containerEvent.appendChild(card);
+        const startButton = card.querySelector(".start-event-btn");
+        if (event.started) {
+            startButton.disabled = true;
+            startButton.textContent = "Événement en cours";
+        } else {
+            startButton.disabled = false;
+            startButton.textContent = "Démarrer l'événement";
+        }
     });
 
     const detailLinks = document.querySelectorAll(".view-details");
@@ -151,6 +159,14 @@ function displayEvents(events) {
             e.preventDefault();
             const eventId = link.getAttribute("data-event-id");
             fetchEventDetails(eventId);
+        });
+    });
+
+    const startButtons = document.querySelectorAll(".start-event-btn")
+    startButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const eventId = this.getAttribute("data-event-id");
+            startEvent(eventId);
         });
     });
 
@@ -216,6 +232,11 @@ function displayEventModal(event) {
         <p><strong>Jeu associé :</strong> ${event.game}</p>
     `;
     modalDescription.textContent = event.description || "Aucune description disponible.";
+
+    const startStatus = event.started ? "En cours" : "Non démarré";
+    const startStatusElement = document.createElement("p");
+    startStatusElement.innerHTML = `<strong>Statut :</strong> ${startStatus}`;
+    modalInfo.appendChild(startStatusElement);
 
 }
 
@@ -410,6 +431,56 @@ function goToParticipantsList(eventId) {
 
     window.location.href = "/liste-participant";
 }
+
+function startEvent(eventId) {
+    const token = getToken();
+    if (!token) {
+        alert("Vous devez être connecté pour démarrer un événement.");
+        window.location.href = "/signin";
+        return;
+    }
+
+    fetch(`${apiUrl}my-created-events/${eventId}`, {
+        method: "PUT",
+        headers: {
+            "X-AUTH-TOKEN": token,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ started: true })
+    })
+    .then(response => {
+        if (response.status === 204) {
+            alert("L'événement a été démarré avec succès !");
+            localStorage.setItem("eventId", eventId);
+            window.location.href = "/event";
+            return;
+        }
+        
+        return response.json().then(data => {
+            console.log("Réponse du serveur:", response.status, data);
+            if (response.status === 403) {
+                alert("Permission refusée : seul le créateur de l'événement peut le modifier.");
+            } else if (response.status === 404) {
+                alert("Erreur : L'événement n'a pas été trouvé.");
+            } else if (response.status === 400) {
+                alert(`Erreur: ${data.message}`);
+            } else {
+                throw new Error("Une erreur est survenue lors du démarrage.");
+            }
+        });
+    })
+    .catch(error => {
+        console.error("Erreur :", error);
+        alert("Une erreur est survenue lors du démarrage de l'événement.");
+    });
+}
+
+document.querySelectorAll(".start-event-btn").forEach(button => {
+    button.addEventListener("click", function () {
+        const eventId = this.getAttribute("data-event-id");
+        startEvent(eventId);
+    });
+});
 
 // Charger les événements au démarrage
 loadUserEvents();

@@ -1,55 +1,13 @@
-
 // Sélectionner les boutons "Rejoindre"
-const joinButtons = document.querySelectorAll(".join-event");
 
 // Conteneur principal où le jeu sera injecté
-const containerPageEvent = document.getElementById("containerPageEvent");
 const gameContainer = document.getElementById("gameEvent");
 
-// Ajouter un écouteur d'événements sur chaque bouton "Rejoindre"
-joinButtons.forEach((button) => {
-    button.addEventListener("click", async (event) => {
-        const eventId = event.target.getAttribute("data-event-id"); // Récupérer l'ID de l'événement
-        if (!eventId) {
-            console.error("Aucun ID d'événement trouvé.");
-            return;
-        }
-
-        // Charger les détails de l'événement depuis l'API
-        try {
-            const response = await fetch(`${apiBaseUrl}/${eventId}`);
-            if (!response.ok) {
-                throw new Error(`Erreur API : ${response.status}`);
-            }
-
-            // Récupérer les données de l'événement
-            const eventData = await response.json();
-
-            // Récupérer le jeu associé (exemple : "yams" ou "pendu")
-            const gameName = eventData.getGame;
-
-            if (!gameName) {
-                throw new Error("Aucun jeu associé à cet événement.");
-            }
-
-            // Masquer la liste d'événements et afficher le conteneur du jeu
-            document.querySelector(".event-list").style.display = "none";
-            containerPageEvent.style.display = "block";
-
-            // Charger le jeu
-            await loadGame(gameName);
-        } catch (error) {
-            console.error("Erreur lors du chargement de l'événement :", error);
-            alert("Une erreur est survenue lors du chargement de l'événement.");
-        }
-    });
-});
-
 // Fonction pour charger le jeu dynamiquement
-async function loadGame(gameName) {
+async function loadGame(gameName, eventId) {
     try {
         // Construire le chemin du fichier HTML du jeu
-        const gameHtmlPath = `/${gameName}.html`;
+        const gameHtmlPath = `/${gameName}`;
 
         // Charger le contenu HTML du jeu
         const response = await fetch(gameHtmlPath);
@@ -62,14 +20,67 @@ async function loadGame(gameName) {
 
         // Charger dynamiquement le script associé au jeu
         const script = document.createElement("script");
-        script.src = `/js/${gameName}.js`;
+        script.src = `/js/game/${gameName}.js`;
         document.body.appendChild(script);
+
+        // Ajouter l'ID de l'événement dans le localStorage
+        localStorage.setItem("eventId", eventId);
+        
+        // Réinitialiser le localStorage après 5 secondes
+        setTimeout(() => {
+            localStorage.removeItem("eventId");
+        }, 5000); // Ajustez ce délai selon vos besoins
     } catch (error) {
         console.error("Erreur lors du chargement du jeu :", error);
         gameContainer.innerHTML = `<p>${error.message}</p>`;
     }
 }
 
+// Fonction qui charge automatiquement le jeu lorsqu'on arrive sur la page de l'événement
+(async () => {
+    const eventId = localStorage.getItem('eventId');
+    console.log('eventId:', eventId); 
+    if (!eventId) {
+        alert("Aucun ID d'événement trouvé. Veuillez vous inscrire à un événement.");
+        console.log("Aucun ID d'événement trouvé dans le localStorage.");
+        return; // Ne continuez pas si l'eventId n'est pas disponible
+    }
+    const token = getToken();
+    if (!token) {
+        console.error("Aucun token trouvé. L'utilisateur doit se connecter.");
+        alert("Veuillez vous connecter pour accéder à l'événement.");
+        window.location.href = "/signin";
+        return;
+    }
+    const headers = new Headers({
+        "X-AUTH-TOKEN": token,
+        "Content-Type": "application/json",
+    });
+    if (eventId) {
+        try {
+            const response = await fetch(apiUrl+`${eventId}/details`,{
+                method: "GET",
+                headers: headers,
+            });
+            if (!response.ok) {
+                throw new Error(`Erreur API : ${response.status}`);
+            }
 
-// Lancer le chargement du jeu
-loadGame();
+            const eventData = await response.json();
+            const gameName = eventData.game;
+
+            if (!gameName) {
+                throw new Error("Aucun jeu associé à cet événement.");
+            }
+
+            gameContainer.style.display = "block";
+
+            await loadGame(gameName, eventId);
+        } catch (error) {
+            console.error("Erreur lors du chargement de l'événement :", error);
+            alert("Une erreur est survenue lors du chargement de l'événement.");
+        }
+    } else {
+        alert("Aucun ID d'événement trouvé. Veuillez vous inscrire à un événement.");
+    }
+})();

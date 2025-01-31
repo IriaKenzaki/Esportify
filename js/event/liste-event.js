@@ -159,6 +159,7 @@ function displayEventModal(event) {
     const dateTimeEnd = event.dateTimeEnd ? formatDate(event.dateTimeEnd) : "Non spécifié";
     const players = event.players || "Non spécifié";
     const createdBy = event.createdBy || "Inconnu";
+    const started = event.started || "Non";
     const description = event.description || "Aucune description disponible.";
 
     modalImage.src = imageUrl;
@@ -169,6 +170,7 @@ function displayEventModal(event) {
         <p><strong>Date et heure de fin :</strong> ${dateTimeEnd}</p>
         <p><strong>Nombre de joueurs :</strong> ${players}</p>
         <p><strong>Organisateur :</strong> ${createdBy}</p>
+        <p><strong>Evènement démarrer :</strong> ${started}</p>
     `;
     modalDescription.textContent = description;
 

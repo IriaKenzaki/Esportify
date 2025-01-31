@@ -106,12 +106,11 @@ function displayEvent(events) {
     detailLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
             e.preventDefault();
-            const eventId = link.getAttribute("data-event-id", event.id);
+            const eventId = link.getAttribute("data-event-id");
             fetchEventDetails(eventId);
         });
     });
 }
-
 function fetchEventDetails(eventId) {
     const token = getToken();
 
@@ -167,6 +166,7 @@ function displayEventModal(event) {
     const dateTimeEnd = event.dateTimeEnd ? formatDate(event.dateTimeEnd) : "Non spécifié";
     const players = event.players || "Non spécifié";
     const createdBy = event.createdBy || "Inconnu";
+    const game = event.game || "Non spécifié";
     const description = event.description || "Aucune description disponible.";
 
     modalImage.src = imageUrl;
@@ -177,6 +177,7 @@ function displayEventModal(event) {
         <p><strong>Date et heure de fin :</strong> ${dateTimeEnd}</p>
         <p><strong>Nombre de joueurs :</strong> ${players}</p>
         <p><strong>Organisateur :</strong> ${createdBy}</p>
+        <p><strong>Jeux :</strong> ${game}</p>
     `;
     modalDescription.textContent = description;
 
@@ -184,6 +185,11 @@ function displayEventModal(event) {
     unsubscribeButton.addEventListener("click", function(e) {
         e.preventDefault();
         removeParticipant(event.id);
+    });
+    const goToLinkButton = document.getElementById("goToLink");
+    goToLinkButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        goToEvent(event.id);
     });
 }
 
@@ -220,4 +226,51 @@ function removeParticipant(eventId) {
         console.error("Erreur lors de la désinscription :", error);
         alert("Une erreur est survenue lors de la désinscription.");
     });
+}
+
+function goToEvent(eventId){
+
+    if (!eventId) {
+        console.error("Aucun ID d'événement trouvé.");
+        alert("Erreur : Aucun événement sélectionné.");
+        return;
+    }
+
+    const token = getToken();
+    if (!token) {
+        console.error("Aucun token trouvé. L'utilisateur doit se connecter.");
+        alert("Veuillez vous connecter pour accéder à l'événement.");
+        window.location.href = "/signin";
+        return;
+    }
+
+    const headers = new Headers({
+        "X-AUTH-TOKEN": token,
+        "Content-Type": "application/json",
+    });
+
+    const url = `${apiUrl}${eventId}/details`;
+
+    fetch(url, {
+        method: "GET",
+        headers: headers,
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`Erreur ${response.status}: Impossible de récupérer les détails.`);
+            }
+            return response.json();
+        })
+        .then((event) => {
+            if (event.started) {
+                localStorage.setItem("eventId", eventId);
+                window.location.href = "/event";
+            } else {
+                alert("Cet événement n'est pas encore lancé.");
+            }
+        })
+        .catch((error) => {
+            console.error("Erreur lors de la vérification de l'événement :", error);
+            alert("Une erreur est survenue lors de la vérification de l'événement.");
+        });
 }

@@ -10,8 +10,8 @@ const inputDescription = document.getElementById("DescriptionInput");
 const btnCreation = document.getElementById("btn-creation");
 const formEvent = document.getElementById("formEvent");
 
-const maxImageSize = 5 * 1024 * 1024;
-const maxImageSizeErrorMessage = "L'image est trop grande. La taille maximale autorisée est de 5 Mo.";
+const maxImageSize = 2 * 1024 * 1024;
+const maxImageSizeErrorMessage = "L'image est trop grande. La taille maximale autorisée est de 2 Mo.";
 
 btnCreation.addEventListener("click", CreeEvent);
 inputTitle.addEventListener("keyup", validateForm);

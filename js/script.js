@@ -115,7 +115,6 @@ forms.forEach(form => {
         event.preventDefault();
         const inputs = form.querySelectorAll('input, textarea');
         inputs.forEach(input => {
-            // Ne pas appliquer sanitizeHtml sur les inputs de type "number"
             if (input.type !== "number") {
                 input.value = sanitizeHtml(input.value);
             }
@@ -128,7 +127,6 @@ forms.forEach(form => {
         button.addEventListener('click', function() {
             const inputs = form.querySelectorAll('input, textarea');
             inputs.forEach(input => {
-                // Ne pas appliquer sanitizeHtml sur les inputs de type "number"
                 if (input.type !== "number") {
                     input.value = sanitizeHtml(input.value);
                 }
@@ -170,7 +168,6 @@ function getInfosUser(){
 function formatDate(dateString) {
     const date = new Date(dateString);
 
-    // Formate la date dans le format souhaité : 'YYYY-MM-DD HH:mm'
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
