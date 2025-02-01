@@ -55,7 +55,7 @@ function displayValidationCards(events) {
                 <p><strong>Date et heure de début :</strong> ${formatDate(event.dateTimeStart)}</p>
                 <p><strong>Date et heure de fin :</strong> ${formatDate(event.dateTimeEnd)}</p>
                 <div style="text-align: right;">
-                    <a href="#" class="viewDetails" data-id="${event.id}">
+                    <a href="/liste-event" class="viewDetails" data-id="${event.id}">
                         Plus d'informations <i class="bi bi-arrow-right-circle"></i>
                     </a>
                 </div>

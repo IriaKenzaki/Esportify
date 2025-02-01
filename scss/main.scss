@@ -33,6 +33,7 @@ button{
 
 a{
     font-family: "Afacad", serif;
+    color: #2D4739;
     font-weight: bold;
 }
 
@@ -1024,6 +1025,11 @@ input[type="file"]::-webkit-file-upload-button{
     padding: 20px
 }
 
+button:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
 /* Liste avis */
 
 .form-container-avis {
@@ -1039,43 +1045,6 @@ input[type="file"]::-webkit-file-upload-button{
     background-color: #cccccc00;
     border-radius: 0;
     border: none;
-}
-
-/* Page évènement */
-
-.container-page-event{
-    justify-items: center;
-    align-items: center;
-}
-
-.game-event{
-    width: 1000px;
-    height: 600px;
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    margin: 30px;
-    border: #ffffff solid 2px;
-}
-
-iframe{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-}
-
-.a-button{
-    font-family: "Afacad";
-    font-size: 1.5rem;
-    display: block;
-    text-decoration: none;
-    font-weight: 500;
-    text-align: center;
-    background-color: #BCB382;
-    color:black;
-    border-radius: 20px;
-    margin: 10px auto;
-    padding: 5px 15px;
-
 }
 
 /* Validation */
@@ -1204,13 +1173,20 @@ h3{
 
 /* Jeu du yams */
 
+
 .game-container {
     margin-top: 50px;
+    width: 100%;
+    height: 75vh;
 }
-
 h1 {
     font-size: 3rem;
     margin-bottom: 10px;
+}
+
+#exitGame{
+    display: flex;
+    margin: 10px;
 }
 
 .dice-container {
@@ -1259,6 +1235,7 @@ h1 {
     margin-top: 30px;
     font-size: 1.5rem;
 }
+
 
 /* Pendu */
 

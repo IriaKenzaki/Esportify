@@ -299,7 +299,7 @@ async function validateEvent(eventId) {
 
         const eventModal = document.getElementById("eventModal");
         if (eventModal) {
-            eventModal.style.display = "none"; // Ferme la modal (ou utilise Bootstrap modal si besoin)
+            eventModal.style.display = "none";
         }
         fetchNotValidatedEvents();
         fetchValidatedEvents();

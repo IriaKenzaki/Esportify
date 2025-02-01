@@ -7,9 +7,104 @@ const modalInfo = eventModal.querySelector(".modal-info");
 const modalDescription = eventModal.querySelector(".modal-body > p");
 const modalButton = document.getElementById("button-modal");
 
+let userId;
+let username;
+
 function getToken() {
     const token = getCookie(tokenCookieName);
     return token;
+}
+
+getUserInfo();
+
+async function getUserInfo() {
+    const token = getToken();
+    if (!token) return;
+
+    try {
+        const response = await fetch(apiUrl + "account/me", {
+            method: "GET",
+            headers: {
+                "X-AUTH-TOKEN": token,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) throw new Error();
+
+        const data = await response.json();
+        if (data?.id && data?.username) {
+            userId = data.id;
+            username = data.username;
+        }
+    } catch (error) {
+        console.error("Erreur API :", error);
+    }
+}
+
+async function checkUserScoreForEvent(eventId) {
+    if (!userId) {
+        return;
+    }
+
+    try {
+        const response = await fetch(apiUrl + "scores", {
+            method: "GET",
+            headers: {
+                "X-AUTH-TOKEN": getToken(),
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) throw new Error("Erreur lors de la récupération des scores");
+
+        const scores = await response.json();
+
+        const userScoreForEvent = scores.find(score => score.eventId === eventId);
+
+        const goToLinkButton = document.getElementById("goToLink");
+
+        if (goToLinkButton) {
+            if (userScoreForEvent) {
+                alert(`Vous avez déjà un score pour cet événement : ${userScoreForEvent.score}`);
+                goToLinkButton.disabled = true;
+                goToLinkButton.textContent = "Événement déjà terminé";
+                goToLinkButton.style.pointerEvents = 'none';
+            } else {
+                goToLinkButton.disabled = false;
+            }
+        } else {
+            console.error("Le bouton 'goToLink' n'a pas été trouvé.");
+        }
+    } catch (error) {
+        console.error("Erreur lors de la vérification du score :", error);
+    }
+}
+
+async function checkAndSetButtonState(eventId) {
+    const userScoreForEvent = await checkUserScoreForEvent(eventId);
+
+    if (userScoreForEvent) {
+        const goToLinkButton = document.getElementById("goToLink");
+        goToLinkButton.disabled = true;
+        goToLinkButton.textContent = "Vous avez déjà un score";
+        alert(`Vous avez déjà un score pour cet événement : ${userScoreForEvent.score}`);
+    } else {
+        const goToLinkButton = document.getElementById("goToLink");
+        goToLinkButton.disabled = false;
+        goToLinkButton.textContent = "Rejoindre l'événement";
+    }
+
+    const goToLinkButton = document.getElementById("goToLink");
+    goToLinkButton.addEventListener("click", function(e) {
+        if (goToLinkButton.disabled) {
+            e.preventDefault();
+            alert("Vous avez déjà un score pour cet événement.");
+        } else {
+            e.preventDefault();
+            goToEvent(eventId);
+        }
+    });
 }
 
 document.getElementById("searchButton").addEventListener("click", function(event) {
@@ -50,7 +145,6 @@ document.getElementById("searchButton").addEventListener("click", function(event
             }
         })
         .catch((error) => {
-            console.error("Erreur : ", error);
             containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
         });
 });
@@ -111,11 +205,11 @@ function displayEvent(events) {
         });
     });
 }
+
 function fetchEventDetails(eventId) {
     const token = getToken();
 
     if (!token) {
-        console.error("Aucun token trouvé. L'utilisateur doit se connecter.");
         alert("Veuillez vous connecter pour accéder aux détails de l'événement.");
         window.location.href = "/signin";
         return;
@@ -136,7 +230,6 @@ function fetchEventDetails(eventId) {
         if (response.ok) {
             return response.json();
         } else if (response.status === 401) {
-            console.error("Token invalide ou expiré.");
             alert("Votre session a expiré. Veuillez vous reconnecter.");
             window.location.href = "/signin";
             throw new Error("Non autorisé.");
@@ -148,14 +241,12 @@ function fetchEventDetails(eventId) {
         displayEventModal(data);
     })
     .catch((error) => {
-        console.error("Erreur lors de la récupération des détails de l'événement :", error);
         alert("Une erreur est survenue lors du chargement des détails de l'événement.");
     });
 }
 
 function displayEventModal(event) {
     if (!event) {
-        console.error("Les détails de l'événement sont introuvables.");
         alert("Aucune information disponible pour cet événement.");
         return;
     }
@@ -180,16 +271,22 @@ function displayEventModal(event) {
         <p><strong>Jeux :</strong> ${game}</p>
     `;
     modalDescription.textContent = description;
+    checkUserScoreForEvent(event.id);
 
     const unsubscribeButton = document.getElementById("désinscriptionLink");
     unsubscribeButton.addEventListener("click", function(e) {
         e.preventDefault();
         removeParticipant(event.id);
     });
+
     const goToLinkButton = document.getElementById("goToLink");
     goToLinkButton.addEventListener("click", function(e) {
-        e.preventDefault();
-        goToEvent(event.id);
+        if (goToLinkButton.disabled) {
+            e.preventDefault();
+        } else {
+            e.preventDefault();
+            goToEvent(event.id);
+        }
     });
 }
 
@@ -197,7 +294,6 @@ function removeParticipant(eventId) {
     const token = getToken();
 
     if (!token) {
-        console.error("Aucun token trouvé. L'utilisateur doit se connecter.");
         alert("Veuillez vous connecter pour vous désinscrire.");
         window.location.href = "/signin";
         return;
@@ -223,7 +319,6 @@ function removeParticipant(eventId) {
         }
     })
     .catch((error) => {
-        console.error("Erreur lors de la désinscription :", error);
         alert("Une erreur est survenue lors de la désinscription.");
     });
 }
@@ -264,11 +359,12 @@ function goToEvent(eventId){
         .then((event) => {
             if (event.started) {
                 localStorage.setItem("eventId", eventId);
-                window.location.href = "/event";
+                if (event.game) {
+                    window.location.href = `${event.game}`;
             } else {
                 alert("Cet événement n'est pas encore lancé.");
             }
-        })
+        }})
         .catch((error) => {
             console.error("Erreur lors de la vérification de l'événement :", error);
             alert("Une erreur est survenue lors de la vérification de l'événement.");
