@@ -2,43 +2,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/scss/main.css">
-    <title>Validation</title>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <header>
-    <h1>Validation d'évènement</h1>
+    <h1>Tableau de bord</h1>
 </header>
 <body>
-    <form action="/search" method="GET">
+    <select id="filter-type">
+    <option value="message">Messages</option>
+    <option value="statistique">Statistiques</option>
+</select>
+    </form>
+    <form id="searchForm">
         <div class="form-container">
-            <div>
-                <label for="date">Date de début:</label>
-                <input type="date" id="date" name="date" min="2025-01-01" max="">
-            </div>
-            <div>
-                <label for="date">Date de fin:</label>
-                <input type="date" id="date" name="date" min="2025-01-01" max="">
-            </div>
-            <div>
-                <label for="role-select">Sélection des filtres:</label>
-                <select name="role" id="role-select">
-                    <option value="">--Choix des options--</option>
-                    <option value="connexion">Connexion</option>
-                    <option value="event">Evènement crées</option>
-                    <option value="compte">Compte crées</option>
-                    <option value="all">Tout</option>
-                </select>
-            </div>
-            <div>
-                <button type="submit" style="margin: 20px 0 0 0">Recherche</button>
+            <div id="stat-filters">
+                <div>
+                    <label for="role-select">Sélectionner un résultat :</label>
+                    <select id="role-select">
+                        <option value="all">Tous</option>
+                        <option value="event">Evénements créés</option>
+                        <option value="user">Utilisateurs créés</option>
+                        <option value="connexion">Utilisateurs connectés</option>
+                    </select>    
+                </div>
+                <div>
+                    <label for="startDateStat">Date de début :</label>
+                    <input type="date" id="startDateStat">   
+                </div>
+                <div>
+                    <label for="endDateStat">Date de fin :</label>
+                    <input type="date" id="endDateStat">
+                </div>
+                <div>
+                    <button type="button" id="searchStatsButton">Filtrer les statistiques</button>
+                </div>
             </div>
         </div>
     </form>
-    <div class="container-resultat">
-        <div>
-            résultat
-        </div>
-        <div>
-            <canvas id="histogram" width="800" height="400"></canvas>
-        </div>
+
+    <div id="stats-section">
+        <canvas id="histogram"></canvas>
     </div>
+
+    <div id="messages-section">
+        <h2>Messages reçus</h2>
+
+    </div>
+    <script src="/js/dashboard/dashboard.js"></script>
+    
 </body>

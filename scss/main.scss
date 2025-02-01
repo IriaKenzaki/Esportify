@@ -70,6 +70,13 @@ h1 {
     color: #E5C687;
 }
 
+h2{
+    font-family: "Chakra Petch";
+    text-align: center;
+    color: #E5C687;
+    font-size: 2.5rem;
+}
+
 .acces-link{
     color:#ffffff;
     text-decoration: none;
@@ -870,7 +877,7 @@ input[type="checkbox"]:checked + .checkbox-custom {
 }
 .container-right-contact{
     justify-items: center !important;
-    justify-content: center !important;
+    align-content: center !important;
     box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
     padding: 20px;
 
@@ -1161,14 +1168,41 @@ h3{
 /* Dashboard */
 
 .container-resultat{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex !important;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     justify-items: center;
-    margin: 20px;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
 }
 
+#stats-section{
+    padding: 10px;
+    justify-items: center;
+}
+
+.message{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+#histogram{
+    box-sizing: border-box;
+    display: block;
+    max-width: 800px;
+    max-height: 400px;
+    font-size: 1.5rem;
+}
+
+#messages-container{
+    display: flex;
+    flex-direction: row;
+
+}
 
 /* Jeu du yams */
 
@@ -1286,7 +1320,7 @@ h1 {
 
 /* Mes évènements */
 
-#searchButton{
+#searchButton, .searchButton{
     margin-bottom: 0;
     margin-top: 20px;
 }

@@ -3,25 +3,21 @@ const titleInput = document.getElementById("TitleInput");
 const messageInput = document.querySelector("textarea");
 
 form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Empêcher le rechargement de la page lors de la soumission du formulaire
+    event.preventDefault();
 
-    // Récupérer les valeurs des champs du formulaire
     const title = titleInput.value;
     const message = messageInput.value;
 
-    // Valider les champs
     if (!title || !message) {
         alert("Tous les champs sont requis.");
         return;
     }
 
-    // Créer l'objet de données à envoyer à l'API
     const data = {
-        title: title, // Utilisation de l'email comme titre
-        text: message // Utilisation du message comme texte
+        title: title,
+        text: message
     };
     const token = getToken();
-    // Envoyer la requête POST à l'API
     fetch(apiUrl+'contact', {
         method: 'POST',
         headers: {
@@ -37,9 +33,8 @@ form.addEventListener("submit", function (event) {
         return response.json();
     })
     .then(responseData => {
-        // Afficher une alerte si l'envoi est réussi
         alert("Message envoyé avec succès !");
-        form.reset(); // Réinitialiser le formulaire après l'envoi
+        form.reset();
     })
     .catch(error => {
         console.error("Erreur:", error);

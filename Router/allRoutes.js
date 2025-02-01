@@ -19,7 +19,7 @@ export const allRoutes = [
     new Route("/avis", "Avis", "/pages/avis/avis.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/avis/avis.js"),
     new Route("/liste-avis", "Liste des Avis", "/pages/avis/liste-avis.html", [], "/js/avis/liste-avis.js"),
     new Route("/event", "Evènement", "/pages/event/event.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/game/loadgame.js"),
-    new Route("/dashboard", "Tableau de bord", "/pages/dashboard/dashboard.html", ["ROLE_ADMIN"]),
+    new Route("/dashboard", "Tableau de bord", "/pages/dashboard/dashboard.html", ["ROLE_ADMIN"], "/js/dashboard/dashboard.js"),
     new Route("/yams", "Yams", "/pages/game/yams.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/game/yams.js"),
     new Route("/pendu", "Pendu", "/pages/game/pendu.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/game/pendu.js"),
 
