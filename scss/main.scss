@@ -1201,8 +1201,16 @@ h3{
 #messages-container{
     display: flex;
     flex-direction: row;
-
 }
+
+@media (max-width: 920px) {
+    #filter-type-div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 
 /* Jeu du yams */
 

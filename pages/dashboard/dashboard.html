@@ -10,14 +10,16 @@
     <h1>Tableau de bord</h1>
 </header>
 <body>
-    <select id="filter-type">
-    <option value="message">Messages</option>
-    <option value="statistique">Statistiques</option>
-</select>
+    <div id="filter-type-div">
+        <select id="filter-type">
+            <option value="message">Messages</option>
+            <option value="statistique">Statistiques</option>
+        </select>
+    </div>
     </form>
     <form id="searchForm">
-        <div class="form-container">
-            <div id="stat-filters">
+        <div id="stat-filters">
+            <div class="form-container">
                 <div>
                     <label for="role-select">Sélectionner un résultat :</label>
                     <select id="role-select">
