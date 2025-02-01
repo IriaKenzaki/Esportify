@@ -21,14 +21,10 @@
         <div class="container-right-contact">
             <h1>Formulaire de contact</h1>
             <form>
-                    <div>
-                        <label for="UsernameInput" class="form-label">Votre Pseudo :</label>
-                        <input type="text" class="form-control" id="UsernameInput" placeholder="Pseudo" name="Username"> 
-                      </div>
-                      <div>
-                          <label for="EmailInput" class="form-label">Votre Email :</label>
-                          <input type="email" class="form-control" id="EmailInput" placeholder="test@mail.fr" name="Email"> 
-                      </div>
+                <div>
+                    <label for="TitleInput" class="form-label">Titre du message :</label>
+                    <input type="text" class="form-control" id="TitleInput" placeholder="Problème de connexion" name="title" required>
+                </div>
                 <div class="container-left-contact">
                     <label for="textarea" class="form-label">Votre méssage :</label>
                     <textarea placeholder="Entrez votre message ici..."></textarea>
@@ -38,5 +34,6 @@
                 </div>
         </div>
     </div>
+    <script src="/js/dashboard/contact.js"></script>
 </body>
 </html>
