@@ -9,7 +9,7 @@ export const allRoutes = [
     new Route("/myaccount", "Gestion du compte", "/pages/account/myaccount.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/account/myaccount.js"),
     new Route("/accounts", "Gestion des comptes", "/pages/account/accounts.html", ["ROLE_ADMIN"], "/js/account/accounts.js"),
     new Route("/useraccount", "Gestion d'un compte", "/pages/account/useraccount.html", ["ROLE_ADMIN"], "/js/account/useraccount.js"),
-    new Route("/scores", "Scores", "/pages/scores.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"]),
+    new Route("/scores", "Scores", "/pages/scores.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/scores.js"),
     new Route("/liste-participant", "Liste participant", "/pages/event/liste-participant.html", ["ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/event/liste-participant.js"),
     new Route("/new-event", "Création d'évènement", "/pages/event/new-event.html", ["ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/event/new-event.js"),
     new Route("/inscription", "Mes inscriptions", "/pages/event/inscription.html", ["ROLE_USER", "ROLE_ORGANISATEUR", "ROLE_ADMIN"], "/js/event/inscription.js"),
