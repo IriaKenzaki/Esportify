@@ -78,7 +78,7 @@ function displayEvent(events) {
         card.classList.add("card");
 
         const eventImage = event.image && event.image !== "" 
-        ? 'https://localhost:8000/uploads/images/' + event.image
+        ? apiUrlImage + event.image
         : '/Images/def-event.webp';
 
         card.innerHTML = `
@@ -153,7 +153,7 @@ function displayEventModal(event) {
         return;
     }
 
-    const imageUrl = event.image ? `https://localhost:8000/uploads/images/${event.image}` : "/Images/def-event.webp";
+    const imageUrl = event.image ? apiUrlImage+`${event.image}` : "/Images/def-event.webp";
     const title = event.title || "Titre non disponible";
     const dateTimeStart = event.dateTimeStart ? formatDate(event.dateTimeStart) : "Non spécifié";
     const dateTimeEnd = event.dateTimeEnd ? formatDate(event.dateTimeEnd) : "Non spécifié";

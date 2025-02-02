@@ -110,7 +110,7 @@ function displayEvents(events) {
         card.classList.add("card");
 
         const eventImage = event.image
-            ? `https://127.0.0.1:8000/uploads/images/${event.image}`
+            ? apiUrlImage+ event.image
             : "/Images/def-event.webp";
 
         let cardContent = `
@@ -221,7 +221,7 @@ function fetchEventDetails(eventId) {
 }
 
 function displayEventModal(event) {
-    const imageUrl = event.image ? `https://127.0.0.1:8000/uploads/images/${event.image}` : "/Images/def-event.webp";
+    const imageUrl = event.image ? apiUrlImage + event.image : "/Images/def-event.webp";
 
     modalImage.src = imageUrl;
     modalTitle.textContent = event.title || "Titre non disponible";
@@ -457,7 +457,6 @@ function startEvent(eventId) {
         }
         
         return response.json().then(data => {
-            console.log("Réponse du serveur:", response.status, data);
             if (response.status === 403) {
                 alert("Permission refusée : seul le créateur de l'événement peut le modifier.");
             } else if (response.status === 404) {
@@ -482,5 +481,4 @@ document.querySelectorAll(".start-event-btn").forEach(button => {
     });
 });
 
-// Charger les événements au démarrage
 loadUserEvents();

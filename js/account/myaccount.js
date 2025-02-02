@@ -59,7 +59,6 @@ submitButton.addEventListener('click', async (event) => {
         });
 
         const body = JSON.stringify(dataToSend);
-        console.log(body);
         const response = await fetch(apiUrl + 'account/edit', {
             method: 'PUT',
             headers: headers,
@@ -69,7 +68,6 @@ submitButton.addEventListener('click', async (event) => {
         if (response.ok) {
             const result = await response.json();
             alert('Compte modifié avec succès.');
-            console.log('Réponse serveur:', result);
         } else {
             const errorData = await response.json();
             alert(`Erreur : ${errorData.message || 'Impossible de modifier le compte.'}`);

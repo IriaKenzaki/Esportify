@@ -2,6 +2,7 @@ const tokenCookieName = "accesstoken";
 const signoutBtn = document.getElementById("signout-btn");
 const RoleCookieName = "role";
 const apiUrl = "https://127.0.0.1:8000/api/";
+const apiUrlImage = 'https://localhost:8000/uploads/images/';
 
 signoutBtn.addEventListener("click", signout);
 
@@ -157,7 +158,6 @@ function getInfosUser(){
         }
     })
     .then(result => {
-        console.log(result);
         return result;
     })
     .catch(error =>{

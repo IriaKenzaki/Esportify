@@ -1,4 +1,4 @@
-const slide = ["/Images/pokemon.webp", "/Images/playstation.jpg", "/Images/video-game.jpg", "/Images/gamer.jpg"];
+const slide = ["/Images/pokemon.webp", "/Images/playstation.jpg", "/Images/video-game.jpg", "/Images/gamer.jpg", "/Images/flame.webp", "/Images/fleur.webp"];
 let numero = 0;
 
 function ChangeSlide(sens) {
@@ -43,7 +43,7 @@ function displayValidationCards(events) {
         card.classList.add("card-validation");
 
         const eventImage = event.image && event.image !== "" 
-        ? 'https://localhost:8000/uploads/images/' + event.image
+        ? apiUrlImage + event.image
         : '/Images/def-event.webp';
 
         card.innerHTML = ` 

@@ -23,8 +23,6 @@ async function loadUserDetails(userId) {
         }
 
         const users = await response.json();
-        console.log("Utilisateurs récupérés:", users);
-
         const user = users.find(u => u.id === parseInt(userId));
 
         if (!user) {
@@ -59,7 +57,6 @@ async function updateUserDetails() {
         if (response.ok) {
             const result = await response.json();
             alert(result.message || "Utilisateur mis à jour avec succès.");
-            console.log("Utilisateur mis à jour:", result);
         } else {
             const error = await response.json();
             alert(error.message || "Erreur lors de la mise à jour de l'utilisateur.");

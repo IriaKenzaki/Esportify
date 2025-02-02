@@ -40,5 +40,5 @@ function checkCredentials(){
         setCookie(RoleCookieName, result.roles[0], 7);
         window.location.replace("/");
     })
-    .catch(error => console.log('error', error));
+    .catch(error);
 }

@@ -97,13 +97,11 @@ function generateStars(rate) {
 }
 
 function deleteAvis(avisId) {
-    console.log("ID de l'avis à supprimer :", avisId);
     const token = getToken();
     const headers = new Headers({
         "X-AUTH-TOKEN": token,
         "Content-Type": "application/json",
     });
-    console.log();
     fetch(`${apiUrl}avis/${avisId}`, {
         method: "DELETE",
         headers: headers,
@@ -117,7 +115,6 @@ function deleteAvis(avisId) {
                 }
                 throw new Error(`Erreur lors de la suppression de l'avis : ${response.status}`);
             }
-            console.log("Avis supprimé avec succès :", avisId);
             const avisCard = document.querySelector(`button[data-id="${avisId}"]`).closest(".card");
             if (avisCard) avisCard.remove();
         })
