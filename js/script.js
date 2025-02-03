@@ -66,21 +66,29 @@ connected (admin ou organisateur ou user)
 */
 
 const showAndHideElementsForRoles = () => {
-    const userRole = getRole();
-    const isUserConnected = isConnected(); 
+    const userRole = getRole(); // Récupère le rôle de l'utilisateur
+    const isUserConnected = isConnected(); // Vérifie si l'utilisateur est connecté
   
+    console.log("User Role:", userRole); // Vérifier le rôle de l'utilisateur
+    console.log("User Connected:", isUserConnected); // Vérifier si l'utilisateur est connecté
+  
+    // Sélectionner tous les éléments avec un attribut 'data-show'
     const elements = document.querySelectorAll('[data-show]');
+    console.log("Elements to check:", elements);
   
     elements.forEach((element) => {
       const allowedRoles = element.getAttribute('data-show').split(',');
+      console.log("Allowed Roles for element:", allowedRoles);
   
-
+      // Vérification de l'affichage
       if ((allowedRoles.includes("connected") && isUserConnected) || 
           (allowedRoles.includes("disconnected") && !isUserConnected) || 
           allowedRoles.includes(userRole)) {
-        element.style.display = "block"; 
+        console.log("Displaying:", element); // Si affichage
+        element.style.display = "block"; // Afficher l'élément
       } else {
-        element.style.display = "none";
+        console.log("Hiding:", element); // Si masquage
+        element.style.display = "none"; // Masquer l'élément
       }
     });
   };
