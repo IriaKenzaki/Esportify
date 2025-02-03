@@ -23,7 +23,6 @@ jobs:
         protocol: ftps-legacy
         port: 990
         security: loose 
-        timeout: 120
         exclude: |
           **/.git*
           **/.git*/**
