@@ -23,7 +23,7 @@ jobs:
         username: esportify-team
         password : ${{ secrets.ftp_password }}
         protocol: ftps
-        security: true
+        security: strict
         port: 990
         exclude: |
           **/.git*
