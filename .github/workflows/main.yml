@@ -17,21 +17,19 @@ jobs:
       run: npm install
     
     - name: 📂 Sync files
-      uses: appleboy/scp-action@v0.1.7
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ftp-esportify-team.alwaysdata.net
         username: esportify-team
         password : ${{ secrets.ftp_password }}
         protocol: ftps-legacy
         security: loose
-        port: 22
+        port: 990
         exclude: |
           **/.git*
           **/.git*/**
           **/node_modules/bootstrap/scss/**
           **/node_modules/bootstrap/js/**
-          **/node_modules/bootstrap-icons/icons/**  
-        source: "./"
+          **/node_modules/bootstrap-icons/icons/** 
         server-dir: /www/
-        overwrite: true 
-        strip_components: 1 
+
