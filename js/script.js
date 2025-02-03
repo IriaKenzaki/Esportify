@@ -65,33 +65,42 @@ connected (admin ou organisateur ou user)
     - organisateur
 */
 
-const showAndHideElementsForRoles = () => {
-    const userRole = getRole(); // Récupère le rôle de l'utilisateur
-    const isUserConnected = isConnected(); // Vérifie si l'utilisateur est connecté
-  
-    console.log("User Role:", userRole); // Vérifier le rôle de l'utilisateur
-    console.log("User Connected:", isUserConnected); // Vérifier si l'utilisateur est connecté
-  
-    // Sélectionner tous les éléments avec un attribut 'data-show'
-    const elements = document.querySelectorAll('[data-show]');
-    console.log("Elements to check:", elements);
-  
-    elements.forEach((element) => {
-      const allowedRoles = element.getAttribute('data-show').split(',');
-      console.log("Allowed Roles for element:", allowedRoles);
-  
-      // Vérification de l'affichage
-      if ((allowedRoles.includes("connected") && isUserConnected) || 
-          (allowedRoles.includes("disconnected") && !isUserConnected) || 
-          allowedRoles.includes(userRole)) {
-        console.log("Displaying:", element); // Si affichage
-        element.style.display = "block"; // Afficher l'élément
-      } else {
-        console.log("Hiding:", element); // Si masquage
-        element.style.display = "none"; // Masquer l'élément
-      }
-    });
-  };
+function showAndHideElementsForRoles(){
+    const userConnected = isConnected();
+    const role = getRole();
+    console.log(role);
+    let elements = document.querySelectorAll('[data-show]');
+
+    elements.forEach(element =>{
+        switch(element.dataset.show){
+            case 'disconnected': 
+                if(userConnected){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'connected':
+                if(!userConnected){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'ROLE_ADMIN': 
+                if(!userConnected || role != "ROLE_ADMIN"){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'ROLE_USER': 
+                if(!userConnected || role != "ROLE_USER"){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'ROLE_ORGANISATEUR': 
+                if(!userConnected || role != "ROLE_ORGANISATEUR"){
+                    element.classList.add("d-none");
+                }
+                break;
+        }
+    })
+}
 
 
 function sanitizeHtml(text) {
