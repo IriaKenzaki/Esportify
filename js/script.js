@@ -1,8 +1,8 @@
 const tokenCookieName = "accesstoken";
 const signoutBtn = document.getElementById("signout-btn");
 const RoleCookieName = "role";
-const apiUrl = "https://127.0.0.1:8000/api/";
-const apiUrlImage = 'https://localhost:8000/uploads/images/';
+const apiUrl = "https://main-bvxea6i-u3bqvlpugi4lo.fr-4.platformsh.site/api/";
+const apiUrlImage = apiUrl+'uploads/images/';
 
 signoutBtn.addEventListener("click", signout);
 
