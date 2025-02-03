@@ -11,6 +11,7 @@ export default class Route {
 /* 
 [] -> Tout le monde peut y accéder
 ["disconnected"] -> Réserver aux utilisateurs déconnecté 
+["connected"] -> réserver aux utilisateur connecté
 ["ROLE_USER"] -> Réserver aux utilisateurs avec le rôle user 
 ["ROLE_ADMIN"] -> Réserver aux utilisateurs avec le rôle admin
 ["ROLE_ORGANISATEUR"] -> Réserver aux utilisateurs avec le rôle organisateur

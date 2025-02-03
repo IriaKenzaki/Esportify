@@ -2,7 +2,7 @@ const tokenCookieName = "accesstoken";
 const signoutBtn = document.getElementById("signout-btn");
 const RoleCookieName = "role";
 const apiUrl = "https://main-bvxea6i-u3bqvlpugi4lo.fr-4.platformsh.site/api/";
-const apiUrlImage = apiUrl+'uploads/images/';
+const apiUrlImage = 'https://main-bvxea6i-u3bqvlpugi4lo.fr-4.platformsh.site/uploads/images/';
 
 signoutBtn.addEventListener("click", signout);
 
@@ -65,42 +65,25 @@ connected (admin ou organisateur ou user)
     - organisateur
 */
 
-function showAndHideElementsForRoles(){
-    const userConnected = isConnected();
-    const role = getRole();
+const showAndHideElementsForRoles = () => {
+    const userRole = getRole();
+    const isUserConnected = isConnected(); 
+  
+    const elements = document.querySelectorAll('[data-show]');
+  
+    elements.forEach((element) => {
+      const allowedRoles = element.getAttribute('data-show').split(',');
+  
 
-    let allElementsToEdit = document.querySelectorAll('[data-show]');
-
-    allElementsToEdit.forEach(element =>{
-        switch(element.dataset.show){
-            case 'disconnected': 
-                if(userConnected){
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'connected':
-                if(!userConnected){
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'ROLE_ADMIN': 
-                if(!userConnected || role != "ROLE_ADMIN"){
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'ROLE_USER': 
-                if(!userConnected || role != "ROLE_USER"){
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'ROLE_ORGANISATEUR': 
-                if(!userConnected || role != "ROLE_ORGANISATEUR"){
-                    element.classList.add("d-none");
-                }
-                break;
-        }
-    })
-}
+      if ((allowedRoles.includes("connected") && isUserConnected) || 
+          (allowedRoles.includes("disconnected") && !isUserConnected) || 
+          allowedRoles.includes(userRole)) {
+        element.style.display = "block"; 
+      } else {
+        element.style.display = "none";
+      }
+    });
+  };
 
 
 function sanitizeHtml(text) {
