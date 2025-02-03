@@ -17,14 +17,14 @@ jobs:
       run: npm install
     
     - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      uses: appleboy/scp-action@v0.1.7
       with:
         server: ftp-esportify-team.alwaysdata.net
         username: esportify-team
         password : ${{ secrets.ftp_password }}
         protocol: ftps-legacy
         security: loose
-        port: 21
+        port: 22
         exclude: |
           **/.git*
           **/.git*/**
