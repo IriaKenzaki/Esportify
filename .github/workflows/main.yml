@@ -22,9 +22,7 @@ jobs:
         server: ftp-esportify-team.alwaysdata.net
         username: esportify-team
         password : ${{ secrets.ftp_password }}
-        protocol: ftps
-        security: strict
-        port: 990
+        protocol: ftp
         exclude: |
           **/.git*
           **/.git*/**
