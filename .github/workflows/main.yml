@@ -31,4 +31,7 @@ jobs:
           **/node_modules/bootstrap/scss/**
           **/node_modules/bootstrap/js/**
           **/node_modules/bootstrap-icons/icons/**  
+        source: "./"
         server-dir: /www/
+        overwrite: true 
+        strip_components: 1 
