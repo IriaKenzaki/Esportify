@@ -1,32 +1,55 @@
-on : push
 name: 🚀 Deploy website on push
+
+on:
+  push:
+    branches:
+      - main  # Déploie uniquement sur la branche principale
+
 jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-      
-    - name: 📂 Install dependencies
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22' 
-    - name: 📂 Install npm dependencies
-      run: npm install
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ftp-esportify-team.alwaysdata.net
-        username: esportify-team
-        password: ${{ secrets.ftp_password }}
-        protocol: ftps-legacy
-        port: 990
-        security: loose 
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/bootstrap/scss/**
-          **/node_modules/bootstrap/js/**
-          **/node_modules/bootstrap-icons/icons/**  
-        server-dir: /www/
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 📂 Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+
+      - name: 📂 Install npm dependencies
+        run: npm install
+
+      # 🛠️ Tentative de déploiement via FTPS
+      - name: 🔄 Deploy via FTPS
+        id: ftps_deploy
+        continue-on-error: true  # Ne bloque pas le workflow si FTPS échoue
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp-esportify-team.alwaysdata.net
+          username: esportify-team
+          password: ${{ secrets.ftp_password }}
+          protocol: ftps-legacy  # 🔄 Mode plus compatible
+          security: loose  # 🔓 Accepte TLS moins strict
+          port: 21  # 🌐 Tester avec 990 si besoin
+          timeout: 180  # ⏳ Augmente le temps de connexion
+          exclude: |
+            **/.git*
+            **/.git*/**
+           **/node_modules/bootstrap/scss/**
+           **/node_modules/bootstrap/js/**
+           **/node_modules/bootstrap-icons/icons/**  
+          server-dir: /www/
+
+      # 🚀 Si FTPS échoue, on passe à SFTP automatiquement
+      - name: 🔄 Deploy via SFTP (Fallback)
+        if: steps.ftps_deploy.outcome == 'failure'  # 🛑 Si FTPS échoue, essaie SFTP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ftp-esportify-team.alwaysdata.net
+          username: esportify-team
+          password: ${{ secrets.ftp_password }}
+          port: 22  # 🔄 SFTP utilise le port 22
+          source: "./"
+          target: "/www/"
