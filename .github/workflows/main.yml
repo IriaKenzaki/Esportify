@@ -21,7 +21,7 @@ jobs:
         username: esportify-team
         password: ${{ secrets.ftp_password }}
         protocol: ftps-legacy
-        port: 21
+        port: 990
         security: loose 
         timeout: 120
         exclude: |
