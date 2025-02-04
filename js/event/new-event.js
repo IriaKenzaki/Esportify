@@ -26,6 +26,7 @@ inputDescription.addEventListener("keyup", validateForm);
 
 function getToken() {
     const token = getCookie(tokenCookieName);
+    console.log("Token récupéré : ", token);
     return token;
 }
 
@@ -38,6 +39,17 @@ function validateForm() {
     const playersOk = validateRequired(inputPlayers);
     const gameSelectOk = validateRequired(inputGameSelect);
     const descriptionOk = validateRequired(inputDescription);
+
+    console.log("Formulaire validé : ", {
+        titleOk,
+        dateStartOk,
+        dateEndOk,
+        timeStartOk,
+        timeEndOk,
+        playersOk,
+        gameSelectOk,
+        descriptionOk
+    });
 
     if (
         titleOk &&
@@ -69,12 +81,19 @@ function validateRequired(input) {
 
 function CreeEvent() {
     const dataForm = new FormData(formEvent);
+    console.log("Données du formulaire : ", dataForm);
 
     const dateTimeStart = `${dataForm.get("DateStartInput")}T${dataForm.get("TimeStartInput")}:00`;
     const dateTimeEnd = `${dataForm.get("DateEndInput")}T${dataForm.get("TimeEndInput")}:00`;
 
+    console.log("dateTimeStart : ", dateTimeStart);
+    console.log("dateTimeEnd : ", dateTimeEnd);
+
     const playersValue = parseInt(dataForm.get("PlayersInput"), 10);
+    console.log("Nombre de joueurs : ", playersValue);
+
     const imageFile = dataForm.get("imageUpload");
+    console.log("Fichier image sélectionné : ", imageFile);
 
     if (isNaN(playersValue) || playersValue < 0) {
         alert("Le nombre de joueurs doit être un nombre positif.");
@@ -95,8 +114,11 @@ function CreeEvent() {
     formData.append("game", dataForm.get("GameSelectInput"));
     formData.append("visibility", false);
 
+    console.log("FormData avant ajout de l'image : ", formData);
+
     if (imageFile) {
         formData.append("image", imageFile);
+        console.log("FormData avec image ajoutée : ", formData);
     }
 
     const token = getToken();
@@ -111,8 +133,11 @@ function CreeEvent() {
         redirect: "follow"
     };
 
+    console.log("Options de requête : ", requestOptions);
+
     fetch(apiUrl + "event", requestOptions)
         .then((response) => {
+            console.log("Réponse de l'API : ", response);
             if (!response.ok) {
                 alert("Erreur lors de la création de l'événement. Veuillez réessayer.");
                 return;
@@ -120,13 +145,14 @@ function CreeEvent() {
             return response.json();
         })
         .then((result) => {
+            console.log("Résultat de l'API : ", result);
             if (result) {
                 alert("Bravo, votre événement est créé, vous pouvez le retrouver dans vos événements créés.");
                 document.location.href = "/my-event";
             }
         })
         .catch((error) => {
-            console.error(error);
+            console.error("Erreur de requête : ", error);
             alert("Une erreur s'est produite lors de la création de l'événement.");
         });
 }
@@ -136,5 +162,8 @@ function validateImageSize() {
     if (imageFile && imageFile.size > maxImageSize) {
         alert(maxImageSizeErrorMessage);
         inputImage.value = '';
+        console.log("Fichier image trop gros : ", imageFile);
+    } else {
+        console.log("Taille de l'image correcte : ", imageFile);
     }
 }
