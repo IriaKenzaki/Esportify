@@ -12385,7 +12385,7 @@ body.modal-open {
 
 .modal-body {
   color: #000000;
-  display: block;
+  display: contents;
   text-align: center;
   padding-bottom: 10px;
   justify-items: center;
