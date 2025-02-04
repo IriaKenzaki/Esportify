@@ -924,6 +924,28 @@ textarea::placeholder {
 .span-contact{
     color: #E5C687;
 }
+@media (max-width: 920px) {
+    textarea {
+        width: 20rem !important;
+        height: 15rem !important;
+        background-color: #121619 !important;
+        border-radius: 5px !important;
+        padding: 5px !important;
+        font-size: 1.5rem !important;
+        line-height: 1.2 !important;
+        color: #ffffff !important;
+        text-align: left !important;
+        border: 1px solid #ffffff !important;
+        border-radius: 5px !important;
+        box-sizing: border-box !important;
+        outline: none !important;
+    }
+
+    p.p-contact{
+        padding: 0;
+    }
+}
+
 
 /* Avis */
 
