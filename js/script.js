@@ -84,17 +84,20 @@ function showAndHideElementsForRoles(){
                 }
                 break;
             case 'ROLE_ADMIN': 
-                if(!userConnected || role != "ROLE_ADMIN"){
+                if(!userConnected || !(new Array("ROLE_ADMIN").includes(role) 
+                )){
                     element.classList.add("d-none");
                 }
                 break;
             case 'ROLE_USER': 
-                if(!userConnected || role != "ROLE_USER"){
+                if(!userConnected || !(new Array("ROLE_ADMIN", "ROLE_ORGANISATEUR", "ROLE_USER").includes(role) 
+                )){
                     element.classList.add("d-none");
                 }
                 break;
             case 'ROLE_ORGANISATEUR': 
-                if(!userConnected || role != "ROLE_ORGANISATEUR"){
+                if(!userConnected || !(new Array("ROLE_ADMIN", "ROLE_ORGANISATEUR").includes(role) 
+                )){
                     element.classList.add("d-none");
                 }
                 break;
