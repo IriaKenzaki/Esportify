@@ -1057,13 +1057,6 @@ input[type="file"]::-webkit-file-upload-button{
 
 /* Mes inscriptions */
 
-.button-modal{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
-    gap: 30px;
-    padding: 20px
-}
 
 button:disabled {
     opacity: 0.5 !important;
