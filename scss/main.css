@@ -13215,7 +13215,8 @@ h3, .h3 {
 .game-container {
   margin-top: 50px;
   width: 100%;
-  height: 75vh;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 h1, .h1 {
