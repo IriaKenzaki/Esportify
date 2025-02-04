@@ -2,7 +2,7 @@ const tokenCookieName = "accesstoken";
 const signoutBtn = document.getElementById("signout-btn");
 const RoleCookieName = "role";
 const apiUrl = "https://main-bvxea6i-u3bqvlpugi4lo.fr-4.platformsh.site/api/";
-const apiUrlImage = 'https://main-bvxea6i-u3bqvlpugi4lo.fr-4.platformsh.site/mnt/uploads/images/';
+const apiUrlImage = 'https://main-bvxea6i-u3bqvlpugi4lo.fr-4.platformsh.site/uploads/images/';
 
 signoutBtn.addEventListener("click", signout);
 
