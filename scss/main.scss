@@ -412,7 +412,7 @@ body.modal-open {
 
 .modal-body {
     color: #000000;
-    display: block;
+    display: grid;
     text-align: center;
     padding-bottom: 10px;
     justify-items: center;
@@ -475,6 +475,7 @@ body.modal-open {
         justify-items: center;
         align-items: center;
         align-content: center;
+        display: grid;
     }
 
     .modal-content{
