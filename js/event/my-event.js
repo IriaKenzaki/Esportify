@@ -363,7 +363,7 @@ function saveEventChanges(eventId) {
         players: players,
         dateTimeStart: dateTimeStart,
         dateTimeEnd: dateTimeEnd,
-        game: formData.get("editGame").trim(),
+        game: formData.get("editGame"),
         visibility: formData.get("editVisibility") === "true" ? true : false
     };
 
