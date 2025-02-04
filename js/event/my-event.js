@@ -395,6 +395,7 @@ function saveEventChanges(eventId) {
                 body: formDataImage,
             })
             .then((imageResponse) => {
+                console.log('Réponse image:', imageResponse);
                 if (!imageResponse.ok) {
                     throw new Error("Erreur lors de la modification de l'image.");
                 }
