@@ -13403,7 +13403,9 @@ h1, .h1 {
 
 @media (max-width: 920px) {
   .button-card {
+    display: ruby;
     align-content: center;
+    align-items: center;
     justify-items: center;
   }
 }/*# sourceMappingURL=main.css.map */
