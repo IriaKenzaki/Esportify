@@ -13328,6 +13328,7 @@ h1, .h1 {
 }
 
 .button-card {
+  align-content: center;
   justify-items: center;
 }
 
