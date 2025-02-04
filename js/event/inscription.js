@@ -10,6 +10,8 @@ const modalButton = document.getElementById("button-modal");
 let userId;
 let username;
 
+fetchEventsOnPageLoad();
+
 function getToken() {
     const token = getCookie(tokenCookieName);
     return token;
@@ -68,7 +70,7 @@ async function checkUserScoreForEvent(eventId) {
             if (userScoreForEvent) {
                 alert(`Vous avez déjà un score pour cet événement : ${userScoreForEvent.score}`);
                 goToLinkButton.disabled = true;
-                goToLinkButton.textContent = "Événement déjà terminé";
+                goToLinkButton.textContent = "Événement non disponible";
                 goToLinkButton.style.pointerEvents = 'none';
             } else {
                 goToLinkButton.disabled = false;
@@ -369,4 +371,43 @@ function goToEvent(eventId){
             console.error("Erreur lors de la vérification de l'événement :", error);
             alert("Une erreur est survenue lors de la vérification de l'événement.");
         });
+}
+
+async function fetchEventsOnPageLoad() {
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const number = document.getElementById("number").value;
+    const pseudo = document.getElementById("pseudo").value;
+
+    const params = { date, time, number, pseudo };
+    const token = getToken();
+    const headers = new Headers({
+        "X-AUTH-TOKEN": token,
+        "Content-Type": "application/json",
+    });
+
+    try {
+        const response = await fetch(apiUrl + "my-events", {
+            method: "GET",
+            headers: headers,
+        });
+
+        if (!response.ok) {
+            throw new Error("Erreur lors de la récupération des événements");
+        }
+
+        const data = await response.json();
+        if (data && typeof data === "object") {
+            const filteredEvents = filterEvents(data, params);
+            if (filteredEvents.length > 0) {
+                displayEvent(filteredEvents);
+            } else {
+                containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+            }
+        } else {
+            containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+        }
+    } catch (error) {
+        containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+    }
 }

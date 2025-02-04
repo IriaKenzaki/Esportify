@@ -12,6 +12,34 @@ function getToken() {
     return token;
 }
 
+fetchEvents();
+
+function fetchEvents(params = {}) {
+    fetch(apiUrl + "all")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération des événements");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data && typeof data === "object") {
+                const filteredEvents = filterEvents(data, params);
+                if (filteredEvents.length > 0) {
+                    displayEvent(filteredEvents);
+                } else {
+                    containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+                }
+            } else {
+                containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+            }
+        })
+        .catch((error) => {
+            console.error("Erreur : ", error);
+            containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+        });
+}
+
 document.getElementById("searchButton").addEventListener("click", function(event) {
     event.preventDefault();
 

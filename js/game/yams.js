@@ -119,7 +119,9 @@ function resetGame() {
     rollButton.disabled = false;
 }
 
-quitEventButton.addEventListener('click', () => sendScore(true));
+quitEventButton.addEventListener('click', () => {
+    sendScore(true)
+});
 
 window.onbeforeunload = function (event) {
     sendScore();

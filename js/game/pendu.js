@@ -8,6 +8,7 @@ let displayedWord = "";
 let attempts = 8;
 let guessedLetters = [];
 let gameOver = false;
+let scoreAlreadySent = false;
 
 const wordDisplay = document.getElementById("wordDisplay");
 const attemptsLeft = document.getElementById("attempts");
@@ -18,7 +19,6 @@ const quitEventButton = document.getElementById("quitEventButton");
 let userId = null;
 let username = null;
 let eventId = localStorage.getItem("eventId");
-let scoreAlreadySent = false;
 
 function getToken() {
     return getCookie(tokenCookieName);
