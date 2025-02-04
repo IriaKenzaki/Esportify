@@ -94,26 +94,37 @@ function filterUsers() {
     const roleSearch = document.getElementById('role-select').value.trim().toLowerCase();
 
     const filteredUsers = cachedUsers.filter(user => {
-        const usernameMatch = user.username.toLowerCase().includes(pseudoSearch);
-        const emailMatch = user.email.toLowerCase().includes(emailSearch);
-        const roleMatch = !roleSearch || (user.roles && user.roles[0].toLowerCase().includes(roleSearch));
+        const usernameMatch = user.username && user.username.toLowerCase().includes(pseudoSearch);
+        const emailMatch = user.email && user.email.toLowerCase().includes(emailSearch);
+        const roleMatch = !roleSearch || (user.roles[0] && user.roles[0].toLowerCase().includes(roleSearch));
+
         return usernameMatch && emailMatch && roleMatch;
     });
 
     displayUsers(filteredUsers);
 }
 
+
+(async () => {
+    try {
+        cachedUsers = await searchUsers(); 
+        displayUsers(cachedUsers);
+    } catch (error) {
+        alert('Une erreur est survenue lors du chargement des utilisateurs.');
+    }
+})();
+
+document.getElementById('pseudo-search').addEventListener('input', filterUsers);
+document.getElementById('email-search').addEventListener('input', filterUsers);
+document.getElementById('role-select').addEventListener('change', filterUsers);
+
 document.getElementById('searchButton').addEventListener('click', async function (event) {
     event.preventDefault();
 
     try {
         cachedUsers = await searchUsers(); 
-        displayUsers(cachedUsers); 
+        displayUsers(cachedUsers);
     } catch (error) {
         alert('Une erreur est survenue lors de la recherche.');
     }
 });
-
-document.getElementById('pseudo-search').addEventListener('input', filterUsers);
-document.getElementById('email-search').addEventListener('input', filterUsers);
-document.getElementById('role-select').addEventListener('change', filterUsers);
