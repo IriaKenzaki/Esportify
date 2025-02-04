@@ -13034,6 +13034,13 @@ input[type=file]::-webkit-file-upload-button {
   }
 }
 /* Mes inscriptions */
+#button-inscription-modal {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
 button:disabled {
   opacity: 0.5 !important;
   cursor: not-allowed !important;
