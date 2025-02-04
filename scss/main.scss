@@ -1435,6 +1435,7 @@ h1 {
 
 @media (max-width: 920px){
     .button-card{
+        display: grid;
         align-content: end;
         justify-items: center;
     }
