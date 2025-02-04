@@ -13399,4 +13399,11 @@ h1, .h1 {
 
 .modal-footer {
   justify-content: center;
+}
+
+@media (max-width: 920px) {
+  .button-card {
+    align-content: center;
+    justify-items: center;
+  }
 }/*# sourceMappingURL=main.css.map */

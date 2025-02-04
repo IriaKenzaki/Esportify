@@ -1432,5 +1432,12 @@ h1 {
     justify-content: center;
 }
 
+@media (max-width: 920px){
+    .button-card{
+        align-content: center;
+        justify-items: center;
+    }
+}
+
 
 
