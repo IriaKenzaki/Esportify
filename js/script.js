@@ -68,7 +68,6 @@ connected (admin ou organisateur ou user)
 function showAndHideElementsForRoles(){
     const userConnected = isConnected();
     const role = getRole();
-    console.log(role);
     let elements = document.querySelectorAll('[data-show]');
 
     elements.forEach(element =>{

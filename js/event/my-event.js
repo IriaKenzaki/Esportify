@@ -441,45 +441,72 @@ function startEvent(eventId) {
         return;
     }
 
-    fetch(`${apiUrl}my-created-events/${eventId}`, {
-        method: "PUT",
+    fetch(`${apiUrl}${eventId}/details`, {
+        method: "GET",
         headers: {
             "X-AUTH-TOKEN": token,
             "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ started: true })
+        }
     })
     .then(response => {
-        if (response.status === 204) {
-            alert("L'événement a été démarré avec succès !");
-            localStorage.setItem("eventId", eventId);
-            window.location.href = "/event";
+        if (!response.ok) {
+            throw new Error("Erreur lors de la récupération des détails de l'événement.");
+        }
+        return response.json();
+    })
+    .then(event => {
+        const dateTimeStart = new Date(event.dateTimeStart);
+        const dateTimeEnd = new Date(event.dateTimeEnd);
+        const currentDateTime = new Date();
+
+        const limitStartTime = new Date(dateTimeStart.getTime() - 30 * 60000);
+
+        if (currentDateTime < limitStartTime) {
+            alert("L'événement ne peut être démarré que 30 minutes avant sa date de début.");
             return;
         }
-        
-        return response.json().then(data => {
-            if (response.status === 403) {
-                alert("Permission refusée : seul le créateur de l'événement peut le modifier.");
-            } else if (response.status === 404) {
-                alert("Erreur : L'événement n'a pas été trouvé.");
-            } else if (response.status === 400) {
-                alert(`Erreur: ${data.message}`);
+
+        if (currentDateTime > dateTimeEnd) {
+            alert("L'événement ne peut plus être démarré après sa date de fin.");
+            return;
+        }
+
+        // Si toutes les vérifications sont passées, démarrer l'événement
+        fetch(`${apiUrl}my-created-events/${eventId}`, {
+            method: "PUT",
+            headers: {
+                "X-AUTH-TOKEN": token,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ started: true })
+        })
+        .then(response => {
+            if (response.status === 204) {
+                alert("L'événement a été démarré avec succès !");
+                window.location.href = "/inscription";
             } else {
-                throw new Error("Une erreur est survenue lors du démarrage.");
+                return response.json().then(data => {
+                    if (response.status === 403) {
+                        alert("Permission refusée : seul le créateur de l'événement peut le modifier.");
+                    } else if (response.status === 404) {
+                        alert("Erreur : L'événement n'a pas été trouvé.");
+                    } else if (response.status === 400) {
+                        alert(`Erreur: ${data.message}`);
+                    } else {
+                        throw new Error("Une erreur est survenue lors du démarrage.");
+                    }
+                });
             }
+        })
+        .catch(error => {
+            console.error("Erreur :", error);
+            alert("Une erreur est survenue lors du démarrage de l'événement.");
         });
     })
     .catch(error => {
-        console.error("Erreur :", error);
-        alert("Une erreur est survenue lors du démarrage de l'événement.");
+        console.error("Erreur lors de la récupération des détails de l'événement :", error);
+        alert("Une erreur est survenue lors de la récupération des détails de l'événement.");
     });
 }
-
-document.querySelectorAll(".start-event-btn").forEach(button => {
-    button.addEventListener("click", function () {
-        const eventId = this.getAttribute("data-event-id");
-        startEvent(eventId);
-    });
-});
 
 loadUserEvents();

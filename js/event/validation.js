@@ -256,6 +256,7 @@ function displayEventModal(event) {
     const dateTimeEnd = event.dateTimeEnd ? formatDate(event.dateTimeEnd) : "Non spécifié";
     const players = event.players || "Non spécifié";
     const createdBy = event.createdBy || "Inconnu";
+    const game = event.game || "Non définie";
     const description = event.description || "Aucune description disponible.";
 
     modalImage.src = imageUrl;
@@ -265,6 +266,7 @@ function displayEventModal(event) {
         <p><strong>Date et heure de début :</strong> ${dateTimeStart}</p>
         <p><strong>Date et heure de fin :</strong> ${dateTimeEnd}</p>
         <p><strong>Nombre de joueurs :</strong> ${players}</p>
+        <p><strong>Jeux :</strong> ${game}</p>
         <p><strong>Organisateur :</strong> ${createdBy}</p>`;
     modalDescription.textContent = description;
 
@@ -294,7 +296,7 @@ async function validateEvent(eventId) {
             updatedEvent = JSON.parse(responseText);
             alert("Événement validé:", updatedEvent);
         } else {
-            alert("Événement validé, mais l'API n'a pas renvoyé de contenu.");
+            alert("Événement validé.");
         }
 
         const eventModal = document.getElementById("eventModal");
