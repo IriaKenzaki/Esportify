@@ -25,9 +25,7 @@ inputImage.addEventListener("change", validateImageSize);
 inputDescription.addEventListener("keyup", validateForm);
 
 function getToken() {
-    const token = getCookie(tokenCookieName);
-    console.log("Token récupéré : ", token);
-    return token;
+    return getCookie(tokenCookieName);
 }
 
 function validateForm() {
@@ -39,17 +37,6 @@ function validateForm() {
     const playersOk = validateRequired(inputPlayers);
     const gameSelectOk = validateRequired(inputGameSelect);
     const descriptionOk = validateRequired(inputDescription);
-
-    console.log("Formulaire validé : ", {
-        titleOk,
-        dateStartOk,
-        dateEndOk,
-        timeStartOk,
-        timeEndOk,
-        playersOk,
-        gameSelectOk,
-        descriptionOk
-    });
 
     if (
         titleOk &&
@@ -81,19 +68,12 @@ function validateRequired(input) {
 
 function CreeEvent() {
     const dataForm = new FormData(formEvent);
-    console.log("Données du formulaire : ", dataForm);
 
     const dateTimeStart = `${dataForm.get("DateStartInput")}T${dataForm.get("TimeStartInput")}:00`;
     const dateTimeEnd = `${dataForm.get("DateEndInput")}T${dataForm.get("TimeEndInput")}:00`;
 
-    console.log("dateTimeStart : ", dateTimeStart);
-    console.log("dateTimeEnd : ", dateTimeEnd);
-
     const playersValue = parseInt(dataForm.get("PlayersInput"), 10);
-    console.log("Nombre de joueurs : ", playersValue);
-
     const imageFile = dataForm.get("imageUpload");
-    console.log("Fichier image sélectionné : ", imageFile);
 
     if (isNaN(playersValue) || playersValue < 0) {
         alert("Le nombre de joueurs doit être un nombre positif.");
@@ -105,55 +85,70 @@ function CreeEvent() {
         return;
     }
 
-    const formData = new FormData();
-    formData.append("title", dataForm.get("Title"));
-    formData.append("description", dataForm.get("Description"));
-    formData.append("players", playersValue);
-    formData.append("dateTimeStart", dateTimeStart);
-    formData.append("dateTimeEnd", dateTimeEnd);
-    formData.append("game", dataForm.get("GameSelectInput"));
-    formData.append("visibility", false);
+    // Vérifier si l'événement existe déjà dans la base de données
+    fetch(apiUrl + "all")
+        .then((response) => response.json())
+        .then((events) => {
+            const isEventExist = events.some(event => {
+                return event.title === dataForm.get("Title") &&
+                    event.dateTimeStart === dateTimeStart &&
+                    event.dateTimeEnd === dateTimeEnd &&
+                    event.players === playersValue &&
+                    event.game === dataForm.get("GameSelectInput");
+            });
 
-    console.log("FormData avant ajout de l'image : ", formData);
-
-    if (imageFile) {
-        formData.append("image", imageFile);
-        console.log("FormData avec image ajoutée : ", formData);
-    }
-
-    const token = getToken();
-    const headers = new Headers({
-        "X-AUTH-TOKEN": token
-    });
-
-    const requestOptions = {
-        method: "POST",
-        headers: headers,
-        body: formData,
-        redirect: "follow"
-    };
-
-    console.log("Options de requête : ", requestOptions);
-
-    fetch(apiUrl + "event", requestOptions)
-        .then((response) => {
-            console.log("Réponse de l'API : ", response);
-            if (!response.ok) {
-                alert("Erreur lors de la création de l'événement. Veuillez réessayer.");
+            if (isEventExist) {
+                alert("Un événement avec ces informations existe déjà. Veuillez vérifier les détails.");
                 return;
             }
-            return response.json();
-        })
-        .then((result) => {
-            console.log("Résultat de l'API : ", result);
-            if (result) {
-                alert("Bravo, votre événement est créé, vous pouvez le retrouver dans vos événements créés.");
-                document.location.href = "/my-event";
+
+            // Si l'événement n'existe pas, créer l'événement
+            const formData = new FormData();
+            formData.append("title", dataForm.get("Title"));
+            formData.append("description", dataForm.get("Description"));
+            formData.append("players", playersValue);
+            formData.append("dateTimeStart", dateTimeStart);
+            formData.append("dateTimeEnd", dateTimeEnd);
+            formData.append("game", dataForm.get("GameSelectInput"));
+            formData.append("visibility", false);
+
+            if (imageFile) {
+                formData.append("image", imageFile);
             }
+
+            const token = getToken();
+            const headers = new Headers({
+                "X-AUTH-TOKEN": token
+            });
+
+            const requestOptions = {
+                method: "POST",
+                headers: headers,
+                body: formData,
+                redirect: "follow"
+            };
+
+            fetch(apiUrl + "event", requestOptions)
+                .then((response) => {
+                    if (!response.ok) {
+                        alert("Erreur lors de la création de l'événement. Veuillez réessayer.");
+                        return;
+                    }
+                    return response.json();
+                })
+                .then((result) => {
+                    if (result) {
+                        alert("Bravo, votre événement est créé, vous pouvez le retrouver dans vos événements créés.");
+                        document.location.href = "/my-event";
+                    }
+                })
+                .catch((error) => {
+                    alert("Une erreur s'est produite lors de la création de l'événement.");
+                });
         })
         .catch((error) => {
-            console.error("Erreur de requête : ", error);
-            alert("Une erreur s'est produite lors de la création de l'événement.");
+            console.error("Erreur lors de la récupération des événements existants : ", error);
+            alert("Erreur lors de la vérification des événements existants.");
         });
 }
 
@@ -162,8 +157,5 @@ function validateImageSize() {
     if (imageFile && imageFile.size > maxImageSize) {
         alert(maxImageSizeErrorMessage);
         inputImage.value = '';
-        console.log("Fichier image trop gros : ", imageFile);
-    } else {
-        console.log("Taille de l'image correcte : ", imageFile);
     }
 }
