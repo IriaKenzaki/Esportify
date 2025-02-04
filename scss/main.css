@@ -13330,6 +13330,7 @@ h1, .h1 {
 }
 
 .button-card {
+  display: grid;
   align-content: center;
   justify-items: center;
 }
