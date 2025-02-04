@@ -12855,7 +12855,9 @@ input[type=checkbox]:checked + .checkbox-custom {
 }
 
 .container-right-contact {
-  justify-items: center !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   align-content: center !important;
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
   padding: 20px;
