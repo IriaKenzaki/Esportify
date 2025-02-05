@@ -898,7 +898,7 @@ input[type="checkbox"] {
 .checkbox-custom {
     width: 30px;
     height: 30px;
-    border: 2px solid #df9800;
+    border: 2px solid #E5C687;
     border-radius: 50%;
     background-color: transparent;
     cursor: pointer;
@@ -907,7 +907,7 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked + .checkbox-custom {
-    background-color: #df9800;
+    background-color: #E5C687;
 }
 
 /* Contact */
