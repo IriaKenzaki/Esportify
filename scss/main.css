@@ -12034,6 +12034,27 @@ footer {
   width: 100%;
   margin-top: 10px;
 }
+@media (max-width: 1500px) {
+  footer .navbar-collapse {
+    position: absolute;
+    bottom: 100%;
+    width: 100%;
+    left: 0;
+    padding-left: 10px;
+    background-color: #121619;
+    margin-bottom: 0px;
+    transition: all 0.3s ease;
+  }
+  footer .navbar-toggler {
+    position: relative;
+    z-index: 3;
+  }
+}
+@media (max-width: 920px) {
+  footer {
+    margin-top: 30px;
+  }
+}
 
 h1, .h1 {
   font-family: "Chakra Petch";
@@ -12074,9 +12095,6 @@ h2, .h2 {
     width: 100%;
     padding: 0;
     margin: 0;
-  }
-  footer {
-    margin-top: 30px;
   }
   .left, .right {
     margin: 0px;
@@ -12345,6 +12363,8 @@ h3, .h3 {
   justify-content: center;
   justify-items: center;
   align-items: center;
+  transition: transform 350ms ease-out;
+  transform: translateY(100%);
 }
 
 #eventModalLabel {
@@ -12353,6 +12373,7 @@ h3, .h3 {
 
 .modal.show {
   display: flex !important;
+  transform: translateY(0);
 }
 
 body.modal-open {
@@ -12434,6 +12455,10 @@ body.modal-open {
 }
 
 @media (max-width: 920px) {
+  .modal {
+    transition: none;
+    transform: translateY(0);
+  }
   .container-event {
     display: flex;
     flex-direction: column;
@@ -13254,6 +13279,27 @@ h1, .h1 {
   color: #fff;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+@keyframes bounceEffect {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.dice.shake {
+  animation: bounceEffect 0.5s ease-out;
 }
 
 .dice.selected {

@@ -97,8 +97,13 @@ function toggleDice(index) {
 
 const rollButton = document.getElementById('rollButton');
 rollButton.addEventListener('click', () => {
+    diceElements.forEach(dice => dice.classList.add('shake'));
+
+    setTimeout(() => {
+        diceElements.forEach(dice => dice.classList.remove('shake'));
+    }, 500);
+    
     if (turnsLeft > 0) {
-        animateDice();
         updateDiceResults();
         calculateScore();
         turnsLeft--;
