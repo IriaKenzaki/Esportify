@@ -42,7 +42,7 @@ async function getUserInfo() {
         const data = await response.json();
         if (data?.id && data?.username) {
             userId = data.id;
-            username = data.username;
+            username = data.username || data.email;
         }
     } catch (error) {}
 }
@@ -57,8 +57,8 @@ function chooseWord() {
 
 function updateDisplay() {
     wordDisplay.textContent = displayedWord.split("").join(" ");
-    attemptsLeft.textContent = `Tentatives restantes : ${attempts}`;
-    hangmanDrawing.textContent = `Tentatives restantes : ${8 - attempts}`;
+    attemptsLeft.textContent = `${attempts}`;
+    hangmanDrawing.textContent = `Tentatives éffectuées : ${8 - attempts}`;
 }
 
 function guessLetter(letter) {
@@ -109,7 +109,7 @@ function sendScore(redirect = false) {
     });
 
     const data = {
-        scores: [{ username, score: (0 + attempts) * 10 }],
+        scores: [{ username, score: attempts * 10 }],
     };
 
     fetch(apiUrl + `${eventId}/add-scores`, {

@@ -1,24 +1,26 @@
-
 const inputMail = document.getElementById("EmailInput");
 const inputPassword = document.getElementById("PasswordInput");
 const inputValidationPassword = document.getElementById("ValidatePasswordInput");
+const inputUsername = document.getElementById("UsernameInput");  // Nouveau champ pour le pseudo
 const btnValidation = document.getElementById("btn-validation-inscription");
 const formInscription = document.getElementById("formulaireInscription");
 
 inputMail.addEventListener("keyup", validateForm);
 inputPassword.addEventListener("keyup", validateForm);
 inputValidationPassword.addEventListener("keyup", validateForm);
+inputUsername.addEventListener("keyup", validateForm); // Validation du pseudo
 btnValidation.addEventListener("click", InscrireUtilisateur);
 
 function validateForm(){
     const mailOk = validateRequired(inputMail);
     const passwordOk = validateRequired(inputPassword);
     const validationPasswordOk = validateRequired(inputValidationPassword);
+    const usernameOk = validateRequired(inputUsername);
     const validateMailOk = validateMail(inputMail);
-    const validatePasswordOk = validatePassword(inputPassword)
+    const validatePasswordOk = validatePassword(inputPassword);
     const passwordConfirmOk = validateConfirmationPassword(inputPassword, inputValidationPassword);
 
-    if(mailOk && passwordOk && validateMailOk && validationPasswordOk && validatePasswordOk && passwordConfirmOk){
+    if(mailOk && passwordOk && validateMailOk && validationPasswordOk && usernameOk && validatePasswordOk && passwordConfirmOk){
         btnValidation.disabled = false;
     }else{
         btnValidation.disabled = true;
@@ -39,7 +41,7 @@ function validateConfirmationPassword(inputPwd, inputConfirmPwd){
 
 function validateMail(input){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const mailUser =inputMail.value;
+    const mailUser = inputMail.value;
     if(mailUser.match(emailRegex)){
         input.classList.add("is-valid");
         input.classList.remove("is-invalid"); 
@@ -64,6 +66,7 @@ function validateRequired(input){
         return false;
     }
 }
+
 function validatePassword(input){
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
     const passwordUser = input.value;
@@ -80,14 +83,15 @@ function validatePassword(input){
 }
 
 function InscrireUtilisateur(){
-    let dataForm = new FormData (formInscription);
+    let dataForm = new FormData(formInscription);
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     let raw = JSON.stringify({
       "email": dataForm.get("Email"),
-      "password": dataForm.get("Password")
+      "password": dataForm.get("Password"),
+      "username": dataForm.get("Username")
     });
 
     let requestOptions = {
@@ -107,9 +111,8 @@ function InscrireUtilisateur(){
         } 
     })
     .then((result) => {
-        alert("Bravo, vous êtes maintenant inscrit, vous pouvez vous connecter.")
+        alert("Bravo, vous êtes maintenant inscrit, vous pouvez vous connecter.");
         document.location.href="/signin";
     })
-    
     .catch((error) => console.error(error));
 }

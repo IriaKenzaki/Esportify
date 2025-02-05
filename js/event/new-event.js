@@ -87,20 +87,29 @@ function CreeEvent() {
 
     // Vérifier si l'événement existe déjà dans la base de données
     fetch(apiUrl + "all")
-        .then((response) => response.json())
-        .then((events) => {
-            const isEventExist = events.some(event => {
-                return event.title === dataForm.get("Title") &&
-                    event.dateTimeStart === dateTimeStart &&
-                    event.dateTimeEnd === dateTimeEnd &&
-                    event.players === playersValue &&
-                    event.game === dataForm.get("GameSelectInput");
-            });
+    .then((response) => response.json())
+    .then((events) => {
+        let isEventExist = false;
 
-            if (isEventExist) {
-                alert("Un événement avec ces informations existe déjà. Veuillez vérifier les détails.");
-                return;
+        // Parcourir les événements et comparer
+        for (let i = 0; i < events.length; i++) {
+            const event = events[i];
+            if (
+                event.title == dataForm.get("Title") &&
+                event.dateTimeStart == dateTimeStart &&
+                event.dateTimeEnd == dateTimeEnd &&
+                event.players == playersValue &&
+                event.game == dataForm.get("GameSelectInput")
+            ) {
+                isEventExist = true;
+                break;
             }
+        }
+
+        if (isEventExist) {
+            alert("Un événement avec ces informations existe déjà. Veuillez vérifier les détails.");
+            return;
+        }
 
             // Si l'événement n'existe pas, créer l'événement
             const formData = new FormData();
