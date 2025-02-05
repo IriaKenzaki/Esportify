@@ -830,7 +830,8 @@ input[type="search"], select {
 .container-scores-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
+    padding: 0 20px;
     gap: 1rem;
     width: 100%;
     margin-bottom: 20px;

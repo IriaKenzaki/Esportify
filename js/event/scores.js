@@ -3,7 +3,7 @@ const scoresContainer = document.querySelector(".container-scores-bottom");
 const globalScoreSpan = document.querySelector(".score-global");
 const startDateInput = document.getElementById("start-date");
 const endDateInput = document.getElementById("end-date");
-const searchButton = document.getElementById("search-button");
+const searchButton = document.getElementById("searchButton");
 
 let scoresData = [];
 
