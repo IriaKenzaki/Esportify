@@ -66,12 +66,32 @@ async function updateUserDetails() {
         console.error("Erreur réseau lors de la mise à jour de l'utilisateur:", error);
     }
 }
+
 async function deleteUser() {
     const token = getToken();
     const headers = new Headers({
         "X-AUTH-TOKEN": token,
         'Content-Type': 'application/json',
     });
+
+    const emailInput = document.getElementById('ConfirmEmailInput').value.trim();
+    const storedEmail = sessionStorage.getItem("userEmail");
+    const userRole = sessionStorage.getItem("userRole");
+
+    if (userRole === "ROLE_ADMIN") {
+        alert("Impossible de supprimer un compte administrateur.");
+        return;
+    }
+
+    if (!emailInput || emailInput !== storedEmail) {
+        alert("L'email saisi ne correspond pas à celui du compte.");
+        return;
+    }
+
+    if (!confirm("Êtes-vous sûr de vouloir supprimer ce compte ? Cette action est irréversible.")) {
+        return;
+    }
+
     try {
         const response = await fetch(apiUrl + `admin/users/${userId}/delete`, {
             method: 'DELETE',
@@ -94,8 +114,6 @@ document.getElementById('updateButton').addEventListener('click', function (even
 });
 document.getElementById('deleteButton').addEventListener('click', function (event) {
     event.preventDefault();
-    if (confirm("Êtes-vous sûr de vouloir supprimer ce compte ?")) {
-        deleteUser();
-    }
+    deleteUser();
 });
 

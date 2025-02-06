@@ -59,56 +59,6 @@ function isConnected(){
     }
 }
 
-/* 
-disconnected
-connected (admin ou organisateur ou user)
-    - admin
-    - user
-    - organisateur
-*/
-
-function showAndHideElementsForRoles(){
-    const userConnected = isConnected();
-    const role = getRole();
-    let elements = document.querySelectorAll('[data-show]');
-
-    elements.forEach(element =>{
-        switch(element.dataset.show){
-            case 'disconnected': 
-                if (!userConnected) {
-                    element.classList.remove("d-none"); 
-                } else {
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'connected':
-                if(!userConnected){
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'ROLE_ADMIN': 
-                if(!userConnected || !(new Array("ROLE_ADMIN").includes(role) 
-                )){
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'ROLE_USER': 
-                if(!userConnected || !(new Array("ROLE_ADMIN", "ROLE_ORGANISATEUR", "ROLE_USER").includes(role) 
-                )){
-                    element.classList.add("d-none");
-                }
-                break;
-            case 'ROLE_ORGANISATEUR': 
-                if(!userConnected || !(new Array("ROLE_ADMIN", "ROLE_ORGANISATEUR").includes(role) 
-                )){
-                    element.classList.add("d-none");
-                }
-                break;
-        }
-    })
-}
-
-
 function sanitizeHtml(text) {
     const tempHtml = document.createElement('div');
     tempHtml.textContent = text;
@@ -181,4 +131,54 @@ function formatDate(dateString) {
     const minutes = date.getMinutes().toString().padStart(2, '0');
 
     return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
+
+/* 
+disconnected
+connected (admin ou organisateur ou user)
+    - admin
+    - user
+    - organisateur
+*/
+
+function showAndHideElementsForRoles(){
+    const userConnected = isConnected();
+    const role = getRole();
+    let elements = document.querySelectorAll('[data-show]');
+
+    elements.forEach(element =>{
+        switch(element.dataset.show){
+            case 'disconnected': 
+                if (!userConnected) {
+                    element.classList.remove("d-none"); 
+                } else {
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'connected':
+                if(!userConnected){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'ROLE_ADMIN': 
+                if(!userConnected || !(new Array("ROLE_ADMIN").includes(role) 
+                )){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'ROLE_USER': 
+                if(!userConnected || !(new Array("ROLE_ADMIN", "ROLE_ORGANISATEUR", "ROLE_USER").includes(role) 
+                )){
+                    element.classList.add("d-none");
+                }
+                break;
+            case 'ROLE_ORGANISATEUR': 
+                if(!userConnected || !(new Array("ROLE_ADMIN", "ROLE_ORGANISATEUR").includes(role) 
+                )){
+                    element.classList.add("d-none");
+                }
+                break;
+        }
+    })
 }
