@@ -109,7 +109,7 @@ function sendScore(redirect = false) {
     });
 
     const data = {
-        scores: [{ username, score: attempts * 10 }],
+        scores: [{ username, score: (8 - attempts) * 10 }],
     };
 
     fetch(apiUrl + `${eventId}/add-scores`, {

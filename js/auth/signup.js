@@ -84,6 +84,11 @@ function validatePassword(input){
 
 function InscrireUtilisateur(){
     let dataForm = new FormData(formInscription);
+    let username = dataForm.get("Username").trim();
+    if (username === "") {
+        alert("Le pseudo ne peut pas être vide !");
+        return;
+    }
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -91,7 +96,7 @@ function InscrireUtilisateur(){
     let raw = JSON.stringify({
       "email": dataForm.get("Email"),
       "password": dataForm.get("Password"),
-      "username": dataForm.get("Username")
+      "username": username
     });
 
     let requestOptions = {
@@ -108,6 +113,7 @@ function InscrireUtilisateur(){
         }
         else{
             alert("Erreur lors de l'inscription");
+            return;
         } 
     })
     .then((result) => {
