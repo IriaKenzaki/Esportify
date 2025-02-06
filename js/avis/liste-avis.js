@@ -46,10 +46,6 @@ function filterAvis(avisList, params) {
         const avisDate = avis.createdAt?.split(" ")[0];
         const dateMatch = params.date ? avisDate === params.date : true;
         const rateMatch = params.rate ? avis.rating === parseInt(params.rate, 10) : true;
-        console.log("Avis Date:", avisDate);
-        console.log("Avis object:", avis);
-        console.log("Utilisateur Date:", params.date);
-        console.log("Date Match:", dateMatch);
         return dateMatch && rateMatch;
     });
 }
