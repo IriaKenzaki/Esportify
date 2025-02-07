@@ -395,7 +395,6 @@ function saveEventChanges(eventId) {
                 body: formDataImage,
             })
             .then((imageResponse) => {
-                console.log('Réponse image:', imageResponse);
                 if (!imageResponse.ok) {
                     throw new Error("Erreur lors de la modification de l'image.");
                 }
@@ -471,7 +470,6 @@ function startEvent(eventId) {
             return;
         }
 
-        // Si toutes les vérifications sont passées, démarrer l'événement
         fetch(`${apiUrl}my-created-events/${eventId}`, {
             method: "PUT",
             headers: {
