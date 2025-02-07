@@ -2,8 +2,8 @@ const tokenCookieName = "accesstoken";
 const signoutBtn = document.getElementById("signout-btn");
 const signoutBtnF = document.getElementById("signout-btn-f");
 const RoleCookieName = "role";
-const apiUrl = "https://main-bvxea6i-u3bqvlpugi4lo.fr-4.platformsh.site/api/";
-const apiUrlImage = 'https://main-bvxea6i-u3bqvlpugi4lo.fr-4.platformsh.site/uploads/images/';
+const apiUrl = "https://ecf-final-back-exyxysy-u3bqvlpugi4lo.fr-4.platformsh.site/api/";
+const apiUrlImage = 'https://ecf-final-back-exyxysy-u3bqvlpugi4lo.fr-4.platformsh.site/uploads/images/';
 
 signoutBtn.addEventListener("click", signout);
 signoutBtnF.addEventListener("click", signout);
