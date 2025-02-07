@@ -271,6 +271,7 @@ function displayEventModal(event) {
         <p><strong>Nombre de joueurs :</strong> ${players}</p>
         <p><strong>Organisateur :</strong> ${createdBy}</p>
         <p><strong>Jeux :</strong> ${game}</p>
+        <p><strong>Statut :</strong> ${event.started ? "En cours" : "Non démarré"}</p>
     `;
     modalDescription.textContent = description;
     checkUserScoreForEvent(event.id);

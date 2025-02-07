@@ -188,7 +188,7 @@ function displayEventModal(event) {
     const players = event.players || "Non spécifié";
     const createdBy = event.createdBy || "Inconnu";
     const game = event.game || "Non définie";
-    const started = event.started || "Non";
+    const started = event.started ? "En cours" : "Non démarré";
     const description = event.description || "Aucune description disponible.";
 
     modalImage.src = imageUrl;
@@ -200,7 +200,7 @@ function displayEventModal(event) {
         <p><strong>Nombre de joueurs :</strong> ${players}</p>
         <p><strong>Organisateur :</strong> ${createdBy}</p>
         <p><strong>Jeux :</strong> ${game}</p>
-        <p><strong>Evènement démarrer :</strong> ${started ? 'En cour' : 'Pas encore commencé'}</p>
+        <p><strong>Statut :</strong> ${started}</p>
     `;
     modalDescription.textContent = description;
 
