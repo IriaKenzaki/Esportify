@@ -43,7 +43,10 @@ a{
     font-weight: bold;
 }
 
-p {margin-bottom: 0px;}
+p {
+    margin-bottom: 0px;
+    text-align: center;
+}
 
 .content{flex: 1;}
 
@@ -1307,7 +1310,7 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 .dice {
