@@ -1,15 +1,16 @@
 const inputMail = document.getElementById("EmailInput");
 const inputPassword = document.getElementById("PasswordInput");
 const inputValidationPassword = document.getElementById("ValidatePasswordInput");
-const inputUsername = document.getElementById("UsernameInput");  // Nouveau champ pour le pseudo
+const inputUsername = document.getElementById("UsernameInput"); 
 const btnValidation = document.getElementById("btn-validation-inscription");
 const formInscription = document.getElementById("formulaireInscription");
 
 inputMail.addEventListener("keyup", validateForm);
 inputPassword.addEventListener("keyup", validateForm);
 inputValidationPassword.addEventListener("keyup", validateForm);
-inputUsername.addEventListener("keyup", validateForm); // Validation du pseudo
+inputUsername.addEventListener("keyup", validateForm);
 btnValidation.addEventListener("click", InscrireUtilisateur);
+
 
 function validateForm(){
     const mailOk = validateRequired(inputMail);
@@ -19,12 +20,18 @@ function validateForm(){
     const validateMailOk = validateMail(inputMail);
     const validatePasswordOk = validatePassword(inputPassword);
     const passwordConfirmOk = validateConfirmationPassword(inputPassword, inputValidationPassword);
+    const captchaOk = grecaptcha.getResponse();
+    const captchaValid = captchaOk.length > 0;
 
-    if(mailOk && passwordOk && validateMailOk && validationPasswordOk && usernameOk && validatePasswordOk && passwordConfirmOk){
+    if(mailOk && passwordOk && validateMailOk && validationPasswordOk && usernameOk && validatePasswordOk && passwordConfirmOk && captchaValid){
         btnValidation.disabled = false;
     }else{
         btnValidation.disabled = true;
     }
+}
+
+function onCaptchaSuccess() {
+    validateForm();
 }
 
 function validateConfirmationPassword(inputPwd, inputConfirmPwd){
@@ -83,6 +90,7 @@ function validatePassword(input){
 }
 
 function InscrireUtilisateur(){
+
     let dataForm = new FormData(formInscription);
     let username = dataForm.get("Username").trim();
     if (username === "") {
@@ -122,3 +130,18 @@ function InscrireUtilisateur(){
     })
     .catch((error) => console.error(error));
 }
+
+function reloadRecaptcha() {
+    let script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js?timestamp=" + new Date().getTime();
+    script.async = true;
+    script.defer = true;
+
+    document.body.appendChild(script);
+}
+
+let oldScript = document.querySelector("script[src*='recaptcha/api.js']");
+if (oldScript) {
+    oldScript.remove();
+}
+reloadRecaptcha();
