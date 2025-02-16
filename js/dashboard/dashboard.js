@@ -51,23 +51,29 @@ function deleteMessage(messageId) {
 
 function updateMessages(messages = allMessages) {
     const container = document.getElementById('messages-section');
-    container.innerHTML = '';
+    container.textContent = '';
 
     if (!messages || messages.length === 0) {
-        container.innerHTML = '<p>Aucun message disponible.</p>';
+        const p = document.createElement('p');
+        p.textContent = 'Aucun message disponible.';
+        container.appendChild(p);
         return;
     }
 
     messages.forEach(message => {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message');
-
+    
+        const user = escapeHTML(message.user);
+        const title = escapeHTML(message.title);
+        const text = escapeHTML(message.text);
+    
         messageElement.innerHTML = `
-            <p><strong>${message.user} :</strong> ${message.title}</p>
-            <p><strong>Contenu du message :</strong>${message.text}</p>
+            <p><strong>${user} :</strong> ${title}</p>
+            <p><strong>Contenu du message :</strong>${text}</p>
             <button onclick="deleteMessage(${message.id})">Supprimer</button>
         `;
-
+    
         container.appendChild(messageElement);
     });
 }
