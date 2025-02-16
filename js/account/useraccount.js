@@ -32,7 +32,9 @@ async function loadUserDetails(userId) {
 
         document.getElementById('UsernameInput').value = user.username || '';
         document.getElementById('EmailInput').value = user.email || '';
+        sessionStorage.setItem("userEmail", user.email);
         document.getElementById('role-select').value = user.roles[0] || '';
+        sessionStorage.setItem("userRole", user.roles[0]);
     } catch (error) {
         console.error("Erreur réseau lors du chargement des détails utilisateur:", error);
     }
