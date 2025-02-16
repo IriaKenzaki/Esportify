@@ -89,7 +89,7 @@ function guessLetter(letter) {
 
 function setupLetters() {
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
-    lettersContainer.innerHTML = "";
+    lettersContainer.textContent = "";
     alphabet.split("").forEach(letter => {
         const letterButton = document.createElement("button");
         letterButton.textContent = letter;

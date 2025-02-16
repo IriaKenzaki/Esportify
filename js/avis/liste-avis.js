@@ -28,15 +28,15 @@ document.getElementById("searchButton").addEventListener("click", function (even
                 if (filteredAvis.length > 0) {
                     displayAvis(filteredAvis);
                 } else {
-                    containerAvis.innerHTML = "<p>Aucun avis trouvé.</p>";
+                    containerAvis.textContent = "Aucun avis trouvé.";
                 }
             } else {
-                containerAvis.innerHTML = "<p>Aucun avis trouvé.</p>";
+                containerAvis.textContent = "Aucun avis trouvé.";
             }
         })
         .catch((error) => {
             console.error("Erreur : ", error);
-            containerAvis.innerHTML = "<p>Une erreur s'est produite lors de la récupération des avis.</p>";
+            containerAvis.textContent = "Une erreur s'est produite lors de la récupération des avis.";
         });
 });
 
@@ -67,37 +67,42 @@ async function checkUserRole() {
             throw new Error("Erreur lors de la récupération des informations utilisateur.");
         }
 
-        const data = await response.json(); // Contient les informations utilisateur, y compris le rôle
-        return data.roles.includes("ROLE_ADMIN"); // Vérifie si l'utilisateur a le rôle ROLE_ADMIN
+        const data = await response.json(); 
+        return data.roles.includes("ROLE_ADMIN"); 
     } catch (error) {
         console.error("Erreur lors de la vérification du rôle : ", error);
-        return false; // En cas d'erreur, on assume que l'utilisateur n'est pas admin
+        return false; 
     }
 }
 
 
 
 function displayAvis(avisList) {
-    containerAvis.innerHTML = "";  // Réinitialise le container
+    containerAvis.textContent = "";  
 
     checkUserRole().then((isAdmin) => {
         avisList.forEach((avis) => {
             const card = document.createElement("div");
             card.classList.add("card");
 
+            const title = escapeHTML(avis.title);
+            const createdAt = escapeHTML(avis.createdAt);
+            const user = escapeHTML(avis.user); 
+            const content = escapeHTML(avis.content || "Pas de description disponible.");
+
             card.innerHTML = `
                 <div class="card-content" style="padding: 30px 15px;">
-                    <h3>${avis.title}</h3>
+                    <h3>${title}</h3>
                     <hr class="card-divider" />
-                    <p><strong>Date :</strong> ${avis.createdAt}</p>
-                    <p><strong>Pseudo de l'auteur :</strong> ${avis.user}</p>
+                    <p><strong>Date :</strong> ${createdAt}</p>
+                    <p><strong>Pseudo de l'auteur :</strong> ${user}</p>
                     <div class="field">
                         <label for="rate" class="form-label"></label>
                         <div class="rate" id="rate-review">
                             ${generateStars(avis.rating)}
                         </div>
                     </div>
-                    <p>${avis.content || "Pas de description disponible."}</p>
+                    <p>${content}</p>
                     ${isAdmin ? `<button type="button" data-show="ROLE_ADMIN" id="button-modal" class="delete-button" data-id="${avis.id}">
                                     Supprimer
                                   </button>` : ""}
@@ -106,7 +111,6 @@ function displayAvis(avisList) {
             containerAvis.appendChild(card);
         });
 
-        // Ajout des événements pour les boutons de suppression si l'utilisateur est admin
         document.querySelectorAll(".delete-button").forEach((button) => {
             button.addEventListener("click", (e) => {
                 const avisId = e.target.getAttribute("data-id");

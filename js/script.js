@@ -65,6 +65,27 @@ function sanitizeHtml(text) {
     return tempHtml.innerHTML; 
 }
 
+function escapeHTML(str, escapeQuotes = true, isInAttribute = false) {
+    return str.replace(/[&<>"]/g, function(match) {
+        const escapeMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+        };
+
+        if (isInAttribute) {
+            escapeMap["'"] = '&#39;';
+        } else if (escapeQuotes) {
+            escapeMap["'"] = '&#39;';
+        } else {
+            escapeMap["'"] = "'";
+        }
+
+        return escapeMap[match];
+    });
+}
+
 const forms = document.querySelectorAll('form');
 
 forms.forEach(form => {

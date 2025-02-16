@@ -28,15 +28,15 @@ function fetchEvents(params = {}) {
                 if (filteredEvents.length > 0) {
                     displayEvent(filteredEvents);
                 } else {
-                    containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+                    containerEvent.textContent = "Aucun événement trouvé.";
                 }
             } else {
-                containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+                containerEvent.textContent = "Aucun événement trouvé.";
             }
         })
         .catch((error) => {
             console.error("Erreur : ", error);
-            containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+            containerEvent.textContent = "Aucun événement trouvé.";
         });
 }
 
@@ -63,15 +63,15 @@ document.getElementById("searchButton").addEventListener("click", function(event
                 if (filteredEvents.length > 0) {
                     displayEvent(filteredEvents);
                 } else {
-                    containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+                    containerEvent.textContent = "Aucun événement trouvé.";
                 }
             } else {
-                containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+                containerEvent.textContent = "Aucun événement trouvé.";
             }
         })
         .catch((error) => {
             console.error("Erreur : ", error);
-            containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+            containerEvent.textContent = "Aucun événement trouvé.";
         });
 });
 
@@ -94,17 +94,17 @@ function filterEvents(events, params) {
 }
 
 function displayEvent(events) {
-    containerEvent.innerHTML = "";
+    containerEvent.textContent = "";
 
     if (events.length === 0) {
-        containerEvent.innerHTML = "<p>Aucun événement trouvé.</p>";
+        containerEvent.textContent = "Aucun événement trouvé.";
         return;
     }
 
     events.forEach((event) => {
         const card = document.createElement("div");
         card.classList.add("card");
-
+        const eventTitle = escapeHTML(event.title || "Titre non disponible");
         const eventImage = event.image && event.image !== "" 
         ? apiUrlImage + event.image
         : '/Images/def-event.webp';
@@ -112,7 +112,7 @@ function displayEvent(events) {
         card.innerHTML = `
             <img src="${eventImage}" alt="Image de l'événement">
             <div class="card-content">
-                <h3>${event.title}</h3>
+                <h3>${eventTitle}</h3>
                 <hr class="card-divider" />
                 <p><strong>Nombre de joueurs :</strong> ${event.players}</p>
                 <p><strong>Date et heure de début :</strong> ${formatDate(event.dateTimeStart)}</p>
@@ -182,14 +182,14 @@ function displayEventModal(event) {
     }
 
     const imageUrl = event.image ? apiUrlImage+`${event.image}` : "/Images/def-event.webp";
-    const title = event.title || "Titre non disponible";
+    const title = escapeHTML(event.title || "Titre non disponible");
     const dateTimeStart = event.dateTimeStart ? formatDate(event.dateTimeStart) : "Non spécifié";
     const dateTimeEnd = event.dateTimeEnd ? formatDate(event.dateTimeEnd) : "Non spécifié";
     const players = event.players || "Non spécifié";
-    const createdBy = event.createdBy || "Inconnu";
-    const game = event.game || "Non définie";
+    const createdBy = escapeHTML(event.createdBy || "Inconnu");
+    const game = escapeHTML(event.game || "Non spécifié");
     const started = event.started ? "En cours" : "Non démarré";
-    const description = event.description || "Aucune description disponible.";
+    const description = escapeHTML(event.description || "Aucune description disponible.");
 
     modalImage.src = imageUrl;
     modalImage.alt = `Image de l'événement ${title}`;
