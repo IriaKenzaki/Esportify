@@ -42,10 +42,10 @@ function fetchParticipants() {
 }
 
 function displayParticipants(participants) {
-    participantsListContainer.innerHTML = "";
+    participantsListContainer.textContent = "";
 
     if (participants.length === 0) {
-        participantsListContainer.innerHTML = "<p>Aucun participant inscrit pour cet événement.</p>";
+        participantsListContainer.textContent = "Aucun participant inscrit pour cet événement.";
         return;
     }
 

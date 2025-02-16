@@ -42,7 +42,7 @@ function displayScores(data) {
         const scoreElement = `
             <div class="response">
                 <div class="response-details">
-                    <span class="title-event">${score.eventTitle}</span>
+                    <span class="title-event">${escapeHTML(score.eventTitle)}</span>
                     <span class="score">${score.score} points</span>
                     <span class="date">${new Date(score.createdAt).toLocaleDateString()}</span>
                 </div>

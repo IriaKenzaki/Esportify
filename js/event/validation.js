@@ -33,7 +33,7 @@ async function fetchNotValidatedEvents() {
         if (!response.ok) {
             if (response.status === 404) {
                 console.warn("Aucun événement non validé trouvé.");
-                containerValidationLeft.innerHTML = "<p>Aucun événement à valider.</p>";
+                containerValidationLeft.textContent = "Aucun événement à valider.";
                 return;
             }
             throw new Error(`Erreur API: ${response.status} ${response.statusText}`);
@@ -43,17 +43,17 @@ async function fetchNotValidatedEvents() {
 
         if (!data || Object.keys(data).length === 0) {
             console.warn("Aucun événement non validé trouvé.");
-            containerValidationLeft.innerHTML = "<p>Aucun événement à valider.</p>";
+            containerValidationLeft.textContent = "Aucun événement à valider.";
             return;
         }
-        containerValidationLeft.innerHTML = ""; 
+        containerValidationLeft.textContent = ""; 
 
         for (const key in data) {
             if (data.hasOwnProperty(key)) {
                 const event = data[key];
                 const card = document.createElement("div");
                 card.classList.add("card-validation");
-
+                const eventTitle = escapeHTML(event.title || "Titre non disponible");
                 const eventImage = event.image && event.image !== "" 
                 ? apiUrlImage + event.image
                 : '/Images/def-event.webp';
@@ -61,7 +61,7 @@ async function fetchNotValidatedEvents() {
                 card.innerHTML = ` 
                     <img src="${eventImage}" alt="Image de l'événement">
                     <div class="card-content">
-                        <h3>${event.title}</h3>
+                        <h3>${eventTitle}</h3>
                         <hr class="card-divider" />
                         <p><strong>Nombre de joueurs :</strong> ${event.players}</p>
                         <p><strong>Date et heure de début :</strong> ${formatDate(event.dateTimeStart)}</p>
@@ -113,14 +113,14 @@ async function fetchValidatedEvents() {
             throw new Error("Erreur: La réponse de l'API ne contient pas d'événements validés.");
         }
 
-        containerValidationRight.innerHTML = "";
+        containerValidationRight.textContent = "";
 
         for (const key in data) {
             if (data.hasOwnProperty(key)) {
                 const event = data[key];
                 const card = document.createElement("div");
                 card.classList.add("card-validation");
-
+                const eventTitle = escapeHTML(event.title || "Titre non disponible");
                 const eventImage = event.image && event.image !== "" 
                 ? apiUrlImage + event.image
                 : '/Images/def-event.webp';
@@ -128,7 +128,7 @@ async function fetchValidatedEvents() {
                 card.innerHTML = ` 
                     <img src="${eventImage}" alt="Image de l'événement">
                     <div class="card-content">
-                        <h3>${event.title}</h3>
+                        <h3>${eventTitle}</h3>
                         <hr class="card-divider" />
                         <p><strong>Nombre de joueurs :</strong> ${event.players}</p>
                         <p><strong>Date et heure de début :</strong> ${formatDate(event.dateTimeStart)}</p>
@@ -251,13 +251,13 @@ function displayEventModal(event) {
     }
 
     const imageUrl = event.image ? apiUrlImage + event.image : "/Images/def-event.webp";
-    const title = event.title || "Titre non disponible";
+    const title = escapeHTML(event.title || "Titre non disponible");
     const dateTimeStart = event.dateTimeStart ? formatDate(event.dateTimeStart) : "Non spécifié";
     const dateTimeEnd = event.dateTimeEnd ? formatDate(event.dateTimeEnd) : "Non spécifié";
     const players = event.players || "Non spécifié";
-    const createdBy = event.createdBy || "Inconnu";
-    const game = event.game || "Non définie";
-    const description = event.description || "Aucune description disponible.";
+    const createdBy = escapeHTML(event.createdBy || "Inconnu");
+    const game = escapeHTML(event.game || "Non spécifié");
+    const description = escapeHTML(event.description || "Aucune description disponible.");
 
     modalImage.src = imageUrl;
     modalImage.alt = `Image de l'événement ${title}`;

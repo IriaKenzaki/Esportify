@@ -42,7 +42,7 @@ function getRoleLabel(role) {
 
 function displayUsers(users) {
     const responseList = document.getElementById('response-list');
-    responseList.innerHTML = ''; 
+    responseList.textContent = ''; 
 
     if (Array.isArray(users) && users.length > 0) {
         users.forEach(user => {

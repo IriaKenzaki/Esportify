@@ -5,7 +5,15 @@ const signinForm = document.getElementById("signinForm");
 
 btnSingin.addEventListener("click", checkCredentials);
 
-function checkCredentials(){
+function checkCredentials(event) {
+    event.preventDefault();
+
+    const captchaResponse = grecaptcha.getResponse();
+    if (!captchaResponse) {
+        alert("Veuillez remplir le reCAPTCHA !");
+        return;
+    }
+
     let dataForm = new FormData(signinForm);
     
     let myHeaders = new Headers();
@@ -13,7 +21,8 @@ function checkCredentials(){
 
     let raw = JSON.stringify({
         "username": dataForm.get("Email"),
-        "password": dataForm.get("Password")
+        "password": dataForm.get("Password"),
+        "g-recaptcha-response": captchaResponse
     });
 
     let requestOptions = {
@@ -40,5 +49,20 @@ function checkCredentials(){
         setCookie(RoleCookieName, result.roles[0], 7);
         window.location.replace("/");
     })
-    .catch(error);
+    .catch(error => console.error("Erreur lors de la connexion:", error));
 }
+
+function reloadRecaptcha() {
+    let script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js?timestamp=" + new Date().getTime();
+    script.async = true;
+    script.defer = true;
+
+    document.body.appendChild(script);
+}
+
+let oldScript = document.querySelector("script[src*='recaptcha/api.js']");
+if (oldScript) {
+    oldScript.remove();
+}
+reloadRecaptcha();
